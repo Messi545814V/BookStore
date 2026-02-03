@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="a0063f41-749d-4f53-8d13-1a20cc40cde7" name="bookstore Mapping">
+      <data-sources db="f679dd80-915e-4ac8-a11b-0339effe5792" />
+      <scope>
+        <node negative="1">
+          <node kind="schema" qname="main" />
+          <node kind="database" negative="1" />
+        </node>
+      </scope>
+    </mapping>
+  </component>
+</project>

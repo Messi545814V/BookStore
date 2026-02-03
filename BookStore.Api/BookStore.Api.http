@@ -1,0 +1,24 @@
+@BookStore.Api_HostAddress = http://localhost:5205
+
+### Get all books
+GET {{BookStore.Api_HostAddress}}/api/Books
+Accept: application/json
+
+### Get book by ID  
+GET {{BookStore.Api_HostAddress}}/api/Books/1
+Accept: application/json
+
+### Create new book
+POST {{BookStore.Api_HostAddress}}/api/Books
+Content-Type: application/json
+
+{
+  "title": "Test Book",
+  "author": "Test Author",
+  "price": 29.99,
+  "year": 2024,
+  "genre": "Fiction",
+  "stock": 10
+}
+
+###

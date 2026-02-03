@@ -1,0 +1,102 @@
+﻿@inherits LayoutComponentBase
+@using Microsoft.AspNetCore.Components.Authorization
+@using BookStore.Client.Services
+@inject NavigationManager NavManager
+
+@inject AuthService AuthService
+
+<AuthorizeView Roles="Admin">
+    <Authorized>
+        <div class="admin-container">
+            
+            <aside class="sidebar">
+                <div class="brand">
+                    <i class="bi bi-shield-lock-fill me-2"></i> Admin
+                </div>
+                
+                <nav class="nav flex-column">
+                    <a href="/admin?tab=dashboard" class="nav-link @(IsTabActive("dashboard") ? "active" : "")">
+                        <i class="bi bi-speedometer2"></i> Дашборд
+                    </a>
+                    <a href="/admin?tab=orders" class="nav-link @(IsTabActive("orders") ? "active" : "")">
+                        <i class="bi bi-cart3"></i> Замовлення
+                    </a>
+                    <a href="/admin?tab=books" class="nav-link @(IsTabActive("books") ? "active" : "")">
+                        <i class="bi bi-book"></i> Книги
+                    </a>
+                    <a href="/admin?tab=comments" class="nav-link @(IsTabActive("comments") ? "active" : "")">
+                        <i class="bi bi-chat-left-text"></i> Коментарі
+                    </a>
+                </nav>
+
+                <div class="mt-auto p-3 w-100 text-center">
+                    <button class="btn btn-outline-danger mb-3 px-4" @onclick="Logout">
+                        <i class="bi bi-box-arrow-right me-2"></i> Вихід
+                    </button>
+                    <div class="text-white-50 small text-center">v1.0.0</div>
+                </div>
+            </aside>
+
+            <main class="content">
+                @Body
+            </main>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="d-flex justify-content-center align-items-center vh-100 bg-dark text-white">
+            <h3>⛔ Доступ заборонено</h3>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    [SupplyParameterFromQuery]
+    public string? Tab { get; set; }
+
+    // Перевіряємо URL, щоб підсвітити активну кнопку
+    // Перевіряємо URL, щоб підсвітити активну кнопку (без зайвих бібліотек)
+    private bool IsTabActive(string tabName)
+    {
+        // Отримуємо повний URL
+        var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
+        
+        // 1. Якщо ми на сторінці книги (редагування/створення) -> підсвічуємо "Книги"
+        // Перевіряємо, чи є в шляху "/book/" (ігноруємо регістр)
+        if (uri.AbsolutePath.Contains("/book/", StringComparison.OrdinalIgnoreCase))
+        {
+            return tabName == "books";
+        }
+
+        // 2. Ручний розбір параметрів (замість WebUtilities)
+        // Беремо все, що після знаку питання
+        var query = uri.Query.TrimStart('?');
+        
+        // Розбиваємо на пари "ключ=значення" (наприклад: tab=orders)
+        var pairs = query.Split('&', StringSplitOptions.RemoveEmptyEntries);
+        
+        foreach (var pair in pairs)
+        {
+            var parts = pair.Split('=', 2); // Розбиваємо "tab=orders" на ["tab", "orders"]
+            if (parts.Length == 2)
+            {
+                var key = parts[0];
+                var value = parts[1];
+
+                // Якщо знайшли параметр "tab", перевіряємо його значення
+                if (key.Equals("tab", StringComparison.OrdinalIgnoreCase))
+                {
+                    return value.Equals(tabName, StringComparison.OrdinalIgnoreCase);
+                }
+            }
+        }
+        
+        // 3. Якщо параметра "tab" немає взагалі — вважаємо, що це Дашборд
+        return tabName == "dashboard";
+    }
+
+    private async Task Logout()
+    {
+        await AuthService.LogoutAsync();
+        NavManager.NavigateTo("/", forceLoad: true);
+    }
+}

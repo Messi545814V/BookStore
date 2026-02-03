@@ -1,0 +1,82 @@
+﻿@page "/returns"
+
+<PageTitle>Повернення та гарантія — BookStore</PageTitle>
+
+<div class="returns-page mb-5">
+    
+    <div class="page-header text-center py-5 mb-4">
+        <h1 class="fw-bold display-5">Повернення та гарантія</h1>
+        <p class="text-muted lead">Прозорі правила для вашого спокою.</p>
+    </div>
+
+    <div class="container" style="max-width: 900px;">
+        
+        @* --- ВАЖЛИВЕ ПОПЕРЕДЖЕННЯ --- *@
+        <div class="alert alert-warning border-0 shadow-sm p-4 mb-5 rounded-4">
+            <div class="d-flex">
+                <i class="bi bi-exclamation-triangle-fill fs-2 me-3 text-warning-emphasis"></i>
+                <div>
+                    <h4 class="alert-heading fw-bold">Важливо знати</h4>
+                    <p class="mb-0">
+                        Згідно з Постановою Кабінету Міністрів України №172, друковані видання належної якості 
+                        <strong>не підлягають обміну або поверненню</strong>. 
+                        Будь ласка, уважно перевіряйте книги при отриманні.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            
+            @* --- ЩО ВВАЖАЄТЬСЯ БРАКОМ --- *@
+            <div class="col-md-6">
+                <div class="content-box h-100">
+                    <h3 class="mb-3">Що вважається браком?</h3>
+                    <p>Ми безкоштовно замінимо книгу або повернемо кошти, якщо ви виявили:</p>
+                    <ul class="check-list">
+                        <li>Відсутні сторінки або переплутані блоки</li>
+                        <li>Пошкоджена обкладинка (подряпини, згини)</li>
+                        <li>Дефекти друку (розмитий текст, плями)</li>
+                        <li>Не та книга, яку ви замовляли</li>
+                    </ul>
+                </div>
+            </div>
+
+            @* --- ПРОЦЕДУРА ПОВЕРНЕННЯ --- *@
+            <div class="col-md-6">
+                <div class="content-box h-100">
+                    <h3 class="mb-3">Як оформити повернення?</h3>
+                    <div class="step-list">
+                        <div class="step">
+                            <span class="step-num">1</span>
+                            <span>Зробіть фото дефекту.</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-num">2</span>
+                            <span>Надішліть фото та номер замовлення нам у <a href="/contacts">Telegram</a> або на пошту.</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-num">3</span>
+                            <span>Менеджер підтвердить брак і надішле дані для відправки.</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-num">4</span>
+                            <span>Ми надішлемо нову книгу за наш рахунок.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="text-center mt-5">
+            <p class="text-muted">Залишилися питання?</p>
+            <a href="/contacts" class="btn btn-outline-dark rounded-pill px-4">Зв'язатися з підтримкою</a>
+        </div>
+
+    </div>
+</div>
+
+<style>
+
+</style>

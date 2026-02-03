@@ -1,0 +1,286 @@
+﻿@page "/admin/book/new"
+@page "/admin/book/edit/{Id:int}"
+@layout AdminLayout
+@attribute [Authorize(Roles = "Admin")]
+
+@using BookStore.Core.Entities
+@using BookStore.Client.Services
+@using BookStore.Core.DTOs
+@using Microsoft.AspNetCore.Authorization
+
+@inject AdminService AdminService
+@inject NavigationManager NavigationManager
+
+<PageTitle>@(isNewBook ? "Додати книгу" : $"Редагувати: {bookModel.Title}")</PageTitle>
+
+<div class="dashboard-layout pt-4">
+    <div class="dashboard-center">
+
+        <div class="mb-4">
+            <h2 class="fw-bold text-white">
+                @(isNewBook ? "Додати нову книгу" : $"Редагувати: {bookModel.Title}")
+            </h2>
+        </div>
+
+        @if (isLoading)
+        {
+            <div class="p-5 text-center">
+                <div class="spinner-border text-primary"></div>
+            </div>
+        }
+        else
+        {
+            <EditForm Model="bookModel" OnValidSubmit="HandleSubmit" class="card custom-dark-card border-0 shadow-sm p-4">
+                <DataAnnotationsValidator />
+                <ValidationSummary class="text-danger mb-3" />
+
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <label class="form-label">Назва</label>
+                        <InputText class="form-control" @bind-Value="bookModel.Title" />
+                    </div>
+                    <div class="col-md-4">
+                         <label class="form-label">Ціна</label>
+                         <InputNumber class="form-control" @bind-Value="bookModel.Price" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Рік видання</label>
+                        <InputNumber class="form-control" 
+                                     @bind-Value="bookModel.Year" 
+                                     min="1300" 
+                                     max="@(DateTime.Now.Year + 1)" />
+                        <ValidationMessage For="@(() => bookModel.Year)" />
+                    </div>
+                    <div class="col-md-8">
+                         <label class="form-label">Жанр</label>
+                         <InputText class="form-control" @bind-Value="bookModel.Genre" />
+                    </div>
+                    <div class="col-md-12">
+                         <label class="form-label">Опис</label>
+                         <InputTextArea class="form-control" rows="4" @bind-Value="bookModel.Description" />
+                    </div>
+                    <div class="col-md-6">
+                         <label class="form-label">Мова</label>
+                         <InputText class="form-control" @bind-Value="bookModel.Language" />
+                    </div>
+                    <div class="col-md-6">
+                         <label class="form-label">Картинка (URL)</label>
+                         <InputText class="form-control" @bind-Value="bookModel.ImageUrl" />
+                    </div>
+                    <div class="col-md-4">
+                         <label class="form-label">Наявність (шт.)</label>
+                         <InputNumber class="form-control" @bind-Value="bookModel.Stock" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Автор</label>
+                        
+                        @if (!isAddingNewAuthor)
+                        {
+                            <div class="input-group">
+                                <InputSelect class="form-select" @bind-Value="bookModel.AuthorId">
+                                    <option value="0" disabled>-- Оберіть автора --</option>
+                                    @foreach (var author in authorsList)
+                                    {
+                                        <option value="@author.Id">@author.Name</option>
+                                    }
+                                </InputSelect>
+                                <button type="button" class="btn btn-outline-primary" @onclick="() => isAddingNewAuthor = true" title="Додати нового автора">
+                                    <i class="bi bi-plus-lg"></i> +
+                                </button>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Ім'я нового автора" @bind="newAuthorName" />
+                                <button type="button" class="btn btn-success" @onclick="SaveNewAuthor">
+                                    <i class="bi bi-check-lg"></i> OK
+                                </button>
+                                <button type="button" class="btn btn-danger" @onclick="() => isAddingNewAuthor = false">
+                                    <i class="bi bi-x-lg"></i> X
+                                </button>
+                            </div>
+                        }
+                        <ValidationMessage For="@(() => bookModel.AuthorId)" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Категорія</label>
+
+                        @if (!isAddingNewCategory)
+                        {
+                            <div class="input-group">
+                                <InputSelect class="form-select" @bind-Value="bookModel.CategoryId">
+                                    <option value="0" disabled>-- Оберіть категорію --</option>
+                                    @foreach (var category in categoriesList)
+                                    {
+                                        <option value="@category.Id">@category.Name</option>
+                                    }
+                                </InputSelect>
+                                <button type="button" class="btn btn-outline-primary" @onclick="() => isAddingNewCategory = true" title="Додати нову категорію">
+                                    <i class="bi bi-plus-lg"></i> +
+                                </button>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Назва категорії" @bind="newCategoryName" />
+                                <button type="button" class="btn btn-success" @onclick="SaveNewCategory">
+                                    <i class="bi bi-check-lg"></i> OK
+                                </button>
+                                <button type="button" class="btn btn-danger" @onclick="() => isAddingNewCategory = false">
+                                    <i class="bi bi-x-lg"></i> X
+                                </button>
+                            </div>
+                        }
+                        <ValidationMessage For="@(() => bookModel.CategoryId)" />
+                    </div>
+
+                </div>
+
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                    <button type="button" class="btn btn-outline-secondary" @onclick="Cancel">Скасувати</button>
+                    <button type="submit" class="btn btn-success">Зберегти Книгу</button>
+                </div>
+            </EditForm>
+        }
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private BookSaveDto bookModel = new();
+    private bool isNewBook = true;
+    private bool isLoading = false;
+    private string? errorMessage;
+    
+    private List<Author> authorsList = new();
+    private List<Category> categoriesList = new();
+    
+    private bool isAddingNewAuthor = false;
+    private string newAuthorName = "";
+    
+    private bool isAddingNewCategory = false;
+    private string newCategoryName = "";
+
+    protected override async Task OnParametersSetAsync()
+    {
+        authorsList = await AdminService.GetAuthorsAsync();
+        categoriesList = await AdminService.GetCategoriesAsync();
+        
+        if (Id == 0)
+        {
+            isNewBook = true;
+            bookModel = new BookSaveDto(); 
+        }
+        else 
+        {
+            isNewBook = false;
+            isLoading = true;
+            try
+            {
+                var dto = await AdminService.GetBookDetailsAsync(Id);
+                if (dto != null)
+                {
+                    bookModel = new BookSaveDto
+                    {
+                        Id = dto.Id,
+                        Title = dto.Title,
+                        Price = dto.Price,
+                        Year = dto.Year,
+                        Description = dto.Description,
+                        Language = dto.Language,
+                        ImageUrl = dto.ImageUrl,
+                        Genre = dto.Genre,
+                        Stock = dto.Stock,
+                        AuthorId = dto.AuthorId, 
+                        CategoryId = dto.CategoryId,
+                    };
+                }
+                else
+                {
+                    errorMessage = "Книгу не знайдено.";
+                }
+            }
+            catch (Exception ex)
+            {
+                errorMessage = $"Помилка завантаження книги: {ex.Message}";
+            }
+            finally
+            {
+                isLoading = false;
+            }
+        }
+    }
+
+    private async Task SaveNewAuthor()
+    {
+        if (string.IsNullOrWhiteSpace(newAuthorName)) return;
+
+        try
+        {
+            var response = await AdminService.CreateAuthorAsync(newAuthorName);
+            
+            authorsList.Add(response);
+            bookModel.AuthorId = response.Id;
+            isAddingNewAuthor = false;
+            newAuthorName = "";
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Error creating author: {e.Message}");
+        }
+    }
+
+    private async Task SaveNewCategory()
+    {
+        if (string.IsNullOrWhiteSpace(newCategoryName)) return;
+
+        try
+        {
+            var response = await AdminService.CreateCategoryAsync(newCategoryName);
+        
+            categoriesList.Add(response);
+            bookModel.CategoryId = response.Id;
+            isAddingNewCategory = false;
+            newCategoryName = "";
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        
+    }
+
+    private async Task HandleSubmit()
+    {
+        try
+        {
+            if (isNewBook)
+            {
+                await AdminService.CreateBookAsync(bookModel);
+            }
+            else
+            {
+                await AdminService.UpdateBookAsync(bookModel);
+            }
+            NavigationManager.NavigateTo("/admin");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Помилка збереження: {ex.Message}";
+        }
+    }
+    
+    // 👇👇👇 ДОДАНО НОВИЙ МЕТОД 👇👇👇
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/admin");
+    }
+}

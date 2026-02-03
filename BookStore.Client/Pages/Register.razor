@@ -1,0 +1,60 @@
+﻿@page "/register"
+@using BookStore.Client.Services
+@using BookStore.Core.DTOs
+@using BookStore.Core.Entities
+
+@inject AuthService AuthService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Реєстрація</PageTitle>
+
+<h3>Реєстрація</h3>
+
+<div class="card">
+    <div class="card-body">
+        <EditForm Model="registerDto" OnValidSubmit="HandleLogin">
+            <DataAnnotationsValidator />
+        
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <div class="alert alert-danger">@errorMessage</div>
+            }
+        
+            <div class="form-group">
+                <label>Ім'я користувача</label>
+                <InputText class="form-control" @bind-Value="registerDto.Username"></InputText>
+                <ValidationMessage For="@(() => registerDto.Username)" />
+            </div>
+            <div class="form-group mt-2">
+                <label>Пароль</label>
+                <InputText type="password" class="form-control" @bind-Value="registerDto.Password"></InputText>
+                <ValidationMessage For="@(() => registerDto.Password)" />
+            </div>
+            <div class="form-group mt-2">
+                <label>Підтвердіть пароль</label>
+                <InputText type="password" class="form-control" @bind-Value="registerDto.ConfirmPassword" />
+                <ValidationMessage For="@(() => registerDto.ConfirmPassword)" />
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Зареєструватися</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private RegisterDto registerDto = new();
+    private string? errorMessage;
+
+    private async Task HandleLogin()
+    {
+        errorMessage = null;
+        var (success, error) = await AuthService.RegisterAsync(registerDto);
+        if (success)
+        {
+            NavigationManager.NavigateTo("/login");
+        }
+        else
+        {
+            errorMessage = error;
+        }
+    }
+}

@@ -1,0 +1,119 @@
+﻿@page "/about"
+@inject NavigationManager NavManager
+
+<PageTitle>Про нас — BookStore</PageTitle>
+
+<div class="about-page">
+    
+    @* --- HERO SECTION --- *@
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold">Ми — BookStore</h1>
+            <p class="lead">Більше, ніж просто книгарня. Твій провідник у світ історій.</p>
+        </div>
+    </section>
+
+    <div class="container my-5">
+        
+        @* --- НАША МІСІЯ --- *@
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6">
+                <h2 class="section-title">Наша місія</h2>
+                <p class="text-muted">
+                    Ми віримо, що книга здатна змінити життя. Наша мета — зробити якісну літературу доступною для кожного українця, де б він не знаходився.
+                </p>
+                <p>
+                    BookStore був створений у 2026 році командою ентузіастів, які втомилися від складних сайтів та довгої доставки. Ми об'єднали любов до паперових книг із сучасними технологіями, щоб ви могли отримати бажану історію в кілька кліків.
+                </p>
+                <div class="mt-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-check-circle-fill text-primary me-3 fs-4"></i>
+                        <span>Тільки офіційні видання українською мовою</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-check-circle-fill text-primary me-3 fs-4"></i>
+                        <span>Підтримка українських видавництв</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-check-circle-fill text-primary me-3 fs-4"></i>
+                        <span>Сервіс, орієнтований на читача</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mt-4 mt-lg-0">
+                @* Стильний текстовий банер замість картинки *@
+                <div class="brand-banner-box">
+                    <div class="brand-bg-decoration"></div>
+                    <h2 class="brand-text-logo">BOOKSTORE</h2>
+                </div>
+            </div>
+        </div>
+
+        @* --- ЧОМУ ОБИРАЮТЬ НАС (ПЕРЕВАГИ) --- *@
+        <div class="features-section mb-5">
+            <h2 class="text-center mb-5">Чому обирають BookStore?</h2>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="icon-box bg-light-blue">
+                            <i class="bi bi-truck"></i>
+                        </div>
+                        <h4>Швидка доставка</h4>
+                        <p>Співпрацюємо з Новою Поштою, щоб ви отримали книгу вже завтра. Відправка день у день.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="icon-box bg-light-green">
+                            <i class="bi bi-gift"></i>
+                        </div>
+                        <h4>Бонусна система</h4>
+                        <p>Отримуйте кешбек з кожної покупки. Використовуйте бонуси для оплати наступних замовлень.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="icon-box bg-light-purple">
+                            <i class="bi bi-search"></i>
+                        </div>
+                        <h4>Зручний пошук</h4>
+                        <p>Розумні фільтри, категорії та рекомендації допоможуть знайти саме те, що вам потрібно.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @* --- ЦИФРИ (STATS) --- *@
+        <div class="stats-box rounded-3 p-5 mb-5 text-white">
+            <div class="row text-center">
+                <div class="col-md-3 mb-3 mb-md-0">
+                    <div class="display-5 fw-bold">500+</div>
+                    <div class="text-white-50">Книг у каталозі</div>
+                </div>
+                <div class="col-md-3 mb-3 mb-md-0">
+                    <div class="display-5 fw-bold">10+</div>
+                    <div class="text-white-50">Видавництв</div>
+                </div>
+                <div class="col-md-3 mb-3 mb-md-0">
+                    <div class="display-5 fw-bold">24/7</div>
+                    <div class="text-white-50">Прийом замовлень</div>
+                </div>
+                <div class="col-md-3">
+                    <div class="display-5 fw-bold">100%</div>
+                    <div class="text-white-50">Задоволені клієнти</div>
+                </div>
+            </div>
+        </div>
+
+        @* --- CALL TO ACTION --- *@
+        <div class="text-center py-4">
+            <h3>Готові знайти свою наступну книгу?</h3>
+            <p class="text-muted mb-4">Перейдіть до каталогу та оберіть історію до душі.</p>
+            <button class="btn btn-primary btn-lg px-5 rounded-pill" @onclick='() => NavManager.NavigateTo("/")'>
+                Перейти до покупок
+            </button>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,121 @@
+﻿@page "/orders"
+@using BookStore.Client.Services
+@using BookStore.Core.DTOs
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+@inject OrderService OrderService
+@inject NavigationManager NavManager
+
+<div class="container-fluid mt-4 mb-5">
+
+    
+    <div class="d-flex align-items-center mb-4">
+        <button class="btn btn-outline-light me-3" @onclick="GoBack">
+            <i class="bi bi-arrow-left"></i> Назад
+        </button>
+        <h2 class="text-white m-0">Мої замовлення</h2>
+    </div>
+
+    @if (isLoading)
+    {
+        <div class="text-center py-5">
+            <div class="spinner-border text-primary"></div>
+        </div>
+    }
+    else if (!orders.Any())
+    {
+        <div class="text-center text-muted py-5">
+            <i class="bi bi-box-seam display-1"></i>
+            <h4 class="mt-3">У вас ще немає замовлень</h4>
+            <button class="btn btn-primary mt-2" @onclick='() => NavManager.NavigateTo("/")'>
+                До каталогу
+            </button>
+        </div>
+    }
+    else
+    {
+        <div class="orders-list">
+            @foreach (var order in orders)
+            {
+                <div class="order-card">
+                    
+                    <div class="order-header">
+                        <div>
+                            <div class="order-number">Замовлення №@order.Id</div>
+                            <div class="order-date">@order.OrderDate.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</div>
+                        </div>
+                        
+                        <div class="text-end">
+                            <div class="status-badge @GetStatusClass(order.Status)">
+                                @TranslateStatus(order.Status)
+                            </div>
+                            <div class="order-total">@order.TotalPrice ₴</div>
+                        </div>
+                    </div>
+
+                    <hr class="divider" />
+
+                    <div class="order-items-scroll">
+                        @foreach (var item in order.Items)
+                        {
+                            <div class="item-thumb" title="@item.Title">
+                                <img src="@item.ImageUrl" onerror="this.src='/images/no-image.png'" />
+                                @if (item.Quantity > 1)
+                                {
+                                    <span class="qty-badge">x @item.Quantity</span>
+                                }
+                            </div>
+                        }
+                    </div>
+
+                    <div class="order-footer">
+                        <span class="text-muted small">Товарів: @order.Items.Sum(i => i.Quantity)</span>
+                    </div>
+
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private List<OrderDto> orders = new();
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            orders = await OrderService.GetOrdersAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void GoBack() => NavManager.NavigateTo("/profile");
+
+    private string GetStatusClass(string status) => status switch
+    {
+        "New" => "status-new",
+        "Sent" => "status-sent",
+        "Completed" => "status-completed",
+        "Cancelled" => "status-cancelled",
+        _ => "status-default"
+    };
+
+    private string TranslateStatus(string status) => status switch
+    {
+        "New" => "Нове",
+        "Sent" => "Відправлено",
+        "Completed" => "Виконано",
+        "Cancelled" => "Скасовано",
+        _ => status
+    };
+}

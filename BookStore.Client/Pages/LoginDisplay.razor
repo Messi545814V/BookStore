@@ -1,0 +1,27 @@
+﻿@using BookStore.Client.Services
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthService AuthService
+@inject NavigationManager NavigationManager
+
+
+<AuthorizeView>
+    <Authorized>
+        
+        <button class="nav-link btn btn-link" @onclick="BeginLogout">
+            Вийти
+        </button>
+    </Authorized>
+    <NotAuthorized>
+        <a class="nav-link" href="register">Реєстрація</a>
+        <a class="nav-link" href="login">Увійти</a>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+
+    private async Task BeginLogout()
+    {
+        await AuthService.LogoutAsync();
+        NavigationManager.NavigateTo("/");
+    }
+}

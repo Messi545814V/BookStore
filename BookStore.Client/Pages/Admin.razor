@@ -1,0 +1,623 @@
+﻿@page "/admin"
+@layout AdminLayout
+@attribute [Authorize(Roles = "Admin")]
+
+@using BookStore.Core.DTOs
+@using BookStore.Client.Services
+@using Microsoft.AspNetCore.Authorization
+
+@inject AdminService AdminService
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+
+<PageTitle>Адмін-панель</PageTitle>
+
+@if (ActiveTab == "dashboard")
+{
+    @* Added px-4 to prevent negative margins of .row from causing horizontal scroll *@
+    <div class="dashboard-layout pt-5 px-4">
+        <div class="dashboard-center">
+            <h2 class="dashboard-title">Огляд магазину</h2>
+
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-6 col-xl-4">
+                    <div
+                        class="stat-card bg-success text-white p-4 rounded shadow-lg position-relative overflow-hidden h-100 border-0">
+                        <div class="position-relative z-1">
+                            <h3 class="display-6 fw-bold mb-1 text-nowrap">@totalRevenue.ToString("N0") ₴</h3>
+                            <p class="mb-0 opacity-75 fs-5">Загальний дохід</p>
+                        </div>
+                        <i class="bi bi-cash-coin stat-icon"></i>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl-4">
+                    <div
+                        class="stat-card bg-primary text-white p-4 rounded shadow-lg position-relative overflow-hidden h-100 border-0">
+                        <div class="position-relative z-1">
+                            <h3 class="display-6 fw-bold mb-1">@totalOrders</h3>
+                            <p class="mb-0 opacity-75 fs-5">Всього замовлень</p>
+                        </div>
+                        <i class="bi bi-basket stat-icon"></i>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl-4">
+                    <div
+                        class="stat-card bg-info text-white p-4 rounded shadow-lg position-relative overflow-hidden h-100 border-0">
+                        <div class="position-relative z-1">
+                            <h3 class="display-6 fw-bold mb-1">@pageResult.TotalCount</h3>
+                            <p class="mb-0 opacity-75 fs-5">Книг у каталозі</p>
+                        </div>
+                        <i class="bi bi-journal-bookmark stat-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (ActiveTab == "orders")
+{
+    <div class="px-4 pt-4"> @* Container padding *@
+        <h2 class="mb-4 fw-bold text-white">Управління замовленнями</h2>
+
+        <div class="card shadow-sm border-0 w-100 custom-dark-card">
+            <div class="card-body p-0">
+                @if (orders == null)
+                {
+                    <div class="p-5 text-center">
+                        <div class="spinner-border text-primary"></div>
+                    </div>
+                }
+                else if (!orders.Any())
+                {
+                    <div class="p-5 text-center text-muted">Замовлень поки немає.</div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-dark table-hover align-middle mb-0 w-100 custom-table">
+                            <thead>
+                            <tr>
+                                <th class="ps-4">ID</th>
+                                <th>Дата</th>
+                                <th>Клієнт</th>
+                                <th>Місто / Доставка</th>
+                                <th>Адреса</th>
+                                <th>Оплата</th>
+                                <th>Коментар</th>
+                                <th>Сума</th>
+                                <th>Статус</th>
+                                <th class="pe-4 text-end">Дія</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var order in orders)
+                            {
+                                <tr>
+                                    <td class="ps-4 fw-bold text-secondary">#@order.Id</td>
+                                    <td class="small text-white-50 text-nowrap">@order.CreatedAt.ToString("dd.MM HH:mm")</td>
+                                    <td>
+                                        <div class="fw-bold text-white">@order.FirstName @order.LastName</div>
+                                        <div class="small text-white-50 text-nowrap">@order.Phone</div>
+                                    </td>
+                                    <td>
+                                        <div class="text-white">@order.City</div>
+                                        <div class="badge bg-secondary text-light fw-normal">@order.DeliveryMethod</div>
+                                    </td>
+                                    <td class="small text-white-50 truncate-cell" style="max-width: 150px;">
+                                        @(!string.IsNullOrEmpty(order.Warehouse) ? order.Warehouse : (!string.IsNullOrEmpty(order.Address) ? order.Address : "-"))
+                                    </td>
+                                    <td><span class="small text-white-50">@order.PaymentMethod</span></td>
+                                    <td class="text-center">
+                                        @if (!string.IsNullOrEmpty(order.Comment))
+                                        {
+                                            <button class="btn btn-sm btn-comment" title="Переглянути коментар"
+                                                    @onclick="() => ShowComment(order.Comment)">
+                                                <i class="bi bi-chat-text-fill"></i>
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-white-50 opacity-25">-</span>
+                                        }
+                                    </td>
+                                    <td class="fw-bold text-success text-nowrap">@order.Amount.ToString("N0") ₴</td>
+                                    <td>
+                                        <span
+                                            class="badge rounded-pill @GetBadgeClass(order.Status)">@order.Status</span>
+                                    </td>
+                                    <td class="pe-4 text-end">
+                                        <select
+                                            class="form-select form-select-sm d-inline-block w-auto bg-dark text-white border-secondary"
+                                            value="@order.Status"
+                                            @onchange="@(e => ChangeStatus(order.Id, e.Value?.ToString()))">
+                                            <option value="New">New</option>
+                                            <option value="Paid">Paid</option>
+                                            <option value="Processing">Processing</option>
+                                            <option value="Shipped">Shipped</option>
+                                            <option value="Completed">Completed</option>
+                                            <option value="Cancelled">Cancelled</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+@if (ActiveTab == "books")
+{
+    <div class="dashboard-layout pt-4 px-4">
+        <div class="dashboard-center">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="fw-bold text-white m-0">Каталог книг</h2>
+                <button class="btn btn-primary" @onclick="@(() => NavigationManager.NavigateTo("/admin/book/new"))">
+                    <i class="bi bi-plus-lg me-1"></i> Додати книгу
+                </button>
+            </div>
+
+            <div class="card shadow-sm border-0 w-100 custom-dark-card">
+                <div class="card-header border-secondary bg-transparent py-3">
+                    <div class="input-group">
+                        <span class="input-group-text bg-dark border-secondary text-secondary"><i
+                                class="bi bi-search"></i></span>
+                        <input type="text" class="form-control bg-dark text-white border-secondary"
+                               placeholder="Пошук за назвою або автором..."
+                               @bind="bookSearch" @bind:event="oninput" @onkeyup="SearchBooks"/>
+                    </div>
+                </div>
+
+                <div class="card-body p-0">
+                    @if (isLoadingBooks)
+                    {
+                        <div class="p-5 text-center">
+                            <div class="spinner-border text-primary"></div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover align-middle mb-0 w-100 custom-table">
+                                <thead>
+                                <tr>
+                                    <th class="ps-4" style="width:80px;">Фото</th>
+                                    <th>Назва / Автор</th>
+                                    <th>Деталі</th>
+                                    <th>Рейтинг</th>
+                                    <th>Склад</th>
+                                    <th>Ціна</th>
+                                    <th class="pe-4 text-end">Дії</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach (var book in pageResult.Items)
+                                {
+                                    <tr>
+                                        <td class="ps-4">
+                                            <img
+                                                src="@(string.IsNullOrEmpty(book.ImageUrl) ? "/images/no-cover.png" : book.ImageUrl)"
+                                                class="rounded shadow-sm"
+                                                style="width:45px;height:65px;object-fit:cover;"/>
+                                        </td>
+                                        <td>
+                                            <div class="fw-bold text-white truncate-cell">@book.Title</div>
+                                            <div class="small text-white-50 truncate-cell">@book.Author</div>
+                                        </td>
+                                        <td>
+                                            <div class="text-white">@book.Genre</div>
+                                            <div class="small text-muted d-flex gap-2">
+                                                <span>@book.Year р.</span>
+                                                <span class="border-start border-secondary ps-2">@book.Language</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-1">
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                                <span
+                                                    class="fw-bold text-white">@(book.Rating > 0 ? book.Rating.ToString("0.0") : "-")</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @if (book.Stock == 0)
+                                            {
+                                                <span
+                                                    class="badge bg-danger bg-opacity-10 text-danger border border-danger">Немає</span>
+                                            }
+                                            else if (book.Stock < 5)
+                                            {
+                                                <span
+                                                    class="badge bg-warning bg-opacity-10 text-warning border border-warning">Закінч.: @book.Stock</span>
+                                            }
+                                            else
+                                            {
+                                                <span
+                                                    class="badge bg-success bg-opacity-10 text-success border border-success">@book.Stock шт.</span>
+                                            }
+                                        </td>
+                                        <td class="fw-bold text-info">@book.Price.ToString("N0") ₴</td>
+                                        <td class="pe-4 text-end">
+                                            <div class="btn-group">
+                                                <button
+                                                    class="btn btn-sm btn-outline-secondary border-0 text-white-50 btn-success"
+                                                    title="Редагувати"
+                                                    @onclick="@(() => NavigationManager.NavigateTo($"/admin/book/edit/{book.Id}"))">
+                                                    <i class="bi bi-pencil-square fs-5"></i>
+                                                </button>
+                                                <button
+                                                    class="btn btn-sm btn-outline-secondary border-0 text-danger btn-danger"
+                                                    title="Видалити"
+                                                    @onclick="@(() => DeleteBook(book.Id))">
+                                                    <i class="bi bi-trash fs-5"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        @if (pageResult.TotalPages > 1)
+                        {
+                            <div class="d-flex justify-content-center py-3 border-top border-secondary">
+                                <button class="btn btn-sm btn-outline-secondary me-2" disabled="@(bookFilter.Page <= 1)"
+                                        @onclick="() => ChangePage((bookFilter.Page ?? 1) - 1)">
+                                    <i class="bi bi-chevron-left"></i>
+                                </button>
+                                <span
+                                    class="align-self-center text-white-50 small">Сторінка @bookFilter.Page з @pageResult.TotalPages</span>
+                                <button class="btn btn-sm btn-outline-secondary ms-2"
+                                        disabled="@(bookFilter.Page >= pageResult.TotalPages)"
+                                        @onclick="() => ChangePage((bookFilter.Page ?? 1) + 1)">
+                                    <i class="bi bi-chevron-right"></i>
+                                </button>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (ActiveTab == "comments")
+{
+    <div class="px-4 pt-4"> @* Container padding *@
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold text-white m-0">Модерація коментарів</h2>
+
+            <div class="btn-group">
+                <button class="btn @(showOnlyNew ? "btn-warning" : "btn-outline-secondary text-white")"
+                        @onclick="() => ToggleFilter(true)">
+                    Нові (@adminComments.Count(c => !c.IsApproved))
+                </button>
+
+                <button class="btn @(!showOnlyNew ? "btn-primary" : "btn-outline-secondary text-white")"
+                        @onclick="() => ToggleFilter(false)">
+                    Всі
+                </button>
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-0 w-100 custom-dark-card">
+            <div class="card-body p-0">
+
+                @if (isLoadingComments)
+                {
+                    <div class="p-5 text-center">
+                        <div class="spinner-border text-primary"></div>
+                    </div>
+                }
+                else if (!FilteredComments.Any())
+                {
+                    <div class="p-5 text-center text-muted">
+                        Коментарів у цій категорії немає.
+                    </div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-dark table-hover align-middle mb-0 w-100 custom-table">
+                            <thead>
+                            <tr>
+                                <th class="ps-4" style="width:120px;">Статус</th>
+                                <th style="width:140px;">Дата</th>
+                                <th style="max-width:180px;">Користувач</th>
+                                <th style="max-width:240px;">Книга</th>
+                                <th>Коментар</th>
+                                <th class="pe-4 text-end" style="width:140px;">Дії</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            @foreach (var comment in FilteredComments)
+                            {
+                                <tr>
+                                    <td class="ps-4">
+                                        @if (!comment.IsApproved)
+                                        {
+                                            <span class="badge bg-warning text-dark">Новий</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-success">Approved</span>
+                                        }
+                                    </td>
+
+                                    <td class="small text-white-50 text-nowrap">
+                                        @comment.CreatedAt.ToString("dd.MM HH:mm")
+                                    </td>
+
+                                    <td class="truncate-cell" style="max-width:180px;">
+                                        <div class="fw-bold text-white text-truncate">
+                                            @comment.UserName
+                                        </div>
+                                    </td>
+
+                                    <td class="truncate-cell" style="max-width:240px;">
+                                        <a href="/admin/book/details/@comment.BookId"
+                                           target="_blank"
+                                           class="text-info text-decoration-none small d-block text-truncate">
+                                            @comment.BookTitle
+                                        </a>
+                                    </td>
+
+                                    <td class="truncate-cell" style="max-width:300px;">
+                                        <div class="text-white small text-truncate" title="@comment.Comment">
+                                            "@comment.Comment"
+                                        </div>
+                                    </td>
+
+                                    <td class="pe-4 text-end text-nowrap">
+                                        @if (!comment.IsApproved)
+                                        {
+                                            <button class="btn btn-sm btn-success me-1 px-2"
+                                                    title="Підтвердити"
+                                                    @onclick="() => ApproveComment(comment.Id)">
+                                                <i class="bi bi-check-lg"></i>
+                                            </button>
+                                        }
+
+                                        <button class="btn btn-sm btn-outline-danger px-2"
+                                                title="Видалити"
+                                                @onclick="() => DeleteAdminComment(comment.Id)">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@* Модальне вікно коментаря *@
+@if (isCommentModalOpen)
+{
+    <div class="modal fade show d-block" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white border-secondary">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title">Коментар до замовлення</h5>
+                    <button type="button" class="btn-close btn-close-white" @onclick="CloseComment"></button>
+                </div>
+                <div class="modal-body">
+                    <p style="white-space: pre-wrap;">@selectedComment</p>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-secondary" @onclick="CloseComment">Закрити</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+
+// 👇 Цей параметр автоматично береться з URL ?tab=...
+    [SupplyParameterFromQuery] public string? Tab { get; set; }
+
+
+    private string ActiveTab => Tab ?? "dashboard";
+
+    private PageResult<BookSummaryDto> pageResult = new();
+    private BookFilterDto bookFilter = new() { Page = 1, PageSize = 10 };
+    private string bookSearch = "";
+    private bool isLoadingBooks = true;
+
+    private List<OrderSummaryDto>? orders;
+    private List<AdminCommentDto>? adminComments = new();
+    private bool isLoadingComments = false;
+    private int totalOrders = 0;
+    private decimal totalRevenue = 0;
+
+    private bool isCommentModalOpen = false;
+    private string selectedComment = "";
+    private bool showOnlyNew = true;
+
+    private IEnumerable<AdminCommentDto> FilteredComments =>
+        showOnlyNew
+            ? adminComments.Where(c => !c.IsApproved)
+            : adminComments;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Завантажуємо дані паралельно
+        var loadBooksTask = LoadBooks();
+        var loadOrdersTask = LoadOrders();
+        var loadCommentsTask = LoadComments();
+        await Task.WhenAll(loadBooksTask, loadOrdersTask, loadCommentsTask);
+    }
+    
+    private async Task LoadBooks()
+    {
+        isLoadingBooks = true;
+        try
+        {
+            bookFilter.SearchTerm = bookSearch;
+            pageResult = await AdminService.GetBooksAsync(bookFilter);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+        finally
+        {
+            isLoadingBooks = false;
+        }
+    }
+
+    private async Task LoadComments()
+    {
+        isLoadingComments = true;
+        try
+        {
+            adminComments = await AdminService.GetAllCommentsAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading comments: {ex.Message}");
+        }
+        finally
+        {
+            isLoadingComments = false;
+        }
+    }
+
+    private void ToggleFilter(bool onlyNew)
+    {
+        showOnlyNew = onlyNew;
+    }
+
+    private async Task ApproveComment(int commentId)
+    {
+        try
+        {
+            await AdminService.ApproveCommentAsync(commentId);
+
+            var comment = adminComments.FirstOrDefault(c => c.Id == commentId);
+            if (comment != null)
+            {
+                comment.IsApproved = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Помилка: " + ex.Message);
+        }
+    }
+
+    private async Task SearchBooks()
+    {
+        bookFilter.Page = 1;
+        await LoadBooks();
+    }
+
+    private async Task ChangePage(int page)
+    {
+        bookFilter.Page = page;
+        await LoadBooks();
+    }
+
+    private async Task DeleteBook(int id)
+    {
+        if (await JsRuntime.InvokeAsync<bool>("confirm", "Видалити книгу?"))
+        {
+            await AdminService.DeleteBookAsync(id);
+            await LoadBooks();
+        }
+    }
+
+    // --- ЗАМОВЛЕННЯ ---
+    private async Task LoadOrders()
+    {
+        try
+        {
+            orders = await AdminService.GetOrdersAsync();
+            if (orders != null)
+            {
+                totalOrders = orders.Count;
+                totalRevenue = orders.Sum(o => o.Amount);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+
+    private async Task ChangeStatus(int orderId, string? newStatus)
+    {
+        if (string.IsNullOrEmpty(newStatus)) return;
+        try
+        {
+            await AdminService.UpdateOrderStatusAsync(orderId, newStatus);
+            var order = orders?.FirstOrDefault(o => o.Id == orderId);
+            if (order != null) order.Status = newStatus;
+        }
+        catch (Exception ex)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", $"Помилка: {ex.Message}");
+        }
+    }
+
+    private string GetBadgeClass(string status)
+    {
+        return status switch
+        {
+            "New" => "bg-secondary",
+            "Paid" => "bg-success",
+            "Processing" => "bg-warning text-dark",
+            "Shipped" => "bg-primary",
+            "Completed" => "bg-success",
+            "Cancelled" => "bg-danger",
+            _ => "bg-light text-dark border"
+        };
+    }
+
+    private async Task DeleteAdminComment(int commentId)
+    {
+        bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Видалити цей коментар остаточно?");
+        if (confirmed)
+        {
+            try
+            {
+                await AdminService.DeleteCommentAsync(commentId);
+
+                var item = adminComments.FirstOrDefault(c => c.Id == commentId);
+                if (item != null) adminComments.Remove(item);
+            }
+            catch (Exception ex)
+            {
+                await JsRuntime.InvokeVoidAsync("alert", "Помилка видалення: " + ex.Message);
+            }
+        }
+    }
+
+    private void ShowComment(string comment)
+    {
+        selectedComment = comment;
+        isCommentModalOpen = true;
+    }
+
+    private void CloseComment()
+    {
+        isCommentModalOpen = false;
+        selectedComment = "";
+    }
+
+}

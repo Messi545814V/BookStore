@@ -1,0 +1,60 @@
+﻿@using BookStore.Client.Services
+@using Microsoft.AspNetCore.Components.Authorization
+@inject CartService CartService
+
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">BookStore</a>
+
+        <button title="Navigation menu" class="navbar-toggler" @onclick="Toggle">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@MenuClass">
+    <nav class="flex-column">
+
+        <AuthorizeView Roles="Admin">
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="/admin">
+                        <i class="bi bi-shield-lock-fill"></i> Адмін
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
+                <i class="bi bi-house-door-fill"></i> Головна
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/cart">
+                <i class="bi bi-cart-fill"></i> Кошик
+
+                @if (CartService.Items.Any())
+                {
+                    <span class="badge bg-secondary">@CartService.Items.Sum(x => x.Quantity)</span>
+                }
+            </NavLink>
+        </div>
+
+    </nav>
+</div>
+
+@code {
+    private bool open = false;
+    private string MenuClass => open ? "nav-open" : "collapse";
+
+    protected override void OnInitialized()
+    {
+        CartService.OnChange += StateHasChanged;
+    }
+
+    private void Toggle() => open = !open;
+
+    private void Dispose() => CartService.OnChange -= StateHasChanged;
+}

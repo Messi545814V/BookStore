@@ -1,0 +1,263 @@
+﻿@page "/bonuses"
+@using BookStore.Client.Services
+@using BookStore.Core.DTOs
+@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Claims
+
+@inject ProfileService ProfileService
+@inject NavigationManager NavManager
+@inject AuthenticationStateProvider AuthStateProvider
+
+<PageTitle>Бонусна програма</PageTitle>
+
+<AuthorizeView>
+    <Authorized>
+        <div class="container mt-4 mb-5">
+            <div class="d-flex align-items-center mb-4">
+                <button class="btn btn-outline-light me-3 border-0" @onclick='() => NavManager.NavigateTo("/")'>
+                    <i class="bi bi-arrow-left fs-4"></i>
+                </button>
+                <h2 class="text-white m-0">Мої бонуси</h2>
+            </div>
+
+            @if (isLoading)
+            {
+                <div class="text-center py-5"><div class="spinner-border text-primary"></div></div>
+            }
+            else
+            {
+                <div class="row g-4">
+                    <div class="col-md-5">
+                        <div class="bonus-card balance-card h-100">
+                            <div class="card-label">Ваш баланс</div>
+                            <div class="balance-value">
+                                <i class="bi bi-coin text-warning"></i> @userProfile.BonusBalance
+                            </div>
+                            <div class="balance-sub">1 бонус = 1 гривня</div>
+                            <button class="btn btn-primary mt-3 w-100" @onclick='() => NavManager.NavigateTo("/")'>
+                                Витратити бонуси
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-7">
+                        <div class="bonus-card level-card h-100">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <div class="card-label">Ваш поточний рівень</div>
+                                    <h3 class="level-title">@userProfile.UserLevel <span class="badge bg-dark ms-2">@CurrentCashback% кешбеку</span></h3>
+                                </div>
+                                <div class="total-spent">
+                                    Витрачено: <b>@TotalSpentFormatted грн</b>
+                                </div>
+                            </div>
+
+                            <hr class="border-secondary" />
+
+                            @if (!IsMaxLevel)
+                            {
+                                <div class="progress-info mb-2">
+                                    <span>До рівня <strong>@NextLevelName</strong> (@NextLevelPercent%)</span>
+                                    <span>Залишилось: <strong>@(NextLevelThreshold - TotalSpent) грн</strong></span>
+                                </div>
+                                <div class="progress" style="height: 10px; background-color: #444;">
+                                    <div class="progress-bar bg-gradient-purple" role="progressbar" 
+                                         style="width: @ProgressPercent%"></div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="text-success">
+                                    <i class="bi bi-trophy-fill"></i> Ви досягли максимального рівня!
+                                </div>
+                            }
+                            
+                            <div class="levels-hint mt-3 small text-muted">
+                                <div>Читач (3%) — від 0 грн</div>
+                                <div>Книгоман (5%) — від 5 000 грн</div>
+                                <div>Експерт (10%) — від 15 000 грн</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="text-white mt-5 mb-3">Історія бонусів</h4>
+                
+                <div class="history-container">
+                    @if (transactions != null && transactions.Any())
+                    {
+                        @foreach (var t in transactions)
+                        {
+                            <div class="history-item">
+                                <div class="history-icon @(t.Amount > 0 ? "income" : "expense")">
+                                    <i class="bi @(t.Amount > 0 ? "bi-arrow-down-left" : "bi-arrow-up-right")"></i>
+                                </div>
+                                <div class="history-info">
+                                    <div class="history-desc">@t.Description</div>
+                                    <div class="history-date">@t.Date.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</div>
+                                </div>
+                                <div class="history-amount @(t.Amount > 0 ? "text-success" : "")">
+                                    @(t.Amount > 0 ? "+" : "")@t.Amount
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="text-center text-muted py-4">
+                            У вас ще немає транзакцій
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </Authorized>
+
+    <NotAuthorized>
+        <div class="promo-wrapper">
+            <div class="hero-section text-center py-5">
+                <div class="container">
+                    <i class="bi bi-gift-fill display-1 text-primary mb-3"></i>
+                    <h1 class="display-4 fw-bold text-white mb-3">Читайте більше — платіть менше!</h1>
+                    <p class="lead text-white-50 mb-4">Приєднуйтесь до бонусної програми BookStore та отримуйте до 10% кешбеку з кожної покупки.</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="/register" class="btn btn-primary btn-lg px-5">Стати учасником</a>
+                        <a href="/login" class="btn btn-outline-light btn-lg px-5">Увійти</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container py-5">
+                <h2 class="text-center text-white mb-5">Як це працює?</h2>
+                <div class="row g-4 text-center">
+                    <div class="col-md-4">
+                        <div class="step-card p-4 h-100 bg-dark border border-secondary rounded">
+                            <div class="icon-box mb-3 text-info"><i class="bi bi-cart-check fs-1"></i></div>
+                            <h4 class="text-white">1. Купуйте книги</h4>
+                            <p class="text-white-50">Робіть замовлення на сайті. Бонуси нараховуються автоматично після оплати.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="step-card p-4 h-100 bg-dark border border-secondary rounded">
+                            <div class="icon-box mb-3 text-warning"><i class="bi bi-piggy-bank fs-1"></i></div>
+                            <h4 class="text-white">2. Накопичуйте</h4>
+                            <p class="text-white-50">1 бонус = 1 гривня. Чим більше загальна сума покупок, тим вищий ваш відсоток кешбеку.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="step-card p-4 h-100 bg-dark border border-secondary rounded">
+                            <div class="icon-box mb-3 text-success"><i class="bi bi-bag-heart fs-1"></i></div>
+                            <h4 class="text-white">3. Економте</h4>
+                            <p class="text-white-50">Оплачуйте бонусами до 50% вартості наступних замовлень.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container py-5 mb-5">
+                <h2 class="text-center text-white mb-5">Рівні програми лояльності</h2>
+                <div class="row g-4 align-items-end">
+                    <div class="col-md-4">
+                        <div class="level-card-promo bg-dark border border-secondary rounded p-4 text-center">
+                            <h3 class="text-white">Читач</h3>
+                            <div class="display-3 fw-bold text-primary my-3">3%</div>
+                            <p class="text-white-50">Кешбек відразу після реєстрації</p>
+                            <hr class="border-secondary" />
+                            <small class="text-muted">Сума покупок: 0 грн</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="level-card-promo bg-dark border border-primary rounded p-4 text-center position-relative shadow-lg transform-scale">
+                            <div class="badge bg-primary position-absolute top-0 start-50 translate-middle">Популярний</div>
+                            <h3 class="text-white mt-2">Книгоман</h3>
+                            <div class="display-3 fw-bold text-warning my-3">5%</div>
+                            <p class="text-white-50">Для справжніх любителів літератури</p>
+                            <hr class="border-secondary" />
+                            <small class="text-muted">Сума покупок: від 5 000 грн</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="level-card-promo bg-dark border border-secondary rounded p-4 text-center">
+                            <h3 class="text-white">Експерт</h3>
+                            <div class="display-3 fw-bold text-success my-3">10%</div>
+                            <p class="text-white-50">Максимальна вигода</p>
+                            <hr class="border-secondary" />
+                            <small class="text-muted">Сума покупок: від 15 000 грн</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private bool isLoading = true;
+    private UserProfileDto userProfile = new();
+    private List<BonusTransactionDto> transactions = new();
+
+    private decimal TotalSpent = 0; 
+    private string NextLevelName => TotalSpent >= 5000 ? "Експерт" : "Книгоман";
+    private decimal NextLevelThreshold => TotalSpent >= 5000 ? 15000 : 5000;
+    private int NextLevelPercent => TotalSpent >= 5000 ? 10 : 5;
+    private int CurrentCashback => userProfile.UserLevel == "Експерт" ? 10 : (userProfile.UserLevel == "Книгоман" ? 5 : 3);
+    private bool IsMaxLevel => TotalSpent >= 15000;
+    private string TotalSpentFormatted => TotalSpent.ToString("N0");
+
+    private double ProgressPercent 
+    {
+        get
+        {
+            if (IsMaxLevel) return 100;
+            decimal prevThreshold = TotalSpent >= 5000 ? 5000 : 0;
+            decimal currentProgress = TotalSpent - prevThreshold;
+            decimal needed = NextLevelThreshold - prevThreshold;
+            if (needed <= 0) return 0;
+            double percent = (double)(currentProgress / needed) * 100;
+            return Math.Min(100, Math.Max(0, percent));
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+
+        if (user.Identity != null && user.Identity.IsAuthenticated)
+        {
+            try
+            {
+                userProfile = await ProfileService.GetProfileAsync();
+                if (userProfile != null)
+                {
+                    TotalSpent = userProfile.TotalSpent;
+                }
+                transactions = await ProfileService.GetBonusHistoryAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading bonuses: {ex.Message}");
+            }
+        }
+        
+        isLoading = false;
+    }
+}
+
+<style>
+    .transform-scale {
+        transform: scale(1.05);
+        z-index: 2;
+    }
+    .level-card-promo {
+        transition: transform 0.3s ease;
+    }
+    .level-card-promo:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+    .icon-box i {
+        text-shadow: 0 0 15px currentColor;
+    }
+</style>

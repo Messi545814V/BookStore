@@ -1,0 +1,134 @@
+﻿@using BookStore.Client.Services
+@using BookStore.Core.DTOs
+@using BookStore.Core.Entities
+@inject ClientBookService BookService
+
+<div class="filter-sidebar @(IsOpen ? "open" : "")">
+
+    <div class="filter-header">
+        <h4>Фільтри</h4>
+        <button class="close-btn" @onclick="Close">✖</button>
+    </div>
+
+    <div class="filter-body">
+
+        <label>Пошук</label>
+        <input class="form-control" @bind="LocalFilter.SearchTerm" />
+
+        <label class="mt-3">Категорія</label>
+        <div class="category-dropdown">
+            @foreach (var parent in CategoryTree)
+            {
+                bool hasChildren = parent.Children?.Any() == true;
+                
+                <div class="category-item">
+                    
+                    @if (hasChildren)
+                    {
+                        <div class="category-header" @onclick="() => Toggle(parent.Id)">
+                            <span>@parent.Name</span>
+                            <span class="arrow @(IsExpanded(parent.Id) ? "open" : "")">▼</span>
+                        </div>
+
+                        @if (IsExpanded(parent.Id))
+                        {
+                            <div class="subcategory-list">
+                                @foreach (var child in parent.Children)
+                                {
+                                    <div class="subcategory-item" @onclick="() => SelectCategory(child.Id)">
+                                        @child.Name
+                                    </div>
+
+                                    @foreach (var sub in child.Children)
+                                    {
+                                        <div class="subcategory-item" @onclick="() => SelectCategory(sub.Id)">
+                                            @sub.Name
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="category-header leaf" @onclick="() => SelectCategory(parent.Id)">
+                            <span>@parent.Name</span>
+                        </div>
+                    }
+                    
+                </div>
+            }
+        </div>
+
+
+
+        <label class="mt-3">Ціна</label>
+        <input type="number" min="0" class="form-control mt-1" placeholder="Від" @bind="LocalFilter.MinPrice" />
+        <input type="number" min="1" class="form-control mt-2" placeholder="До" @bind="LocalFilter.MaxPrice" />
+
+        <label class="mt-3">Сортування</label>
+        <select class="form-select" @bind="LocalFilter.SortBy">
+            <option value="">За замовчуванням</option>
+            <option value="rating">За рейтингом (найкращі)</option> <option value="price_asc">Дешеві → Дорогі</option>
+            <option value="price_asc">Дешеві → Дорогі</option> 
+            <option value="price_desc">Дорогі → Дешеві</option>
+            <option value="year">Нові</option>
+            <option value="title">Назва</option>
+        </select>
+
+        <button class="btn btn-primary mt-4 w-100" @onclick="Apply">Застосувати</button>
+        <button class="btn btn-light mt-2 w-100" @onclick="Reset">Скинути</button>
+    </div>
+</div>
+
+@code {
+    private bool IsOpen = false;
+    
+    private BookFilterDto LocalFilter = new();
+    private List<CategoryTreeDto> CategoryTree = new();
+    private HashSet<int> expanded = new();
+
+    [Parameter] public EventCallback<BookFilterDto> OnApplyFilters { get; set; }
+
+    public async void Open()
+    {
+        CategoryTree = await BookService.GetUsedCategoryTreeAsync();
+        IsOpen = true;
+        StateHasChanged();
+    }
+
+    public void Close()
+    {
+        IsOpen = false;
+        StateHasChanged();
+    }
+
+    private async Task Apply()
+    {
+        LocalFilter.Page = 1;
+        await OnApplyFilters.InvokeAsync(LocalFilter);
+        Close();
+    }
+
+    private void Reset()
+    {
+        LocalFilter = new BookFilterDto() { PageSize = 9 };
+        StateHasChanged();
+    }
+
+    public void Toggle(int id)
+    {
+        if (expanded.Contains(id))
+            expanded.Remove(id);
+        else
+            expanded.Add(id);
+    }
+
+    private bool IsExpanded(int id) => expanded.Contains(id);
+
+    private void SelectCategory(int id)
+    {
+        LocalFilter.CategoryId = id;
+        Apply();
+    }
+}

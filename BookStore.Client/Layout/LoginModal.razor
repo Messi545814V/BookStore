@@ -1,0 +1,119 @@
+﻿@using BookStore.Core.DTOs
+@using BookStore.Client.Services
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthService AuthService
+@inject CartService CartService
+@inject AuthenticationStateProvider AuthStateProvider
+@inject NavigationManager NavigationManager
+
+@if (IsVisible)
+{
+    <div class="modal-backdrop fade show"></div>
+    <div class="modal fade show d-block" tabindex="-1" role="dialog" @onclick="Close">
+        
+        <div class="modal-dialog modal-dialog-centered" role="document" @onclick:stopPropagation="true">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Вхід у систему</h5>
+                    <button type="button" class="btn-close" @onclick="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <EditForm Model="loginDto" OnValidSubmit="HandleLogin">
+                        <DataAnnotationsValidator />
+
+                        @if (!string.IsNullOrEmpty(errorMessage))
+                        {
+                            <div class="alert alert-danger">@errorMessage</div>
+                        }
+
+                        <div class="form-group mb-3">
+                            <label>Ім'я користувача</label>
+                            <InputText class="form-control" @bind-Value="loginDto.Username" />
+                            <ValidationMessage For="@(() => loginDto.Username)" />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label>Пароль</label>
+                            <div class="input-group">
+                                <InputText type="@(showPassword ? "text" : "password")" 
+                                           class="form-control password-input" 
+                                           @bind-Value="loginDto.Password" />
+        
+                                <button class="btn btn-password-toggle" type="button" @onclick="() => showPassword = !showPassword">
+                                    <i class="bi @(showPassword ? "bi-eye-slash" : "bi-eye")"></i>
+                                </button>
+                            </div>
+                            <ValidationMessage For="@(() => loginDto.Password)" />
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Увійти</button>
+                        </div>
+                    </EditForm>
+                    
+                    <div class="mt-3 text-center">
+                        <span>Не маєте акаунту? </span>
+                        <button class="btn btn-link p-0 align-baseline" @onclick="SwitchToRegister">Зареєструватися</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private bool IsVisible { get; set; } = false;
+    private LoginDto loginDto = new();
+    private string? errorMessage;
+    private bool showPassword = false;
+
+    [Parameter] public EventCallback<bool> OnLoginSuccess { get; set; }
+    [Parameter] public EventCallback OnGoToRegister { get; set; } 
+
+    public void Show()
+    {
+        IsVisible = true;
+        errorMessage = null;
+        showPassword = false;
+        loginDto = new LoginDto();
+        StateHasChanged();
+    }
+
+    public void Close()
+    {
+        IsVisible = false;
+        StateHasChanged();
+    }
+
+    private async Task SwitchToRegister()
+    {
+        Close(); 
+        await OnGoToRegister.InvokeAsync();
+    }
+
+    private async Task HandleLogin()
+    {
+        errorMessage = null;
+        var success = await AuthService.LoginAsync(loginDto);
+
+        if (success)
+        {
+            await CartService.SyncGuestCartToApi();
+
+            var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+
+            if (user.IsInRole("Admin"))
+            {
+                NavigationManager.NavigateTo("/admin");
+            }
+            
+            Close();
+            await OnLoginSuccess.InvokeAsync(true);
+        }
+        else
+        {
+            errorMessage = "Неправильне ім'я користувача або пароль.";
+        }
+    }
+}

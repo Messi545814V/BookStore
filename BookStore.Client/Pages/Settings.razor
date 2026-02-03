@@ -1,0 +1,200 @@
+﻿@page "/settings"
+@using BookStore.Client.Services
+@using BookStore.Core.DTOs
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@inject ProfileService ProfileService
+@inject NavigationManager NavManager
+
+<PageTitle>Налаштування профілю</PageTitle>
+
+<div class="container mt-4 mb-5">
+    
+    <div class="d-flex align-items-center mb-4">
+        <button class="btn btn-outline-light me-3 border-0" @onclick='() => NavManager.NavigateTo("/")'>
+            <i class="bi bi-arrow-left fs-4"></i>
+        </button>
+        <h2 class="text-white m-0">Налаштування</h2>
+    </div>
+
+    @if (isLoading)
+    {
+        <div class="text-center py-5"><div class="spinner-border text-primary"></div></div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <div class="list-group bg-dark">
+                    <button class="list-group-item list-group-item-action @(activeTab == "general" ? "active" : "")" 
+                            @onclick='() => activeTab = "general"'>
+                        <i class="bi bi-person-vcard me-2"></i> Особисті дані
+                    </button>
+                    <button class="list-group-item list-group-item-action @(activeTab == "security" ? "active" : "")" 
+                            @onclick='() => activeTab = "security"'>
+                        <i class="bi bi-shield-lock me-2"></i> Безпека
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                
+                @if (activeTab == "general")
+                {
+                    <div class="settings-card">
+                        <h4 class="mb-4">Редагування профілю</h4>
+                        
+                        <EditForm Model="@userUpdate" OnValidSubmit="SaveProfile">
+                            <DataAnnotationsValidator />
+
+                            <div class="mb-3">
+                                <label class="form-label text-muted">Ім'я</label>
+                                <InputText class="form-control" @bind-Value="userUpdate.FullName" />
+                                <ValidationMessage For="@(() => userUpdate.FullName)" />
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label text-muted">Прізвище</label>
+                                <InputText class="form-control" @bind-Value="userUpdate.Surname" />
+                                <ValidationMessage For="@(() => userUpdate.Surname)" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label text-muted">Телефон</label>
+                                <InputText class="form-control" @bind-Value="userUpdate.Phone" />
+                                <ValidationMessage For="@(() => userUpdate.Phone)" />
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label text-muted">Email</label>
+                                <InputText class="form-control" @bind-Value="userUpdate.Email" />
+                                <ValidationMessage For="@(() => userUpdate.Email)" />
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" disabled="@isSaving">
+                                @(isSaving ? "Збереження..." : "Зберегти зміни")
+                            </button>
+
+                            @if (!string.IsNullOrEmpty(profileMessage))
+                            {
+                                <div class="mt-3 text-success"><i class="bi bi-check-circle"></i> @profileMessage</div>
+                            }
+                        </EditForm>
+                    </div>
+                }
+
+                @if (activeTab == "security")
+                {
+                    <div class="settings-card">
+                        <h4 class="mb-4">Зміна паролю</h4>
+
+                        <EditForm Model="@passwordDto" OnValidSubmit="ChangePassword">
+                            <DataAnnotationsValidator />
+
+                            <div class="mb-3">
+                                <label class="form-label text-muted">Старий пароль</label>
+                                <InputText type="password" class="form-control" @bind-Value="passwordDto.OldPassword" />
+                                <ValidationMessage For="@(() => passwordDto.OldPassword)" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label text-muted">Новий пароль</label>
+                                <InputText type="password" class="form-control" @bind-Value="passwordDto.NewPassword" />
+                                <ValidationMessage For="@(() => passwordDto.NewPassword)" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label text-muted">Підтвердження паролю</label>
+                                <InputText type="password" class="form-control" @bind-Value="passwordDto.ConfirmPassword" />
+                                <ValidationMessage For="@(() => passwordDto.ConfirmPassword)" />
+                            </div>
+
+                            <button type="submit" class="btn btn-danger" disabled="@isChangingPass">
+                                @(isChangingPass ? "Обробка..." : "Змінити пароль")
+                            </button>
+
+                            @if (!string.IsNullOrEmpty(passMessage))
+                            {
+                                <div class="mt-3 @(passIsError ? "text-danger" : "text-success")">
+                                    @passMessage
+                                </div>
+                            }
+                        </EditForm>
+                    </div>
+                }
+
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private string activeTab = "general";
+    private bool isLoading = true;
+    
+    // Моделі
+    private UserUpdateDto userUpdate = new();
+    private ChangePasswordDto passwordDto = new();
+
+    // Стани
+    private bool isSaving = false;
+    private string profileMessage = "";
+
+    private bool isChangingPass = false;
+    private string passMessage = "";
+    private bool passIsError = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var profile = await ProfileService.GetProfileAsync();
+        if (profile != null)
+        {
+            userUpdate.FullName = profile.FullName;
+            userUpdate.Phone = profile.PhoneNumber;
+            userUpdate.Email = profile.Email;
+            userUpdate.Surname = profile.Surname;
+        }
+        isLoading = false;
+    }
+
+    private async Task SaveProfile()
+    {
+        isSaving = true;
+        profileMessage = "";
+        
+        bool success = await ProfileService.UpdateProfileAsync(userUpdate);
+        if (success)
+        {
+            profileMessage = "Дані успішно оновлено!";
+            // Тут можна оновити глобальний стан, якщо потрібно
+        }
+        else
+        {
+            profileMessage = "Помилка при збереженні.";
+        }
+        
+        isSaving = false;
+    }
+
+    private async Task ChangePassword()
+    {
+        isChangingPass = true;
+        passMessage = "";
+        passIsError = false;
+
+        var error = await ProfileService.ChangePasswordAsync(passwordDto);
+        
+        if (error == null)
+        {
+            passMessage = "Пароль успішно змінено!";
+            passwordDto = new(); // Очистити форму
+        }
+        else
+        {
+            passMessage = "Помилка: " + error;
+            passIsError = true;
+        }
+
+        isChangingPass = false;
+    }
+}

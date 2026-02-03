@@ -1,0 +1,49 @@
+﻿@* Bookstore.Client/Shared/BookCard.razor *@
+@using BookStore.Client.Services
+@using BookStore.Core.DTOs
+@inject NavigationManager NavigationManager
+@inject CartService CartService
+
+<div class="card" style="width: 18rem; margin: 10px;">
+    
+    <img src="@Book.ImageUrl"
+         onerror="this.src='/images/no-image.png'"
+         class="card-img-top"
+         alt="@Book.Title"
+         style="height: 250px; object-fit: cover;"> 
+
+    <div class="card-body">
+        <h5 class="card-title">@Book.Title</h5>
+        <p class="card-text">@Book.Author</p>
+        <p class="card-text"><strong>@Book.Price.ToString("C")</strong></p>
+        
+        <a href="/book/@Book.Id" class="btn btn-primary">Деталі</a>
+        <button class="btn btn-success mt-2 w-100" @onclick="AddToCart">
+            В кошик
+        </button>
+
+    </div>
+</div>
+
+
+@code {
+
+    private string? errorMessage;
+    [Parameter, EditorRequired]
+    public BookSummaryDto Book { get; set; } = null!;
+
+    private async Task AddToCart() 
+
+    {
+        
+        try
+        {
+            await CartService.AddToCart(Book);
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Не вдалося завантажити дані: {ex.Message}";
+            Console.WriteLine(ex); // Виводимо повну помилку в консоль браузера
+        }
+    }
+}

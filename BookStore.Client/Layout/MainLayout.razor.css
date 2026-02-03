@@ -1,0 +1,48 @@
+.layout-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background: linear-gradient(180deg, #052767, #3a0647);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+/* === Sticky Header === */
+.top-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #ffffffcc;
+    backdrop-filter: blur(10px);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Кнопки у хедері */
+.header-btn {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 8px;
+    color: #333;
+}
+.header-btn:hover {
+    color: #0067ff;
+}
+
+/* Пошук */
+
+
+/* Контент */
+.body-content {
+    padding: 20px;
+    width: 100%;
+}

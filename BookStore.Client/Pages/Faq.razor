@@ -1,0 +1,156 @@
+﻿@page "/faq"
+
+<PageTitle>FAQ — Часті запитання</PageTitle>
+
+<div class="faq-page mb-5">
+    
+    <div class="faq-header text-center py-5 mb-4">
+        <h1 class="fw-bold display-5">Часті запитання</h1>
+        <p class="text-muted lead">Знайдіть відповіді на найпопулярніші запитання про наш сервіс.</p>
+    </div>
+
+    <div class="container" style="max-width: 900px;">
+        
+        @foreach (var group in faqSections)
+        {
+            <div class="faq-section mb-5">
+                <h3 class="section-title mb-3">
+                    <i class="@group.IconClass me-2 text-primary"></i> @group.Title
+                </h3>
+
+                <div class="accordion custom-accordion">
+                    @foreach (var item in group.Items)
+                    {
+                        <div class="accordion-item border-0 mb-3 shadow-sm rounded overflow-hidden">
+                            <h2 class="accordion-header">
+                                @* 1. Прибрали data-bs-toggle
+                                   2. Додали @onclick
+                                   3. Динамічно міняємо клас (collapsed чи ні)
+                                *@
+                                <button class="accordion-button fw-semibold @(item.IsOpen ? "" : "collapsed")" 
+                                        type="button" 
+                                        @onclick="() => ToggleItem(item)">
+                                    @item.Question
+                                </button>
+                            </h2>
+                            @* Динамічно додаємо клас "show", якщо IsOpen == true
+                            *@
+                            <div class="accordion-collapse collapse @(item.IsOpen ? "show" : "")">
+                                <div class="accordion-body text-muted">
+                                    @((MarkupString)item.Answer)
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
+        <div class="text-center mt-5 p-5 bg-light rounded-4">
+            <h3 class="fw-bold">Не знайшли відповіді?</h3>
+            <p class="text-muted mb-4">Наша служба підтримки готова допомогти вам у будь-який час.</p>
+            <a href="/contacts" class="btn btn-primary btn-lg rounded-pill px-5">
+                Зв'язатися з нами
+            </a>
+        </div>
+
+    </div>
+</div>
+
+@code {
+    private List<FaqSectionModel> faqSections = new();
+
+    // Метод для перемикання відкриття
+    private void ToggleItem(FaqItemModel item)
+    {
+        item.IsOpen = !item.IsOpen;
+    }
+
+    protected override void OnInitialized()
+    {
+        faqSections = new List<FaqSectionModel>
+        {
+            new FaqSectionModel 
+            {
+                Id = "orders",
+                Title = "Замовлення та Оплата",
+                IconClass = "bi bi-cart-check-fill",
+                Items = new List<FaqItemModel>
+                {
+                    new FaqItemModel("Чи можу я зробити замовлення без реєстрації?", 
+                        "Ви можете додати товари в кошик, проте вже під час оформлення замовлення у кошику вам доведеться зареєструватися/авторизуватися."),
+                    new FaqItemModel("Які є способи оплати?", 
+                        "Ми приймаємо оплату банківськими картками Visa/Mastercard онлайн або післяплату."),
+                    new FaqItemModel("Як скасувати замовлення?", 
+                        "Зв'яжіться з нашою службою підтримки.")
+                }
+            },
+            new FaqSectionModel
+            {
+                Id = "delivery",
+                Title = "Доставка",
+                IconClass = "bi bi-truck",
+                Items = new List<FaqItemModel>
+                {
+                    new FaqItemModel("Скільки коштує доставка?", 
+                        "Вартість доставки залежить від тарифів Нової Пошти."),
+                    new FaqItemModel("Як швидко ви відправляєте книги?", 
+                        "Замовлення до 15:00 відправляються в той же день."),
+                    new FaqItemModel("Де знаходиться моє замовлення?", 
+                        "Ви отримаєте ТТН в SMS.")
+                }
+            },
+            new FaqSectionModel
+            {
+                Id = "bonuses",
+                Title = "Бонусна програма",
+                IconClass = "bi bi-gift-fill",
+                Items = new List<FaqItemModel>
+                {
+                    new FaqItemModel("Як працюють бонуси?", 
+                        "1 бонус = 1 гривня. Можна використати під час оформлення замовлення."),
+                    new FaqItemModel("Коли нараховуються бонуси?", 
+                        "Після того, як ви отримуєте товар."),
+                    new FaqItemModel("Чи згорають бонуси?", 
+                        "Ні, бонуси залишаються на вашому балансі, доки ви їх не використаєте.")
+                }
+            },
+            new FaqSectionModel
+            {
+                Id = "returns",
+                Title = "Повернення та Обмін",
+                IconClass = "bi bi-arrow-repeat",
+                Items = new List<FaqItemModel>
+                {
+                    new FaqItemModel("Чи можна повернути книгу?", 
+                        "Книги належної якості не підлягають поверненню."),
+                    new FaqItemModel("Що робити, якщо книга пошкоджена?", 
+                        "Перевіряйте посилку на пошті. Складіть акт та відмовтеся від отримання.")
+                }
+            }
+        };
+    }
+
+    class FaqSectionModel
+    {
+        public string Id { get; set; } = "";
+        public string Title { get; set; } = "";
+        public string IconClass { get; set; } = "";
+        public List<FaqItemModel> Items { get; set; } = new();
+    }
+
+    class FaqItemModel
+    {
+        public string Question { get; set; }
+        public string Answer { get; set; }
+        
+        // --- ДОДАЛИ ЦЮ ВЛАСТИВІСТЬ ---
+        public bool IsOpen { get; set; } = false; 
+
+        public FaqItemModel(string q, string a)
+        {
+            Question = q;
+            Answer = a;
+        }
+    }
+}

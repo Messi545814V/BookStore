@@ -1,0 +1,225 @@
+﻿@page "/contacts"
+@using System.ComponentModel.DataAnnotations
+
+<PageTitle>Контакти — BookStore</PageTitle>
+
+<div class="contacts-page mb-5">
+    
+    @* --- ЗАГОЛОВОК --- *@
+    <div class="contacts-header text-center py-5 mb-4">
+        <h1 class="fw-bold display-5">Зв'яжіться з нами</h1>
+        <p class="text-muted lead">Ми завжди раді допомогти вам з вибором книги або відповісти на запитання.</p>
+    </div>
+
+    <div class="container">
+        <div class="row g-5">
+            
+            @* --- ЛІВА КОЛОНКА: КОНТАКТНА ІНФОРМАЦІЯ --- *@
+            <div class="col-lg-5">
+                <h3 class="mb-4">Наші контакти</h3>
+
+                <div class="contact-info-list">
+                    
+                    <div class="contact-item">
+                        <div class="icon-wrapper bg-primary-subtle text-primary">
+                            <i class="bi bi-telephone-fill"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-1">Телефони</h5>
+                            @* Мобільний *@
+                            <a href="tel:+380671215775" class="d-block text-decoration-none text-body fs-5 fw-bold">
+                                +38 (067) 121-57-75
+                            </a>
+                            @* Гаряча лінія *@
+                            <a href="tel:08001215775" class="d-block text-decoration-none text-body mt-1">
+                                0 800 121 57 75 <span class="badge bg-success-subtle text-success ms-2" style="font-size: 0.7em;">Безкоштовно</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="icon-wrapper bg-danger-subtle text-danger">
+                            <i class="bi bi-envelope-fill"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-1">Email</h5>
+                            <a href="mailto:support@bookstore.ua" class="text-decoration-none text-body fs-5">support@bookstore.ua</a>
+                            <div class="small text-muted mt-1">Відповідаємо протягом 24 годин</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="icon-wrapper bg-success-subtle text-success">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-1">Адреса офісу</h5>
+                            <p class="mb-0">м. Харків, вул. Заливна, 2</p>
+                            <small class="text-muted">Самовивіз доступний після підтвердження</small>
+                        </div>
+                    </div>
+
+                    <div class="contact-item border-0">
+                        <div class="icon-wrapper bg-warning-subtle text-warning">
+                            <i class="bi bi-clock-fill"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-1">Графік роботи</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li class="d-flex justify-content-between" style="min-width: 200px;">
+                                    <span>Пн - Пт:</span> <strong>09:00 - 20:00</strong>
+                                </li>
+                                <li class="d-flex justify-content-between">
+                                    <span>Сб - Нд:</span> <strong>10:00 - 18:00</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                
+                @* Соціальні мережі *@
+                <div class="social-links mt-5">
+                    <h5 class="mb-3">Ми в соцмережах:</h5>
+                    <div class="d-flex gap-3">
+                        <a href="https://t.me/Messi545814V" target="_blank" class="custom-telegram-link">
+                            <img src="Telegram_2019_Logo.svg.png" alt="Telegram" onerror="this.style.display='none';alert('Додайте файл telegram-logo.png у папку wwwroot/images!');" 
+                                 height="50"
+                                 width="50"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            @* --- ПРАВА КОЛОНКА: ФОРМА --- *@
+            <div class="col-lg-7">
+                <div class="contact-form-card p-4 p-md-5">
+                    <h3 class="mb-4">Напишіть нам</h3>
+                    
+                    @if (isSent)
+                    {
+                        <div class="alert alert-success d-flex align-items-center" role="alert">
+                            <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                            <div>
+                                <strong>Повідомлення надіслано!</strong><br/>
+                                Дякуємо, ми зв'яжемося з вами найближчим часом.
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-dark btn-sm mt-2" @onclick="ResetForm">Написати ще</button>
+                    }
+                    else
+                    {
+                        <EditForm Model="@model" OnValidSubmit="HandleSubmit">
+                            <DataAnnotationsValidator />
+                            
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <InputText id="name" class="form-control" placeholder="Ім'я" @bind-Value="model.Name" />
+                                        <label for="name">Ваше ім'я</label>
+                                        <ValidationMessage For="@(() => model.Name)" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <InputText id="email" class="form-control" placeholder="Email" @bind-Value="model.Email" />
+                                        <label for="email">Email</label>
+                                        <ValidationMessage For="@(() => model.Email)" />
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <InputSelect id="subject" class="form-control" @bind-Value="model.Subject">
+                                            <option value="">Оберіть тему...</option>
+                                            <option value="Замовлення">Питання по замовленню</option>
+                                            <option value="Співпраця">Співпраця</option>
+                                            <option value="Інше">Інше</option>
+                                        </InputSelect>
+                                        <label for="subject">Тема звернення</label>
+                                        <ValidationMessage For="@(() => model.Subject)" />
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <InputTextArea id="message" class="form-control" placeholder="Повідомлення" style="height: 150px" @bind-Value="model.Message" />
+                                        <label for="message">Ваше повідомлення</label>
+                                        <ValidationMessage For="@(() => model.Message)" />
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill fw-bold" disabled="@isSubmitting">
+                                        @if (isSubmitting)
+                                        {
+                                            <span class="spinner-border spinner-border-sm me-2"></span>
+                                            <span>Надсилання...</span>
+                                        }
+                                        else
+                                        {
+                                            <span><i class="bi bi-send-fill me-2"></i> Надіслати повідомлення</span>
+                                        }
+                                    </button>
+                                </div>
+                            </div>
+                        </EditForm>
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <div class="map-section mt-5 pt-4">
+            <h3 class="mb-4">Ми на мапі</h3>
+            <div class="map-container rounded-4 overflow-hidden shadow-sm">
+                <iframe src="https://maps.google.com/maps?q=49.9781018,36.2391674&hl=uk&z=16&output=embed" 
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    private ContactFormModel model = new();
+    private bool isSubmitting = false;
+    private bool isSent = false;
+
+    private async Task HandleSubmit()
+    {
+        isSubmitting = true;
+        
+        // Тут буде логіка відправки на сервер
+        await Task.Delay(1500);
+
+        isSubmitting = false;
+        isSent = true;
+    }
+
+    private void ResetForm()
+    {
+        model = new ContactFormModel();
+        isSent = false;
+    }
+
+    public class ContactFormModel
+    {
+        [Required(ErrorMessage = "Введіть ваше ім'я")]
+        public string Name { get; set; } = "";
+
+        [Required(ErrorMessage = "Введіть Email")]
+        [EmailAddress(ErrorMessage = "Некоректний Email")]
+        public string Email { get; set; } = "";
+
+        [Required(ErrorMessage = "Оберіть тему")]
+        public string Subject { get; set; } = "";
+
+        [Required(ErrorMessage = "Напишіть повідомлення")]
+        [MinLength(10, ErrorMessage = "Повідомлення занадто коротке")]
+        public string Message { get; set; } = "";
+    }
+}

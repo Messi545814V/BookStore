@@ -1,0 +1,349 @@
+﻿@using BookStore.Client.Pages
+@using BookStore.Client.Services
+@using BookStore.Client.Layout
+@using BookStore.Core.DTOs
+@using BookStore.Infrastructure.Services
+@using Microsoft.AspNetCore.Components.Authorization
+@inherits LayoutComponentBase
+
+@inject NavigationManager NavigationManager
+@inject ProfileService ProfileService
+@inject AuthenticationStateProvider AuthStateProvider
+@inject ClientBookService BookService
+
+<CascadingValue Value="FilterSidebar">
+
+    <FilterSidebar @ref="FilterSidebar" OnApplyFilters="ApplyFilters" />
+    <CartSidebar @ref="CartSidebar" />
+    <UserProfile @ref="UserProfile" />
+    <LoginModal @ref="loginModal" 
+                OnLoginSuccess="HandleLoginSuccess" 
+                OnGoToRegister="OpenRegisterModal"/>
+    <RegisterModal @ref="registerModal" 
+                   OnGoToLogin="OpenLoginModal"
+                   OnLoginSuccess="HandleLoginSuccess"/>
+
+    <div class="layout-container">
+        <main>
+            <header class="top-header">
+                <div class="header-inner">
+
+                    <div class="header-left">
+                        <div class="brand-logo" @onclick='() => NavigationManager.NavigateTo("/")'>
+                            BOOKSTORE
+                        </div>
+
+                        <div class="header-search">
+                            <button class="search-btn" @onclick="DoSearch">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </button>
+                            <input @bind="SearchTerm"
+                                   @bind:event="oninput"
+                                   @onkeydown="HandleSearchKey"
+                                   placeholder="Пошук..."
+                                   class="search-input" />
+                        </div>
+
+                        <div class="delivery-info">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="delivery-icon">
+                                <rect x="1" y="3" width="15" height="13"></rect>
+                                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                            </svg>
+                            <div class="delivery-text">
+                                <div class="main-txt">За тарифами Нової пошти</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="header-right">
+                        
+
+                        <div class="bonus-box" @onclick='() => NavigationManager.NavigateTo("/bonuses")'>
+                            <div class="sub-txt">Бонуси</div>
+                            <div class="main-txt">@userProfile.BonusBalance грн</div>
+                        </div>
+
+                        <div class="profile-wrapper">
+                            <AuthorizeView>
+                                <Authorized>
+                                    <div class="profile-box" @onclick="OpenProfile">
+                                        <div class="main-txt">
+                                            @(string.IsNullOrEmpty(userProfile.FullName) ? "КОРИСТУВАЧ" : userProfile.FullName.ToUpper())
+                                        </div>
+                                        <div class="sub-txt">Вітаємо!</div>
+                                    </div>
+                                </Authorized>
+                                <NotAuthorized>
+                                    @* ЗМІНЕНО: Замість href="/login" викликаємо метод *@
+                                    <button class="login-link btn-reset" @onclick="OpenLoginModal">Увійти</button>
+                                </NotAuthorized>
+                            </AuthorizeView>
+                        </div>
+
+                        <a href="/wishlist" class="text-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 5px; vertical-align: middle;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            @if (userProfile.WishListCount > 0)
+                            {
+                                <span class="count-badge">@userProfile.WishListCount</span>
+                            }
+                        </a>
+
+                        <button class="text-link cart-btn" @onclick="OpenCart">
+                            Кошик
+                        </button>
+                    </div>
+                </div>
+            </header>
+            
+            <nav class="category-nav">
+                <div class="nav-container">
+                    @if (Categories != null)
+                    {
+                        @foreach (var cat in Categories.Take(12))
+                        {
+                            <div class="nav-item">
+                                <a href="/?categoryId=@cat.Id">@cat.Name</a>
+                                @if (cat.Children != null && cat.Children.Any())
+                                {
+                                    <div class="dropdown-content">
+                                        @foreach (var child in cat.Children)
+                                        {
+                                            <a href="/?categoryId=@child.Id">@child.Name</a>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        }
+
+                        @if (Categories.Count > 12)
+                        {
+                            <div class="nav-item more-dropdown">
+                                <span class="more-trigger">Більше ▾</span>
+                                <div class="dropdown-content">
+                                    @foreach (var cat in Categories.Skip(12))
+                                    {
+                                        <div class="nested-item">
+                                            <a href="/?categoryId=@cat.Id" class="more-link">
+                                                @cat.Name 
+                                                @if (cat.Children != null && cat.Children.Any()) { <span class="side-arrow">▶️</span> }
+                                            </a>
+                    
+                                            @if (cat.Children != null && cat.Children.Any())
+                                            {
+                                                <div class="side-dropdown">
+                                                    @foreach (var child in cat.Children)
+                                                    {
+                                                        <a href="/?categoryId=@child.Id">@child.Name</a>
+                                                    }
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </nav>
+
+            <article class="body-content">
+                <div class="page-container">
+                    @Body
+                </div>
+            </article>
+        </main>
+        <footer class="site-footer">
+            <div class="footer-container">
+
+                <div class="footer-col">
+                    <div class="footer-title">BOOKSTORE</div>
+                    <p class="footer-text">
+                        Онлайн-книгарня з доставкою по всій Україні.
+                    </p>
+                    <p class="footer-text small">
+                        © @DateTime.Now.Year BookStore
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                    <div class="footer-title">Покупцям</div>
+                    <a href="/delivery">Доставка і оплата</a>
+                    <a href="/returns">Повернення</a>
+                    <a href="/bonuses">Бонусна програма</a>
+                </div>
+
+                <div class="footer-col">
+                    <div class="footer-title">Про нас</div>
+                    <a href="/about">Про BookStore</a>
+                    <a href="/contacts">Контакти</a>
+                    <a href="/faq">FAQ</a>
+                </div>
+
+                <div class="footer-col">
+                    <div class="footer-title">Контакти</div>
+                    <span>📞 +38 (067) 121-57-75</span>
+                    <span>✉️ support@bookstore.ua</span>
+                </div>
+
+            </div>
+        </footer>
+
+        
+    </div>
+</CascadingValue>
+
+@code {
+    private string SearchTerm = "";
+    private List<CategoryTreeDto> Categories = new();
+
+    private FilterSidebar? FilterSidebar;
+    private CartSidebar? CartSidebar;
+    private UserProfile? UserProfile;
+    private LoginModal? loginModal;
+    private RegisterModal? registerModal;
+
+    private UserProfileDto userProfile = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        NavigationManager.LocationChanged += HandleLocationChanged;
+        
+        AuthStateProvider.AuthenticationStateChanged += OnAuthenticationStateChanged;
+        
+        
+        
+        await LoadCategories();
+        
+        await LoadUserData();
+    }
+
+    private void OpenLoginModal()
+    {
+        registerModal?.Close();
+        loginModal?.Show();
+    }
+    
+    private void OpenRegisterModal()
+    {
+        loginModal?.Close();
+        registerModal?.Show();
+    }
+    
+    private async Task HandleLoginSuccess()
+    { 
+        await LoadUserData();
+        StateHasChanged();
+    }
+
+    private void OnAuthenticationStateChanged(Task<AuthenticationState> task)
+    {
+        _ = InvokeAsync(async () =>
+        {
+            await LoadUserData();
+            StateHasChanged();
+        });
+    }
+    
+    private async Task LoadUserData()
+    {
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        if (authState.User.Identity?.IsAuthenticated == true)
+        {
+            try
+            {
+                var profile = await ProfileService.GetProfileAsync();
+                if (profile != null)
+                {
+                    userProfile = profile;
+                }
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine($"Помилка завантаження профілю: {ex.Message}");
+            }
+        }
+        else
+        {
+            // Якщо користувач вийшов - очищаємо дані
+            userProfile = new UserProfileDto(); 
+        }
+    }
+    
+    private async Task LoadCategories()
+    {
+        try 
+        {
+            // Використовуємо ваш існуючий метод із ClientBookService
+            Categories = await BookService.GetUsedCategoryTreeAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Помилка завантаження категорій: {ex.Message}");
+        }
+    }
+
+    private void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
+        => StateHasChanged();
+
+    private bool IsHomePage()
+    {
+        var path = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        return string.IsNullOrEmpty(path);
+    }
+
+    private void OpenFilters() => FilterSidebar?.Open();
+    private void OpenCart() => CartSidebar?.Open();
+    private void OpenProfile() => UserProfile?.Open();
+
+    private void DoSearch()
+    {
+        NavigationManager.NavigateTo(
+            $"/?searchTerm={Uri.EscapeDataString(SearchTerm ?? "")}",
+            replace: true);
+    }
+
+    private void HandleSearchKey(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            DoSearch();
+        }
+    }
+
+    private void ApplyFilters(BookFilterDto filter)
+    {
+        var q = new Dictionary<string, string>();
+
+        if (!string.IsNullOrWhiteSpace(filter.SearchTerm))
+            q["searchTerm"] = filter.SearchTerm;
+
+        if (filter.CategoryId is not null)
+            q["categoryId"] = filter.CategoryId.Value.ToString();
+
+        if (filter.MinPrice is not null)
+            q["minPrice"] = filter.MinPrice.Value.ToString();
+
+        if (filter.MaxPrice is not null)
+            q["maxPrice"] = filter.MaxPrice.Value.ToString();
+
+        if (!string.IsNullOrWhiteSpace(filter.SortBy))
+            q["sortBy"] = filter.SortBy;
+
+        q["page"] = "1";
+
+        NavigationManager.NavigateTo(
+            "/?" + string.Join("&", q.Select(x => $"{x.Key}={x.Value}")),
+            replace: true);
+    }
+    
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= HandleLocationChanged;
+        AuthStateProvider.AuthenticationStateChanged -= OnAuthenticationStateChanged;
+    }
+}

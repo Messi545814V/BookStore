@@ -1,0 +1,468 @@
+﻿@page "/"
+@page "/search"
+@implements IDisposable
+@inject ClientBookService BookService
+@inject CartService CartService
+@inject NavigationManager NavigationManager
+@using BookStore.Core.DTOs
+@using Microsoft.AspNetCore.Components.Authorization
+@using BookStore.Client.Helpers
+@using BookStore.Client.Services
+@using Microsoft.AspNetCore.Components.Authorization
+
+<PageTitle>Bookstore — Головна</PageTitle>
+
+<div class="container-fluid mt-4 px-4">
+    @if (isLoading)
+    {
+        <div class="d-flex justify-content-center align-items-center" style="min-height:400px;">
+            <div class="spinner-border text-danger" style="width: 3rem; height: 3rem;"></div>
+        </div>
+    }
+    else if (IsSearching)
+    {
+        <div class="catalog-header-bar mb-4">
+            <div class="d-flex justify-content-between align-items-end flex-wrap gap-3">
+
+                <div>
+                    <h3 class="text-white mb-1">
+                        @if (!string.IsNullOrEmpty(filter.SearchTerm))
+                        {
+                            <span>Результати для &quot;<span class="text-primary">@filter.SearchTerm</span>&quot;</span>
+                        }
+                        else if (filter.CategoryId.HasValue)
+                        {
+                            <span>Категорія</span>
+                        }
+                        else
+                        {
+                            <span>Каталог книг</span>
+                        }
+                    </h3>
+                    <div class="text-white-50 small">Знайдено: @pagedResult.TotalCount товарів</div>
+                </div>
+
+                <div class="d-flex align-items-center gap-3">
+
+                    <button class="btn btn-link text-danger text-decoration-none btn-sm" @onclick="ResetFilters">
+                        ✕ Скинути
+                    </button>
+
+                    <div class="custom-dropdown @(isSortMenuOpen ? "open" : "")">
+                        <button class="dropdown-toggle-btn" @onclick="ToggleSortMenu" @onfocusout="CloseSortMenuDelay">
+                            <span>@GetSortLabel(filter.SortBy)</span>
+                            <i class="bi bi-chevron-down toggle-icon"></i>
+                        </button>
+
+                        <div class="dropdown-menu-custom">
+                            <button class="@(filter.SortBy == "popularity" ? "active" : "")"
+                                    @onclick='() => SelectSort("popularity")'>За популярністю
+                            </button>
+
+                            <button class="@(filter.SortBy == "price_asc" ? "active" : "")"
+                                    @onclick='() => SelectSort("price_asc")'>За зростанням ціни
+                            </button>
+
+                            <button class="@(filter.SortBy == "price_desc" ? "active" : "")"
+                                    @onclick='() => SelectSort("price_desc")'>За спаданням ціни
+                            </button>
+
+                            <button class="@(filter.SortBy == "year" ? "active" : "")"
+                                    @onclick='() => SelectSort("year")'>Новинки
+                            </button>
+
+                            <button class="@(filter.SortBy == "rating" ? "active" : "")"
+                                    @onclick='() => SelectSort("rating")'>За рейтингом
+                            </button>
+
+                            <button class="@(filter.SortBy == "title" ? "active" : "")"
+                                    @onclick='() => SelectSort("title")'>Від А до Я
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="view-switcher">
+                        <button class="view-btn @(filter.PageSize == 20 ? "active" : "")"
+                                @onclick="() => SetPageSize(20)"
+                                title="5 книг в ряд">
+                            <svg class="grid-icon" viewBox="0 0 24 24" fill="currentColor">
+                                @* Малюємо сітку 3x3 *@
+                                <rect x="2" y="2" width="5" height="5" rx="1"/>
+                                <rect x="9" y="2" width="5" height="5" rx="1"/>
+                                <rect x="16" y="2" width="5" height="5" rx="1"/>
+
+                                <rect x="2" y="9" width="5" height="5" rx="1"/>
+                                <rect x="9" y="9" width="5" height="5" rx="1"/>
+                                <rect x="16" y="9" width="5" height="5" rx="1"/>
+
+                                <rect x="2" y="16" width="5" height="5" rx="1"/>
+                                <rect x="9" y="16" width="5" height="5" rx="1"/>
+                                <rect x="16" y="16" width="5" height="5" rx="1"/>
+                            </svg>
+                        </button>
+                        
+                        <button class="view-btn @(filter.PageSize == 50 ? "active" : "")"
+                                @onclick="() => SetPageSize(50)"
+                                title="6 книг в ряд">
+                            <svg class="grid-icon" viewBox="0 0 24 24" fill="currentColor">
+                                @* Малюємо сітку 4x4 *@
+                                <rect x="1" y="1" width="4" height="4" rx="1"/>
+                                <rect x="7" y="1" width="4" height="4" rx="1"/>
+                                <rect x="13" y="1" width="4" height="4" rx="1"/>
+                                <rect x="19" y="1" width="4" height="4" rx="1"/>
+
+                                <rect x="1" y="7" width="4" height="4" rx="1"/>
+                                <rect x="7" y="7" width="4" height="4" rx="1"/>
+                                <rect x="13" y="7" width="4" height="4" rx="1"/>
+                                <rect x="19" y="7" width="4" height="4" rx="1"/>
+
+                                <rect x="1" y="13" width="4" height="4" rx="1"/>
+                                <rect x="7" y="13" width="4" height="4" rx="1"/>
+                                <rect x="13" y="13" width="4" height="4" rx="1"/>
+                                <rect x="19" y="13" width="4" height="4" rx="1"/>
+
+                                <rect x="1" y="19" width="4" height="4" rx="1"/>
+                                <rect x="7" y="19" width="4" height="4" rx="1"/>
+                                <rect x="13" y="19" width="4" height="4" rx="1"/>
+                                <rect x="19" y="19" width="4" height="4" rx="1"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary mt-3"/>
+        </div>
+
+        @if (!pagedResult.Items.Any())
+        {
+            <div class="alert alert-dark text-center py-5">
+                <h4>Нічого не знайдено 😕</h4>
+                <button class="btn btn-outline-light mt-2" @onclick="ResetFilters">Повернутися на головну</button>
+            </div>
+        }
+        else
+        {
+            @* ДИНАМІЧНІ КЛАСИ СІТКИ:
+               g-3 забезпечує однакову відстань.
+               row-cols-xl-6 : 6 книг в ряд (для PageSize 50)
+               row-cols-xl-5 : 5 книг в ряд (для PageSize 20)
+            
+            *@
+            <div
+                class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 @(filter.PageSize == 50 ? "row-cols-xl-6" : "row-cols-xl-5") g-3">
+                @foreach (var book in pagedResult.Items)
+                {
+                    <div class="col">
+                        @RenderBookCard(book)
+                    </div>
+                }
+            </div>
+
+            @RenderPagination()
+        }
+    }
+    else
+    {
+        @* ======================================================= *@
+        @* ГОЛОВНА СТОРІНКА (Слайдери, Вітрина)                    *@
+        @* ======================================================= *@
+
+        <section class="home-section">
+            <div class="section-header">
+                <h2>Новинки <span class="badge-new">NEW</span></h2>
+                <a href="/?sortBy=year" class="view-all">Дивитись всі ➔</a>
+            </div>
+            <div class="slider-wrapper">
+                <button class="slider-btn left" @onclick="() => ScrollLeft(nameof(NewArrivals))"><i
+                        class="bi bi-chevron-left"></i></button>
+                <div class="horizontal-scroll" id="slider-NewArrivals">
+                    @foreach (var book in NewArrivals)
+                    {
+                        @RenderBookCard(book)
+                    }
+                </div>
+                <button class="slider-btn right" @onclick="() => ScrollRight(nameof(NewArrivals))"><i
+                        class="bi bi-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <section class="home-section">
+            <div class="section-header">
+                <h2 class="text-white">Топ продажів 🔥</h2>
+                <a href="/?sortBy=rating" class="view-all text-white-50">Більше</a>
+            </div>
+            <div class="slider-wrapper">
+                <button class="slider-btn left" @onclick="() => ScrollLeft(nameof(TopSales))"><i
+                        class="bi bi-chevron-left"></i></button>
+                <div class="horizontal-scroll" id="slider-TopSales">
+                    @foreach (var book in TopSales)
+                    {
+                        @RenderBookCard(book)
+                    }
+                </div>
+                <button class="slider-btn right" @onclick="() => ScrollRight(nameof(TopSales))"><i
+                        class="bi bi-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <section class="home-section">
+            <div class="section-header"><h2>Рекомендовано для вас ✨</h2></div>
+            <div class="slider-wrapper">
+                <button class="slider-btn left" @onclick="() => ScrollLeft(nameof(Recommended))"><i
+                        class="bi bi-chevron-left"></i></button>
+                <div class="horizontal-scroll" id="slider-Recommended">
+                    @foreach (var book in Recommended)
+                    {
+                        @RenderBookCard(book)
+                    }
+                </div>
+                <button class="slider-btn right" @onclick="() => ScrollRight(nameof(Recommended))"><i
+                        class="bi bi-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <section class="home-section mb-5">
+            <div class="section-header"><h2>Зараз читають 📖</h2></div>
+            <div class="slider-wrapper">
+                <button class="slider-btn left" @onclick="() => ScrollLeft(nameof(NowReading))"><i
+                        class="bi bi-chevron-left"></i></button>
+                <div class="horizontal-scroll" id="slider-NowReading">
+                    @foreach (var book in NowReading)
+                    {
+                        @RenderBookCard(book)
+                    }
+                </div>
+                <button class="slider-btn right" @onclick="() => ScrollRight(nameof(NowReading))"><i
+                        class="bi bi-chevron-right"></i></button>
+            </div>
+        </section>
+    }
+</div>
+
+@code {
+    private BookFilterDto filter = new() { PageSize = 20 };
+    private PageResult<BookSummaryDto> pagedResult = new();
+    private List<BookSummaryDto> NewArrivals = new();
+    private List<BookSummaryDto> TopSales = new();
+    private List<BookSummaryDto> Recommended = new();
+    private List<BookSummaryDto> NowReading = new();
+    private bool isLoading = true;
+
+
+    private bool isSortMenuOpen = false;
+
+    // Метод перемикання меню
+    private void ToggleSortMenu() => isSortMenuOpen = !isSortMenuOpen;
+
+    // Метод закриття із затримкою (щоб встиг спрацювати клік по кнопці всередині)
+    private async Task CloseSortMenuDelay()
+    {
+        await Task.Delay(200);
+        isSortMenuOpen = false;
+        StateHasChanged();
+    }
+
+   
+    private void SelectSort(string sortValue)
+    {
+        filter.SortBy = sortValue;
+        filter.Page = 1;
+        isSortMenuOpen = false; 
+        UpdateUrl();
+    }
+
+    private string GetSortLabel(string sortBy) => sortBy switch
+    {
+        "price_asc" => "За зростанням ціни",
+        "price_desc" => "За спаданням ціни",
+        "year" => "Новинки",
+        "rating" => "За рейтингом",
+        "title" => "Від А до Я",
+        _ => "За популярністю"
+    };
+
+    private bool IsSearching =>
+        !string.IsNullOrEmpty(filter.SearchTerm)
+        || filter.CategoryId.HasValue
+        || filter.MinPrice.HasValue
+        || filter.MaxPrice.HasValue
+        || !string.IsNullOrEmpty(filter.SortBy);
+
+    [Inject] IJSRuntime JS { get; set; }
+    [Inject] AuthenticationStateProvider AuthStateProvider { get; set; }
+
+    protected override void OnInitialized()
+    {
+        NavigationManager.LocationChanged += HandleLocationChanged;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        if (authState.User.IsInRole("Admin"))
+        {
+            NavigationManager.NavigateTo("/admin", replace: true);
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var q = UrlQueryHelper.Parse(NavigationManager.Uri);
+
+        filter.SearchTerm = q.Get("searchTerm");
+        filter.CategoryId = q.GetInt("categoryId");
+        filter.MinPrice = q.GetDecimal("minPrice");
+        filter.MaxPrice = q.GetDecimal("maxPrice");
+        filter.SortBy = q.Get("sortBy");
+        filter.Page = q.GetInt("page") ?? 1;
+
+        // Зчитуємо pageSize, якщо немає - за замовчуванням 20 (це буде режим 5 книг в ряд)
+        var sizeParam = q.GetInt("pageSize");
+        filter.PageSize = sizeParam ?? 20;
+
+        if (IsSearching)
+        {
+            if (string.IsNullOrEmpty(filter.SortBy)) filter.SortBy = "popularity";
+            await LoadBooks();
+        }
+        else
+        {
+            await LoadHomeSections();
+        }
+    }
+
+    private void SetPageSize(int size)
+    {
+        if (filter.PageSize == size) return;
+        filter.PageSize = size;
+        filter.Page = 1;
+        UpdateUrl();
+    }
+
+    private void OnSortChange(ChangeEventArgs e)
+    {
+        filter.SortBy = e.Value?.ToString();
+        filter.Page = 1;
+        UpdateUrl();
+    }
+
+    private void ChangePage(int page)
+    {
+        filter.Page = page;
+        UpdateUrl();
+    }
+
+    private void UpdateUrl()
+    {
+        var dict = new Dictionary<string, string>();
+        if (!string.IsNullOrEmpty(filter.SearchTerm)) dict["searchTerm"] = filter.SearchTerm;
+        if (filter.CategoryId.HasValue) dict["categoryId"] = filter.CategoryId.Value.ToString();
+        if (filter.MinPrice.HasValue) dict["minPrice"] = filter.MinPrice.Value.ToString();
+        if (filter.MaxPrice.HasValue) dict["maxPrice"] = filter.MaxPrice.Value.ToString();
+        if (!string.IsNullOrEmpty(filter.SortBy)) dict["sortBy"] = filter.SortBy;
+
+        dict["pageSize"] = filter.PageSize.Value.ToString();
+        dict["page"] = filter.Page.Value.ToString();
+
+        var newUrl = "/?" + string.Join("&", dict.Select(x => $"{x.Key}={x.Value}"));
+        NavigationManager.NavigateTo(newUrl);
+    }
+
+    private void ResetFilters() => NavigationManager.NavigateTo("/", replace: true);
+
+    private async Task LoadBooks()
+    {
+        isLoading = true;
+        StateHasChanged();
+        pagedResult = await BookService.GetBooksAsync(filter);
+        isLoading = false;
+        StateHasChanged();
+    }
+
+    private async Task LoadHomeSections()
+    {
+        isLoading = true;
+        StateHasChanged();
+        var tasks = new Task[]
+        {
+            Task.Run(async () => NewArrivals = (await BookService.GetBooksAsync(new BookFilterDto { SortBy = "year", PageSize = 10 })).Items.ToList()),
+            Task.Run(async () => TopSales = (await BookService.GetBooksAsync(new BookFilterDto { SortBy = "rating", PageSize = 10 })).Items.ToList()),
+            Task.Run(async () => Recommended = (await BookService.GetBooksAsync(new BookFilterDto { PageSize = 10 })).Items.ToList()),
+            Task.Run(async () => NowReading = (await BookService.GetBooksAsync(new BookFilterDto { PageSize = 12 })).Items.ToList())
+        };
+        await Task.WhenAll(tasks);
+        isLoading = false;
+        StateHasChanged();
+    }
+
+    private void HandleLocationChanged(object? sender, LocationChangedEventArgs e) => _ = OnParametersSetAsync();
+    private Task AddToCart(BookSummaryDto book) => CartService.AddToCart(book);
+    private async Task ScrollLeft(string sliderName) => await JS.InvokeVoidAsync("scrollSlider", $"slider-{sliderName}", -1);
+    private async Task ScrollRight(string sliderName) => await JS.InvokeVoidAsync("scrollSlider", $"slider-{sliderName}", 1);
+    public void Dispose() => NavigationManager.LocationChanged -= HandleLocationChanged;
+
+    private RenderFragment RenderBookCard(BookSummaryDto book) => __builder =>
+    {
+        <div class="book-card-v2 dark-theme">
+            <div class="book-cover">
+                <img src="@book.ImageUrl" onerror="this.src='images/no-image.png'" alt="@book.Title"/>
+                <div class="card-overlay">
+                    <button class="btn-wishlist" @onclick:preventDefault><i class="bi bi-heart"></i></button>
+                </div>
+            </div>
+
+            <div class="book-details">
+                <div class="details-top">
+                    <h5 class="book-title" title="@book.Title">@book.Title</h5>
+                    <p class="book-author">@book.Author</p>
+                </div>
+
+                <div class="book-footer mt-2">
+                    <span class="book-price text-white fw-bold">@book.Price ₴</span>
+                    <button class="btn-buy" @onclick:preventDefault @onclick="() => AddToCart(book)">
+                        <i class="bi bi-cart-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <a href="/book/@book.Id" class="stretched-link"></a>
+        </div>
+    };
+
+    private RenderFragment RenderPagination() => __builder =>
+    {
+        if (pagedResult.TotalPages > 1)
+        {
+            <nav class="mt-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item @(filter.Page == 1 ? "disabled" : "")">
+                        <button class="page-link bg-dark text-white border-secondary"
+                                @onclick="() => ChangePage(filter.Page!.Value - 1)">«
+                        </button>
+                    </li>
+                    @for (int i = 1; i <= pagedResult.TotalPages; i++)
+                    {
+                        var pageNumber = i;
+                        if (i == 1 || i == pagedResult.TotalPages || (i >= filter.Page - 2 && i <= filter.Page + 2))
+                        {
+                            <li class="page-item @(filter.Page == pageNumber ? "active" : "")">
+                                <button class="page-link bg-dark text-white border-secondary"
+                                        @onclick="() => ChangePage(pageNumber)">@pageNumber</button>
+                            </li>
+                        }
+                        else if (i == filter.Page - 3 || i == filter.Page + 3)
+                        {
+                            <li class="page-item disabled"><span class="page-link bg-dark text-muted border-secondary">...</span>
+                            </li>
+                        }
+                    }
+                    <li class="page-item @(filter.Page == pagedResult.TotalPages ? "disabled" : "")">
+                        <button class="page-link bg-dark text-white border-secondary"
+                                @onclick="() => ChangePage(filter.Page!.Value + 1)">»
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        }
+    };
+
+}

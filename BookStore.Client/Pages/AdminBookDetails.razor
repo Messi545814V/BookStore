@@ -1,0 +1,251 @@
+﻿@page "/admin/book/details/{Id:int}"
+@layout AdminLayout
+@attribute [Authorize(Roles = "Admin")]
+
+@using BookStore.Core.DTOs
+@using BookStore.Client.Services
+@using Microsoft.AspNetCore.Authorization
+
+@inject ClientBookService BookService
+@inject AdminService AdminService
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+@inject HttpClient Http
+
+<PageTitle>Деталі книги (Адмін) — @(book?.Title ?? "...")</PageTitle>
+
+<div class="container-fluid pt-4">
+    <button class="btn btn-link text-secondary text-decoration-none mb-4 p-0" @onclick="GoBack">
+        <i class="bi bi-arrow-left me-2"></i> Назад до списку
+    </button>
+
+    @if (isLoading)
+    {
+        <div class="d-flex justify-content-center"><div class="spinner-border text-primary"></div></div>
+    }
+    else if (book == null)
+    {
+        <div class="alert alert-danger">Книгу не знайдено (ID: @Id)</div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <img src="@(string.IsNullOrEmpty(book.ImageUrl) ? "/images/no-cover.png" : book.ImageUrl)" 
+                     class="img-fluid rounded shadow mb-3 w-100" style="object-fit: cover;" />
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" @onclick="EditBook"><i class="bi bi-pencil-square me-2"></i> Редагувати</button>
+                    <button class="btn btn-outline-danger" @onclick="DeleteBook"><i class="bi bi-trash me-2"></i> Видалити</button>
+                </div>
+            </div>
+            
+            <div class="col-md-9 ps-md-5">
+                <h1 class="fw-bold text-white mb-2">@book.Title</h1>
+                <h4 class="text-info mb-4">@book.AuthorName</h4>
+
+                <div class="d-flex gap-5 mb-5 border-bottom border-secondary pb-4">
+                    <div>
+                        <div class="text-white-50 small text-uppercase ls-1">Ціна</div>
+                        <div class="fs-3 fw-bold text-success">@book.Price ₴</div>
+                    </div>
+                    <div>
+                        <div class="text-white-50 small text-uppercase ls-1">Склад</div>
+                        <div class="fs-3 fw-bold @(book.Stock < 5 ? "text-warning" : "text-white")">@book.Stock</div>
+                    </div>
+                    <div>
+                        <div class="text-white-50 small text-uppercase ls-1">Рейтинг</div>
+                        <div class="fs-3 fw-bold text-warning">★ @book.AverageRating.ToString("0.0")</div>
+                    </div>
+                    <div>
+                        <div class="text-white-50 small text-uppercase ls-1">Рік</div>
+                        <div class="fs-3 fw-bold text-white">@book.Year</div>
+                    </div>
+                </div>
+
+                <div class="comments-section mt-5 pt-4 border-top border-secondary">
+                    <h4 class="text-white mb-4">Коментарі (@TotalCommentsCount)</h4>
+                    
+                    <div class="mb-4 p-3 bg-dark bg-opacity-50 rounded border border-secondary">
+                         <h6 class="text-white mb-2">Написати коментар від імені Адміністратора</h6>
+                         <textarea class="form-control bg-black text-white border-secondary mb-2" 
+                                   @bind="adminCommentText" rows="2" placeholder="Ваше повідомлення..."></textarea>
+                         <button class="btn btn-primary btn-sm" @onclick="() => SubmitAdminComment(null)">Надіслати</button>
+                    </div>
+
+                    @if (comments.Any())
+                    {
+                        <div class="d-flex flex-column gap-3">
+                            @foreach (var comment in comments)
+                            {
+                                @RenderComment(comment)
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-white-50">Коментарів поки немає.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public int Id { get; set; }
+
+    private BookDetailsDto? book;
+    private List<BookCommentDto> comments = new();
+    private bool isLoading = true;
+    
+    private int? replyingToId = null;
+    private string replyText = "";
+    private string adminCommentText = "";
+
+    private int TotalCommentsCount => comments.Sum(c => 1 + CountReplies(c));
+    private int CountReplies(BookCommentDto c) => (c.Replies?.Count ?? 0) + (c.Replies?.Sum(r => CountReplies(r)) ?? 0);
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        isLoading = true;
+        try
+        {
+            book = await BookService.GetBookByIdAsync(Id);
+            comments = await Http.GetFromJsonAsync<List<BookCommentDto>>($"api/books/{Id}/comments") ?? new();
+        }
+        catch (Exception ex) { Console.WriteLine(ex.Message); }
+        finally { isLoading = false; }
+    }
+    
+    private void ToggleReplyForm(int commentId)
+    {
+        if (replyingToId == commentId) 
+            replyingToId = null;
+        else 
+        {
+            replyingToId = commentId;
+            replyText = ""; 
+        }
+    }
+    
+    private async Task ApproveComment(int commentId)
+    {
+        try 
+        {
+            await AdminService.ApproveCommentAsync(commentId);
+            await LoadData(); 
+        }
+        catch (Exception ex)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", $"Помилка: {ex.Message}");
+        }
+    }
+
+    private async Task SubmitAdminComment(int? parentId)
+    {
+        string text = parentId == null ? adminCommentText : replyText;
+        if (string.IsNullOrWhiteSpace(text)) return;
+
+        var dto = new CreateCommentDto { Comment = text, ParentId = parentId };
+        await Http.PostAsJsonAsync($"api/books/{Id}/comments", dto);
+
+        adminCommentText = "";
+        replyText = "";
+        replyingToId = null;
+        await LoadData();
+    }
+
+    private async Task DeleteComment(int commentId)
+    {
+        if (await JsRuntime.InvokeAsync<bool>("confirm", "Видалити цей коментар?"))
+        {
+            await Http.DeleteAsync($"api/books/{Id}/comments/{commentId}");
+            await LoadData();
+        }
+    }
+
+    private RenderFragment RenderComment(BookCommentDto c, int level = 0) => __builder =>
+    {
+        <div class="comment-item mb-2" style="margin-left: @(level * 30)px;">
+            <div class="p-3 rounded bg-dark border border-secondary border-opacity-25">
+                <div class="d-flex justify-content-between mb-1">
+                    <div>
+                        <span class="fw-bold text-info">@c.UserName</span>
+                        
+                        @if (c.IsAdmin)
+                        {
+                            <span class="badge bg-danger ms-2" title="Адміністратор">Admin</span>
+                        }
+                        
+                        <span class="text-white-50 small ms-2">@c.CreatedAt.ToString("dd.MM HH:mm")</span>
+
+                        @if (!c.IsApproved)
+                        {
+                            <span class="badge bg-warning text-dark ms-2">На перевірці</span>
+                        }
+                    </div>
+                    <div>
+                        
+                        @if (!c.IsApproved)
+                        {
+                            <button class="btn btn-link btn-sm text-decoration-none p-0 me-3 text-warning fw-bold" 
+                                    @onclick="() => ApproveComment(c.Id)">
+                                <i class="bi bi-check-lg me-1"></i>Підтвердити
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-link btn-sm text-decoration-none p-0 me-3 text-success" 
+                                    @onclick="() => ToggleReplyForm(c.Id)">
+                                Відповісти
+                            </button>
+                        }
+
+                        <button class="btn btn-link btn-sm text-decoration-none p-0 text-danger" 
+                                @onclick="() => DeleteComment(c.Id)" title="Видалити">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="text-white-50 text-break">@c.Comment</div>
+
+                @if (replyingToId == c.Id)
+                {
+                    <div class="mt-3 ps-3 border-start border-success">
+                        <textarea class="form-control bg-black text-white border-secondary mb-2" 
+                                  @bind="replyText" rows="2" placeholder="Відповідь адміністратора..."></textarea>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-success btn-sm" @onclick="() => SubmitAdminComment(c.Id)">Надіслати</button>
+                            <button class="btn btn-outline-secondary btn-sm" @onclick="() => replyingToId = null">Скасувати</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        @if (c.Replies != null && c.Replies.Any())
+        {
+            @foreach (var reply in c.Replies)
+            {
+                @RenderComment(reply, level + 1)
+            }
+        }
+    };
+
+    private void GoBack() => NavigationManager.NavigateTo("/admin?tab=books");
+    private void EditBook() => NavigationManager.NavigateTo($"/admin/book/edit/{Id}");
+    private async Task DeleteBook() 
+    {
+        if (await JsRuntime.InvokeAsync<bool>("confirm", "Видалити книгу?"))
+        {
+            await AdminService.DeleteBookAsync(Id);
+            NavigationManager.NavigateTo("/admin?tab=books");
+        }
+    }
+}

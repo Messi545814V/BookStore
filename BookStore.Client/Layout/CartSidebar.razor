@@ -1,0 +1,164 @@
+﻿@using BookStore.Client.Services
+@using BookStore.Core.DTOs
+@using Microsoft.AspNetCore.Components.Authorization
+@inject CartService CartService
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthStateProvider
+
+<div class="cart-sidebar @(IsOpen ? "open" : "")">
+
+    <div class="cart-header">
+        <h4>Кошик</h4>
+        <button class="close-btn" @onclick="Close">✖</button>
+    </div>
+
+    <div class="cart-body">
+
+        @if (isLoading)
+        {
+            <p>Завантаження...</p>
+        }
+        else if (!CartService.Items.Any())
+        {
+            <p>Ваш кошик порожній.</p>
+        }
+        else
+        {
+            @foreach (var item in CartService.Items)
+            {
+                <div class="cart-item">
+                    <img src="@item.ImageUrl" 
+                         onerror="this.src='/images/no-image.png'" 
+                         referrerpolicy="no-referrer"
+                         alt="@item.BookTitle"
+                         class="cart-img"/>
+
+                    <div class="cart-info">
+                        <div class="title">@item.BookTitle</div>
+                        <div class="price">@item.Price.ToString("0.00") грн</div>
+
+                        <div class="qty-box">
+                            <button class="qty-btn" @onclick="() => ChangeQty(item, -1)">-</button>
+                            <span>@item.Quantity</span>
+                            <button class="qty-btn" @onclick="() => ChangeQty(item, 1)">+</button>
+                        </div>
+                    </div>
+
+                    <button class="remove-btn"
+                            @onclick="() => Remove(item.BookId)">
+                        ✖
+                    </button>
+                </div>
+            }
+        }
+    </div>
+
+    <div class="cart-footer">
+        <div class="total-row">
+            <span>Всього:</span>
+            <span class="total-price">@TotalAmount.ToString("0.00") грн</span>
+        </div>
+        
+        <button class="checkout-btn" 
+                @onclick="HandleCheckoutClick"
+                disabled="@(!CartService.Items.Any())">
+            Оформити замовлення
+        </button>
+
+    </div>
+</div>
+
+<div class="overlay @(IsOpen ? "show" : "")" @onclick="Close"></div>
+
+@code {
+    private bool IsOpen = false;
+    private bool isLoading = false;
+    
+    private decimal TotalAmount =>
+        CartService.Items.Sum(i => i.Price * i.Quantity);
+
+    public async Task Open()
+    {
+        IsOpen = true;
+        isLoading = true;
+        StateHasChanged();
+
+        try
+        {
+            // CartService сам вирішить звідки тягнути дані (API чи LocalStorage)
+            await CartService.GetCartItemsAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Cart OPEN error: " + ex.Message);
+        }
+
+        isLoading = false;
+        StateHasChanged();
+    }
+
+    public Task Close()
+    {
+        IsOpen = false;
+        return Task.CompletedTask;
+    }
+
+    private async Task Remove(int id)
+    {
+        await CartService.RemoveFromCartAsync(id);
+        // GetCartItemsAsync вже викликається всередині RemoveFromCartAsync,
+        // але StateHasChanged потрібен тут для оновлення UI сайдбару
+        StateHasChanged();
+    }
+    
+    private async Task ChangeQty(CartItemDto item, int delta)
+    {
+        // Логіка +1/-1
+        // Для гібридного кошика краще викликати UpdateQuantity або AddToCart
+        // залежно від того, як реалізовано API. 
+        // Використаємо універсальний підхід CartService:
+
+        if (delta > 0)
+        {
+            // Якщо це додавання, можна використати AddToCart з BookSummary,
+            // щоб заповнити всі поля для LocalStorage (картинка, назва і т.д.)
+            await CartService.AddToCart(new BookSummaryDto
+            {
+                Id = item.BookId,
+                Title = item.BookTitle,
+                Price = item.Price,
+                ImageUrl = item.ImageUrl
+            });
+        }
+        else
+        {
+            await CartService.UpdateQuantity(item.BookId, -1);
+        }
+
+        // Оновлювати вручну GetCartItemsAsync не треба, CartService робить це сам,
+        // але треба оновити UI компонента
+        StateHasChanged();
+    }
+
+    private async Task HandleCheckoutClick()
+    {
+        // 1. Закриваємо кошик
+        await Close();
+
+        // 2. Перевіряємо авторизацію
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity != null && user.Identity.IsAuthenticated)
+        {
+            // Користувач авторизований -> йдемо на Checkout
+            NavigationManager.NavigateTo("/checkout");
+        }
+        else
+        {
+            // Гість -> йдемо на логін, а потім повернемось на Checkout
+            // Параметр returnUrl дозволить вашій сторінці логіну знати, куди повернути юзера
+            NavigationManager.NavigateTo("/login?returnUrl=/checkout");
+        }
+    }
+}

@@ -1,0 +1,140 @@
+﻿@using BookStore.Client.Services
+@using BookStore.Core.DTOs
+@using Microsoft.AspNetCore.Components.Authorization
+@inject ProfileService ProfileService
+@inject NavigationManager NavManager
+@inject AuthenticationStateProvider AuthStateProvider
+@inject AuthService AuthService
+
+@if (IsOpen)
+{
+    <div class="profile-backdrop" @onclick="Close"></div>
+}
+
+<div class="profile-sidebar @(IsOpen ? "open" : "")">
+    
+    @if (isLoading)
+    {
+        <div class="d-flex justify-content-center align-items-center h-100 text-white">
+            <div class="spinner-border text-primary"></div>
+        </div>
+    }
+    else
+    {
+        <div class="yakaboo-card">
+            
+            <div class="profile-header">
+                <div class="avatar-circle">
+                    <span>@GetInitials(user.FullName)</span>
+                </div>
+                <div class="user-info">
+                    <h3 class="user-name">@user.FullName</h3>
+                    <p class="user-phone">@user.PhoneNumber</p>
+                </div>
+                <button class="close-btn" @onclick="Close">✕</button>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-content">
+                        <i class="bi bi-coin text-warning fs-4"></i>
+                        <span class="stat-value">@user.BonusBalance</span>
+                    </div>
+                    <span class="stat-label">Баланс бонусів</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-content">
+                        <span class="level-badge">@user.UserLevel</span>
+                    </div>
+                    <span class="stat-label">Ваш рівень</span>
+                </div>
+            </div>
+
+            <div class="menu-list">
+                
+                <a href="/orders" class="menu-item" @onclick="Close">
+                    <div class="icon-box-profile icon-purple"><i class="bi bi-truck"></i></div>
+                    <span class="menu-text">Замовлення</span>
+                    @if(user.OrderCount > 0) { <span class="badge-count">@user.OrderCount</span> }
+                    <i class="bi bi-chevron-right arrow-icon"></i>
+                </a>
+
+                <a href="/library" class="menu-item" @onclick="Close">
+                    <div class="icon-box-profile icon-purple"><i class="bi bi-check2-circle"></i></div>
+                    <span class="menu-text">Моя бібліотека</span>
+                    <i class="bi bi-chevron-right arrow-icon"></i>
+                </a>
+
+                <a href="/WaitingListPage" class="menu-item" @onclick="Close">
+                    <div class="icon-box-profile icon-purple"><i class="bi bi-clipboard-check"></i></div>
+                    <span class="menu-text">Товари в очікуванні</span>
+                    <i class="bi bi-chevron-right arrow-icon"></i>
+                </a>
+
+                <div class="menu-divider"></div>
+
+                <a href="/settings" class="menu-item" @onclick="Close">
+                    <div class="icon-box-profile icon-purple"><i class="bi bi-gear"></i></div>
+                    <span class="menu-text">Налаштування</span>
+                    <i class="bi bi-chevron-right arrow-icon"></i>
+                </a>
+
+                <button class="menu-item logout-btn" @onclick="LogOut">
+                    <div class="icon-box-profile icon-purple"><i class="bi bi-box-arrow-right"></i></div>
+                    <span class="menu-text">Вихід</span>
+                </button>
+            </div>
+
+            <div class="profile-footer">
+                <div class="footer-text">
+                    <span>Виникли питання?</span>
+                    <a href="tel:0800335425" class="phone-link">0-800-121-575</a>
+                </div>
+                <button class="contact-btn">Зв'язатися</button>
+            </div>
+
+        </div>
+    }
+</div>
+
+@code {
+    private bool IsOpen = false; 
+    private UserProfileDto user = new();
+    private bool isLoading = true;
+
+    public async void Open()
+    {
+        IsOpen = true;
+        isLoading = true;
+        StateHasChanged();
+        
+        var result = await ProfileService.GetProfileAsync();
+        if (result != null)
+        {
+            user = result;
+        }
+
+        isLoading = false;
+        StateHasChanged();
+    }
+
+    public void Close()
+    {
+        IsOpen = false;
+        StateHasChanged();
+    }
+    
+    private string GetInitials(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name)) return "U";
+        return name.Substring(0, 1).ToUpper();
+    }
+
+    private async void LogOut()
+    {
+        await AuthService.LogoutAsync();
+        Close();
+        NavManager.NavigateTo("/", forceLoad: true);
+    }
+}

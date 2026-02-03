@@ -1,0 +1,192 @@
+﻿@page "/wishlist"
+@using BookStore.Client.Services
+@using BookStore.Core.DTOs
+@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Claims
+
+@* 👇 1. ПРИБИРАЄМО [Authorize], щоб пускало всіх *@
+@* @attribute [Authorize] *@
+
+@inject WishlistService WishlistService
+@inject CartService CartService
+@inject NavigationManager NavManager
+@inject AuthenticationStateProvider AuthStateProvider
+
+<div class="container-fluid mt-4 mb-5">
+
+    <div class="d-flex align-items-center mb-4">
+        <button class="btn btn-outline-light me-3 border-0" @onclick="GoBack">
+            <i class="bi bi-arrow-left fs-4"></i>
+        </button>
+        <h2 class="text-white m-0">Список бажань</h2>
+    </div>
+
+    @if (isLoading)
+    {
+        <div class="text-center py-5">
+            <div class="spinner-border text-primary"></div>
+        </div>
+    }
+    else if (!wishlistItems.Any())
+    {
+        @* 👇 ВІДОБРАЖЕННЯ ДЛЯ ПОРОЖНЬОГО СПИСКУ *@
+        <div class="text-center text-muted py-5">
+            <i class="bi bi-heartbreak display-1 opacity-50"></i>
+            <h4 class="mt-3 text-white">Ваш список бажань порожній</h4>
+            
+            @if (!isAuthenticated)
+            {
+                // Варіант для НЕАВТОРИЗОВАНИХ (як на KSD)
+                <p class="text-white-50 mt-2">
+                    Увійдіть в особистий кабінет, щоб переглянути збережені товари<br/> 
+                    або додайте нові, щоб не загубити їх.
+                </p>
+                <div class="d-flex justify-content-center gap-3 mt-4">
+                    <button class="btn btn-primary px-4" @onclick='() => NavManager.NavigateTo("/login")'>
+                        Увійти
+                    </button>
+                    <button class="btn btn-outline-light px-4" @onclick='() => NavManager.NavigateTo("/")'>
+                        До каталогу
+                    </button>
+                </div>
+            }
+            else
+            {
+                // Варіант для АВТОРИЗОВАНИХ (просто ще нічого не додали)
+                <p class="text-white-50 mt-2">Додайте книги, які хочете прочитати, щоб не загубити їх.</p>
+                <button class="btn btn-primary mt-3 px-4" @onclick='() => NavManager.NavigateTo("/")'>
+                    Перейти до каталогу
+                </button>
+            }
+        </div>
+    }
+    else
+    {
+        @* СІТКА ТОВАРІВ (Тільки для авторизованих, у кого є товари) *@
+        <div class="wishlist-grid">
+            @foreach (var item in wishlistItems)
+            {
+                <div class="yakaboo-wish-card">
+                    
+                    <button class="delete-btn" @onclick="() => RemoveItem(item.BookId)" title="Видалити зі списку">
+                        <i class="bi bi-trash"></i>
+                    </button>
+
+                    <div class="img-wrapper" @onclick='() => NavManager.NavigateTo($"/book/{item.BookId}")'>
+                        <img src="@item.ImageUrl" alt="@item.Title" onerror="this.src='/images/no-image.png'" />
+                        
+                        @if (item.IsTop)
+                        {
+                            <span class="badge-top">🔥 Топ</span>
+                        }
+                    </div>
+
+                    <div class="info-wrapper">
+                        
+                        <div class="rating-row">
+                            <div class="stars">
+                                @for(int i=0; i<5; i++)
+                                {
+                                    if(i < Math.Round(item.Rating)) 
+                                    { <i class="bi bi-star-fill text-warning"></i> }
+                                    else 
+                                    { <i class="bi bi-star text-secondary"></i> }
+                                }
+                            </div>
+                            <span class="reviews ms-2">@item.ReviewsCount відгуків</span>
+                        </div>
+
+                        <h5 class="book-title" @onclick='() => NavManager.NavigateTo($"/book/{item.BookId}")'>
+                            @item.Title
+                        </h5>
+                        <p class="book-author">@item.Author</p>
+
+                        @if (item.IsInStock)
+                        {
+                            <div class="stock-status in-stock">
+                                <i class="bi bi-check-circle-fill me-1"></i> В наявності
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="stock-status out-of-stock">
+                                <i class="bi bi-x-circle-fill me-1"></i> Немає в наявності
+                            </div>
+                        }
+
+                        <div class="card-footer-row">
+                            <span class="price">@item.Price ₴</span>
+                            
+                            <button class="btn-buy" @onclick="() => AddToCart(item)">
+                                <i class="bi bi-cart3 me-1"></i> Купити
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private List<WishlistItemDto> wishlistItems = new();
+    private bool isLoading = true;
+    private bool isAuthenticated = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // 1. Перевіряємо статус авторизації
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        isAuthenticated = user.Identity != null && user.Identity.IsAuthenticated;
+
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        isLoading = true;
+        
+        // 2. Якщо користувач авторизований - тягнемо дані з сервера
+        if (isAuthenticated)
+        {
+            try 
+            {
+                wishlistItems = await WishlistService.GetWishlistAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading wishlist: {ex.Message}");
+            }
+        }
+        else 
+        {
+            // Якщо гість - список просто порожній (API не викликаємо, щоб не було помилки 401)
+            wishlistItems = new List<WishlistItemDto>();
+        }
+
+        isLoading = false;
+    }
+
+    private async Task RemoveItem(int bookId)
+    {
+        await WishlistService.ToggleWishlistAsync(bookId);
+        wishlistItems.RemoveAll(x => x.BookId == bookId);
+    }
+
+    private void AddToCart(WishlistItemDto item)
+    {
+        CartService.AddToCart(new BookSummaryDto 
+        { 
+            Id = item.BookId, 
+            Title = item.Title, 
+            Price = item.Price, 
+            ImageUrl = item.ImageUrl 
+        });
+    }
+
+    private void GoBack()
+    {
+        NavManager.NavigateTo("/");
+    }
+}

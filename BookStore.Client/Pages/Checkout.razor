@@ -1,0 +1,543 @@
+﻿@page "/checkout"
+@using BookStore.Client.NpApi
+@using BookStore.Client.Services
+@using BookStore.Core.DTOs
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@inject CartService CartService
+@inject HttpClient Http
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+@inject ProfileService ProfileService
+@inject AuthenticationStateProvider AuthStateProvider
+
+<PageTitle>Оформлення замовлення</PageTitle>
+
+@if (IsLoading)
+{
+    <div class="text-center mt-5">Завантаження...</div>
+}
+else
+{
+    <EditForm Model="@order" OnValidSubmit="PlaceOrder">
+        <DataAnnotationsValidator />
+
+        <div class="checkout-wrapper">
+            <div class="checkout-form">
+                <h2 class="mb-4">Контактні дані</h2>
+                <div class="row">
+                    <div class="col">
+                        <label>Ім’я *</label>
+                        <InputText class="form-control" @bind-Value="order.FirstName" />
+                        <ValidationMessage For="@(() => order.FirstName)" />
+                    </div>
+                    <div class="col">
+                        <label>Прізвище *</label>
+                        <InputText class="form-control" @bind-Value="order.LastName" />
+                        <ValidationMessage For="@(() => order.LastName)" />
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <label>Телефон *</label>
+                    <InputText class="form-control"
+                               type="tel"
+                               max-length="13"
+                               placeholder="+380 XX XXX XX XX"
+                               @bind-Value="order.Phone" />
+                    <ValidationMessage For="@(() => order.Phone)" />
+                </div>
+                <div class="mt-3">
+                    <label>Email *</label>
+                    <InputText class="form-control" 
+                               type="email" 
+                               placeholder="your@email.com"
+                               @bind-Value="order.Email" />
+                    <ValidationMessage For="@(() => order.Email)" />
+                </div>
+
+                <hr class="my-4" />
+
+                <h3>Доставка</h3>
+
+                <div class="mt-3 position-relative">
+                    <label>Місто *</label>
+                    <input class="form-control"
+                           value="@cityQuery"
+                           @oninput="e => SearchCity(e.Value?.ToString())"
+                           placeholder="Введіть місто..." />
+                
+                    @if (cityResults.Any())
+                    {
+                        <div class="autocomplete">
+                            @foreach (var city in cityResults)
+                            {
+                                <div class="autocomplete-item" @onclick="() => SelectCity(city)">
+                                    @city.Present
+                                </div>
+                            }
+                        </div>
+                    }
+                    <ValidationMessage For="@(() => order.City)" />
+                </div>
+
+                <div class="mt-3">
+                    <label>Спосіб доставки *</label>
+                    <InputSelect class="form-control" 
+                                 Value="@order.DeliveryMethod" 
+                                 ValueChanged="@((string s) => OnDeliveryChanged(s))"
+                                 ValueExpression="@(() => order.DeliveryMethod)">
+                        <option value="">Оберіть спосіб</option>
+                        <option value="Поштомат Нова Пошта">Поштомат Нова Пошта</option>
+                        <option value="Відділення Нова Пошта">Відділення Нова Пошта</option>
+                        <option value="Кур'єр Нова Пошта">Кур'єр Нова Пошта</option>
+                    </InputSelect>
+                    <ValidationMessage For="@(() => order.DeliveryMethod)" />
+                </div>
+
+                @if (showWarehouses)
+                {
+                    <div class="mt-3 position-relative">
+                        <label>Відділення / Поштомат *</label>
+
+                        <InputText class="form-control"
+                                   @bind-Value="warehouseQuery"
+                                   @oninput="@((ChangeEventArgs e) => FilterWarehouses(e.Value?.ToString()))"
+                                   @onfocus="OpenWarehouseList" 
+                                   placeholder="Введіть номер або адресу..."
+                                   autocomplete="off" />
+                               
+                        <ValidationMessage For="@(() => order.Warehouse)" />
+
+                        @if (isWarehouseListOpen && filteredWarehouses.Any())
+                        {
+                            <div class="autocomplete">
+                                @foreach (var wh in filteredWarehouses)
+                                {
+                                    <div class="autocomplete-item" @onclick="() => SelectWarehouse(wh)">
+                                        @wh.Description
+                                    </div>
+                                }
+                            </div>
+                        }
+                    
+                        @if (isWarehouseListOpen && !filteredWarehouses.Any() && warehouses.Any())
+                        {
+                            <div class="text-muted small mt-1">Нічого не знайдено</div>
+                        }
+                    </div>
+                }
+
+                @if (order.DeliveryMethod == "Кур'єр Нова Пошта")
+                {
+                    <div class="mt-3">
+                        <label>Адреса *</label>
+                        <InputText class="form-control" @bind-Value="order.Address" />
+                        <ValidationMessage For="@(() => order.Address)" />
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <label>Будинок *</label>
+                            <InputText class="form-control" @bind-Value="order.House" />
+                            <ValidationMessage For="@(() => order.House)" />
+                        </div>
+                        <div class="col">
+                            <label>Квартира</label>
+                            <InputText class="form-control" @bind-Value="order.Apartment" />
+                        </div>
+                    </div>
+                }
+
+                <hr class="my-4" />
+
+                <h3>Оплата</h3>
+                <InputSelect class="form-control" @bind-Value="order.PaymentMethod">
+                    <option value="">Оберіть спосіб оплати</option>
+                    <option value="Післяплата">Післяплата</option>
+                    <option value="Онлайн">Онлайн оплата</option>
+                </InputSelect>
+                <ValidationMessage For="@(() => order.PaymentMethod)" />
+
+                <div class="mt-4">
+                    <label>Коментар</label>
+                    <InputTextArea class="form-control" @bind-Value="order.Comment" />
+                </div>
+
+            </div>
+
+            <div class="checkout-summary">
+                <h3 class="mb-3">Ваше замовлення</h3>
+                
+                @foreach (var item in CartService.Items)
+                {
+                    <div class="summary-item">
+                        <img src="@item.ImageUrl" onerror="this.src='/images/no-image.png'" />
+                        <div>
+                            <div>@item.BookTitle</div>
+                            <small>@item.Quantity × @item.Price грн</small>
+                        </div>
+                        <div class="price">@(item.Price * item.Quantity) грн</div>
+                    </div>
+                }
+                
+                <hr />
+                
+                <div class="checkout-summary">
+                    <hr />
+
+                    <div class="bonus-section my-3 p-3 bg-light border rounded">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="bi bi-gift-fill text-danger me-2"></i>
+                                <strong>Бонуси</strong>
+                                <div class="text-muted small">
+                                    Ваш баланс: <b>@userBonusBalance</b>
+                                </div>
+                                <div class="text-secondary" style="font-size: 0.75rem;">
+                                    (Можна оплатити до 50% вартості замовлення)
+                                </div>
+                            </div>
+
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="useBonuses" 
+                                       @bind="useBonuses" 
+                                       disabled="@(userBonusBalance == 0)">
+                                <label class="form-check-label" for="useBonuses">Списати</label>
+                            </div>
+                        </div>
+
+                        @if (useBonuses)
+                        {
+                            <div class="d-flex justify-content-between mt-2 text-success">
+                                <span>Знижка бонусами:</span>
+                                <span>-@CalculatedDiscount.ToString("N0") грн</span>
+                            </div>
+                            
+                            @if (userBonusBalance > (totalAmount * 0.5m))
+                            {
+                                <div class="text-end text-warning small mt-1">
+                                    <i class="bi bi-info-circle"></i> Використано максимальний ліміт (50%)
+                                </div>
+                            }
+                        }
+                    </div>
+                    
+                    <hr />
+
+                    <h4>До оплати: <strong>@(totalAmount - CalculatedDiscount) грн</strong></h4>
+                    <button type="submit" 
+                            class="btn btn-success w-100 mt-3" 
+                            disabled="@isSubmitting">
+                        @if (isSubmitting)
+                        {
+                            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                            <span>Обробка...</span>
+                        }
+                        else
+                        {
+                            <span>Підтвердити замовлення</span>
+                        }
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+    </EditForm>
+    @if (liqpayDto != null)
+    {
+        <form id="liqpay-form" method="POST" action="@liqpayDto.Url" style="display:none;">
+            <input type="hidden" name="data" value="@liqpayDto.Data" />
+            <input type="hidden" name="signature" value="@liqpayDto.Signature" />
+        </form>
+    }
+}
+
+
+@code {
+    private bool IsLoading = true;
+    private CheckoutOrderDto order = new();
+
+    // Міста
+    private string cityQuery = "";
+    private List<CityNp> cityResults = new();
+    
+    // Відділення (Повний список + Фільтрований)
+    private List<WareHouseNp> warehouses = new(); 
+    private List<WareHouseNp> filteredWarehouses = new(); 
+    private string warehouseQuery = ""; 
+    private bool isWarehouseListOpen = false;
+    private bool isSubmitting = false;
+
+    private bool showWarehouses = false;
+    private decimal totalAmount => CartService.Items.Sum(i => i.Quantity * i.Price);
+    
+    private decimal userBonusBalance = 0;
+    private bool useBonuses = false;
+
+    private decimal CalculatedDiscount 
+        => useBonuses ? Math.Min(userBonusBalance, totalAmount * 0.5m) : 0;
+
+    private LiqPayCheckoutDto? liqpayDto;
+    
+    [SupplyParameterFromQuery]
+    public int? Retry { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Retry.HasValue)
+        {
+            await RestoreOrder(Retry.Value);
+        }
+        else 
+        {
+            // Звичайна поведінка
+            await CartService.GetCartItemsAsync();
+        }
+        
+        try 
+        {
+            var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+
+            if (user.Identity != null && user.Identity.IsAuthenticated)
+            {
+                var profile = await ProfileService.GetProfileAsync();
+                if (profile != null)
+                {
+                    userBonusBalance = profile.BonusBalance;
+
+                    if (!Retry.HasValue)
+                    {
+                        order.FirstName = profile.FullName;
+                        order.LastName = profile.Surname;
+                        order.Email = profile.Email;
+                        order.Phone = profile.PhoneNumber;
+                    }
+                }
+            }
+        }
+        catch (Exception ex) 
+        {
+            Console.WriteLine("Не вдалося завантажити бонуси: " + ex.Message);
+        }
+        
+        IsLoading = false;
+    }
+    
+    private async Task RestoreOrder(int orderId)
+    {
+        try
+        {
+            // 1. Завантажуємо дані старого замовлення
+            var oldOrder = await Http.GetFromJsonAsync<Order>($"api/order/{orderId}");
+
+            if (oldOrder != null)
+            {
+                // --- ВІДНОВЛЕННЯ ПОЛІВ ФОРМИ ---
+                order.FirstName = oldOrder.FirstName;
+                order.LastName = oldOrder.LastName;
+                order.Phone = oldOrder.Phone;
+                order.Email = oldOrder.Email;
+                
+                order.DeliveryMethod = oldOrder.DeliveryMethod;
+                order.PaymentMethod = oldOrder.PaymentMethod; 
+                order.Comment = oldOrder.Comment;
+
+                order.City = oldOrder.City;
+                order.CityRef = oldOrder.CityRef;
+                order.Warehouse = oldOrder.Warehouse;
+                order.Address = oldOrder.Address;
+                order.House = oldOrder.House;
+                order.Apartment = oldOrder.Apartment;
+
+                // --- ВИПРАВЛЕННЯ ТУТ: НАПОВНЮЄМО КОШИК НА СЕРВЕРІ ---
+                
+                // Спочатку очищаємо локальний вигляд, щоб не було дублів
+                CartService.Items.Clear();
+
+                if (oldOrder.OrderItems != null)
+                {
+                    foreach (var item in oldOrder.OrderItems)
+                    {
+                        // Створюємо об'єкт книги для додавання
+                        var bookToAdd = new BookSummaryDto
+                        {
+                            Id = item.BookId,
+                            Title = item.Book?.Title ?? "",
+                            Price = item.UnitPrice,
+                            ImageUrl = item.Book?.ImageUrl
+                        };
+
+                        // 1. Відправляємо запит на сервер "Додати в кошик"
+                        await CartService.AddToCart(bookToAdd);
+
+                        // 2. Якщо кількість була більше 1, оновлюємо кількість
+                        // (Припускаємо, що AddToCart додає 1 шт. Залежить від вашої реалізації CartService)
+                        if (item.Quantity > 1)
+                        {
+                            // Вам може знадобитися метод UpdateQuantity у CartService
+                            // Якщо його немає, можна викликати AddToCart у циклі
+                            await CartService.UpdateQuantity(item.BookId, item.Quantity);
+                        }
+                    }
+                    
+                    // 3. Синхронізуємо локальний кошик з сервером, щоб переконатися, що все ок
+                    await CartService.GetCartItemsAsync();
+                }
+
+                // --- Відновлення UI для доставки ---
+                cityQuery = order.City; 
+                
+                showWarehouses = !string.IsNullOrEmpty(order.DeliveryMethod) && 
+                                 (order.DeliveryMethod.Contains("Нова Пошта") || 
+                                  order.DeliveryMethod.Contains("Укрпошта") ||
+                                  order.DeliveryMethod.Contains("Meest"));
+
+                if (showWarehouses && !string.IsNullOrEmpty(order.CityRef))
+                {
+                    await LoadWarehouses();
+                    warehouseQuery = order.Warehouse; 
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Помилка відновлення замовлення: {ex.Message}");
+            await CartService.GetCartItemsAsync();
+        }
+    }
+    
+    
+    
+
+    // --- МІСТА ---
+    private async Task SearchCity(string? input)
+    {
+        cityQuery = input ?? "";
+        if (cityQuery.Length < 2) 
+        {
+            cityResults.Clear();
+            return;
+        }
+        try
+        {
+            var response = await Http.GetFromJsonAsync<NpCityResponse>($"api/novaposhta/cities?name={cityQuery}");
+            if (response?.data != null) cityResults = response.data.SelectMany(c => c.Addresses).ToList();
+        }
+        catch (Exception ex) { Console.WriteLine(ex.Message); }
+    }
+
+    private async Task SelectCity(CityNp city)
+    {
+        order.City = city.MainDescription;
+        order.CityRef = city.Ref;
+        cityQuery = city.Present;
+        cityResults.Clear();
+        
+        // Якщо вже обрана пошта, оновлюємо відділення для нового міста
+        if (showWarehouses) await LoadWarehouses();
+    }
+
+    // --- ДОСТАВКА ТА ВІДДІЛЕННЯ ---
+    private async Task OnDeliveryChanged(string method)
+    {
+        order.DeliveryMethod = method;
+        showWarehouses = !string.IsNullOrEmpty(method) && method.Contains("Нова Пошта");
+        
+        if (showWarehouses) await LoadWarehouses();
+        else {
+            warehouses.Clear();
+            order.Warehouse = "";
+        }
+    }
+
+    private async Task LoadWarehouses()
+    {
+        warehouses.Clear();
+        filteredWarehouses.Clear();
+        warehouseQuery = "";
+        order.Warehouse = "";
+
+        if (string.IsNullOrWhiteSpace(order.CityRef)) return;
+
+        try
+        {
+            var response = await Http.GetFromJsonAsync<NpWarehouseResponse>($"api/novaposhta/warehouses?cityRef={order.CityRef}");
+            if (response?.data != null)
+            {
+                var all = response.data.ToList();
+                // Фільтруємо ТИП (Поштомат чи Відділення)
+                if (order.DeliveryMethod.Contains("Поштомат"))
+                    warehouses = all.Where(w => w.Description.ToLower().Contains("поштомат")).ToList();
+                else
+                    warehouses = all.Where(w => !w.Description.ToLower().Contains("поштомат")).ToList();
+                
+                // Спочатку показуємо все, що знайшли
+                filteredWarehouses = warehouses.ToList();
+            }
+        }
+        catch { /* Обробка помилки */ }
+    }
+
+    // --- ПОШУК ПО ВІДДІЛЕННЯХ (Введення тексту) ---
+    private void FilterWarehouses(string? input)
+    {
+        warehouseQuery = input ?? "";
+        isWarehouseListOpen = true;
+        
+        // Це оновлює модель для валідації (поки користувач пише, поле формально заповнене текстом)
+        order.Warehouse = warehouseQuery; 
+
+        if (string.IsNullOrWhiteSpace(warehouseQuery))
+        {
+            filteredWarehouses = warehouses.ToList();
+        }
+        else
+        {
+            filteredWarehouses = warehouses
+                .Where(w => w.Description.Contains(warehouseQuery, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        }
+    }
+    
+    private void OpenWarehouseList()
+    {
+        isWarehouseListOpen = true;
+        if (string.IsNullOrWhiteSpace(warehouseQuery))
+            filteredWarehouses = warehouses.ToList();
+    }
+
+    private void SelectWarehouse(WareHouseNp wh)
+    {
+        order.Warehouse = wh.Description;
+        warehouseQuery = wh.Description;  
+        isWarehouseListOpen = false;      
+    }
+
+    // --- ЗАМОВЛЕННЯ ---
+    private async Task PlaceOrder()
+    {
+        if (isSubmitting) return;
+
+        order.BonusesToUse = useBonuses ? (int)CalculatedDiscount : 0;
+        
+        isSubmitting = true; 
+        StateHasChanged();
+        try {
+            int orderid = await CartService.PlaceCheckoutAsync(order);
+            if (order.PaymentMethod == "Онлайн")
+            {
+                liqpayDto = await Http.GetFromJsonAsync<LiqPayCheckoutDto>($"api/payment/get-params/{orderid}");
+                
+                StateHasChanged();
+                await Task.Delay(100);
+                
+                await JSRuntime.InvokeVoidAsync("submitLiqPayForm");
+            }
+            else
+            {
+                NavigationManager.NavigateTo($"/order-confirmation/{orderid}");
+            }
+            
+        } catch (Exception ex) { Console.WriteLine(ex.Message); }
+    }
+}

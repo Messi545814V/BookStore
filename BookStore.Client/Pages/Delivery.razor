@@ -1,0 +1,94 @@
+﻿@page "/delivery"
+
+<PageTitle>Доставка і оплата — BookStore</PageTitle>
+
+<div class="delivery-page mb-5">
+    
+    @* --- ЗАГОЛОВОК --- *@
+    <div class="page-header text-center py-5 mb-4">
+        <h1 class="fw-bold display-5">Доставка і оплата</h1>
+        <p class="text-muted lead">Ми дбаємо про те, щоб ви отримали свої книги якнайшвидше.</p>
+    </div>
+
+    <div class="container">
+        <div class="row g-4">
+            
+            @* --- БЛОК ДОСТАВКИ --- *@
+            <div class="col-lg-6">
+                <div class="info-card h-100">
+                    <h3 class="mb-4 d-flex align-items-center">
+                        <i class="bi bi-truck text-primary me-3"></i> Доставка
+                    </h3>
+                    
+                    <div class="delivery-methods">
+                        
+                        <div class="method-item">
+                            <div class="icon"><i class="bi bi-box-seam"></i></div>
+                            <div>
+                                <h5>У поштомат Нової Пошти</h5>
+                                <p>Від 50 грн. Зручно забирати у будь-який час.</p>
+                            </div>
+                        </div>
+
+                        <div class="method-item">
+                            <div class="icon"><i class="bi bi-geo-alt"></i></div>
+                            <div>
+                                <h5>У відділення Нової Пошти</h5>
+                                <p>Від 60 грн. Термін доставки 1-2 дні.</p>
+                            </div>
+                        </div>
+
+                        <div class="method-item">
+                            <div class="icon"><i class="bi bi-person-badge"></i></div>
+                            <div>
+                                <h5>Кур'єром до дверей</h5>
+                                <p>Від 115 грн. Доставка за вказаною адресою.</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    
+                </div>
+            </div>
+
+            @* --- БЛОК ОПЛАТИ --- *@
+            <div class="col-lg-6">
+                <div class="info-card h-100">
+                    <h3 class="mb-4 d-flex align-items-center">
+                        <i class="bi bi-wallet2 text-success me-3"></i> Оплата
+                    </h3>
+
+                    <div class="payment-methods">
+                        
+                        <div class="method-item">
+                            <div class="icon green"><i class="bi bi-credit-card"></i></div>
+                            <div>
+                                <h5>Онлайн карткою (LiqPay)</h5>
+                                <p>Apple Pay, Google Pay, Visa, Mastercard. Без комісії.</p>
+                            </div>
+                        </div>
+
+                        <div class="method-item">
+                            <div class="icon green"><i class="bi bi-cash-coin"></i></div>
+                            <div>
+                                <h5>Післяплата (при отриманні)</h5>
+                                <p>Оплата готівкою або карткою у відділенні Нової Пошти.</p>
+                            </div>
+                        </div>
+
+                        <div class="method-item">
+                            <div class="icon green"><i class="bi bi-bank"></i></div>
+                            <div>
+                                <h5>Безготівковий розрахунок</h5>
+                                <p>Для юридичних осіб. Ми виставимо рахунок-фактуру.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

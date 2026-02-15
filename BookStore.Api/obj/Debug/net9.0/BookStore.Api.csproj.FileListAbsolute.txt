@@ -200,3 +200,4 @@ C:\Users\isaen\RiderProjects\Bookstore\BookStore.Api\obj\Debug\net9.0\BookStore.
 C:\Users\isaen\RiderProjects\Bookstore\BookStore.Api\obj\Debug\net9.0\ref\BookStore.Api.dll
 C:\Users\isaen\RiderProjects\Bookstore\BookStore.Api\bin\Debug\net9.0\FuzzySharp.dll
 C:\Users\isaen\RiderProjects\Bookstore\BookStore.Api\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\isaen\RiderProjects\Bookstore\BookStore.Api\obj\Debug\net9.0\BookStore.Api.sourcelink.json

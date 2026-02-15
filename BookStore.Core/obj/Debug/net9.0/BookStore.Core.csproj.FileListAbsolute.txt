@@ -9,3 +9,4 @@ C:\Users\isaen\RiderProjects\Bookstore\BookStore.Core\obj\Debug\net9.0\BookStore
 C:\Users\isaen\RiderProjects\Bookstore\BookStore.Core\obj\Debug\net9.0\refint\BookStore.Core.dll
 C:\Users\isaen\RiderProjects\Bookstore\BookStore.Core\obj\Debug\net9.0\BookStore.Core.pdb
 C:\Users\isaen\RiderProjects\Bookstore\BookStore.Core\obj\Debug\net9.0\ref\BookStore.Core.dll
+C:\Users\isaen\RiderProjects\Bookstore\BookStore.Core\obj\Debug\net9.0\BookStore.Core.sourcelink.json

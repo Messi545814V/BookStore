@@ -17,10 +17,12 @@
         <p class="card-text">@Book.Author</p>
         <p class="card-text"><strong>@Book.Price.ToString("C")</strong></p>
         
+        
         <a href="/book/@Book.Id" class="btn btn-primary">Деталі</a>
         <button class="btn btn-success mt-2 w-100" @onclick="AddToCart">
             В кошик
         </button>
+        
 
     </div>
 </div>

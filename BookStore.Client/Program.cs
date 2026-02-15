@@ -13,7 +13,9 @@ builder.Services.AddScoped<AuthHeaderHandler>();
 
 builder.Services.AddHttpClient("Api", client =>
     {
-        client.BaseAddress = new Uri("https://localhost:7125"); // порт API
+        client.BaseAddress = builder.HostEnvironment.IsDevelopment() 
+            ? new Uri("https://localhost:7125/") 
+            : new Uri("https://bookstore-api-v2.runasp.net/");
     })
     .AddHttpMessageHandler<AuthHeaderHandler>();
 

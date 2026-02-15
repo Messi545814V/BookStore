@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "VvYKwJzwPf6fkU+v/87k/fjiguEGpeJWjrRh2V62dq0=",
+  "Hash": "W60UDCC3oVMD5BpjNIH3IvJXJO7XiW2FOEWVEsj7PKw=",
   "Source": "BookStore.Client",
   "BasePath": "/",
   "Mode": "Root",
@@ -115,8 +115,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "manifest",
-      "Fingerprint": "vbj0t00wbz",
-      "Integrity": "257WcJU+3lVwg5V9mjItFEH/LpEtdLET3BEkPWOY20U=",
+      "Fingerprint": "k9kxablu6r",
+      "Integrity": "KPW4i8K0z2+yP4WEd0GjvPMa276+9rx915Y0T0g1URE=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net9.0\\blazor.boot.json"
@@ -157,8 +157,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "tlna3rbrp6",
-      "Integrity": "/8rkT0WOf3a08Aw7oDUEyjAEmW/BubNIstq75xpjTnM=",
+      "Fingerprint": "pcaqic66mg",
+      "Integrity": "F2d6mjIkR/DFDE/H6g/Dy5rxdG14idvEfVBHSR8oDoc=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net9.0\\BookStore.Client.pdb"
@@ -178,8 +178,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "omcf5ttzjc",
-      "Integrity": "sDaqypd6LowWGwkpOflZ+Nf+gC+Ag0CPNvz4kC6uf/8=",
+      "Fingerprint": "sxg6edtw9p",
+      "Integrity": "wHKQo3zV9UnolKKaSzCFVxkM01BqWEFluvDqqK5MmO8=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\webcil\\BookStore.Client.wasm"
@@ -199,8 +199,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "gr7qrepc4o",
-      "Integrity": "NNOMuOyV+KW+a7m6ZWi5pe9wNIlouSqW9iGrTNCYshw=",
+      "Fingerprint": "denvfkhq9v",
+      "Integrity": "y6isSpq+wlLphsMybIi3YegYyH4N8auWMBYHRPYcjC8=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Core\\bin\\Debug\\net9.0\\BookStore.Core.pdb"
@@ -220,8 +220,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "6awy5y4fzn",
-      "Integrity": "EjuMDjTT88L2usVCbtCmh6aicNZNpAW6Yeu8L7nfDEU=",
+      "Fingerprint": "vocttxc4kw",
+      "Integrity": "fwZtLdv55bw7vEzwT1Ri72moCzd4hsRXMuS/ZXCHMPM=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\webcil\\BookStore.Core.wasm"
@@ -241,8 +241,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "z6l9eehw7k",
-      "Integrity": "i6lBLIyKlyFWPWUbqF8Luq7LuPZal44ma9LarWSSWmA=",
+      "Fingerprint": "cjy0ou5xei",
+      "Integrity": "KHHhzBobERHN6i8xSB7kcgJPaNAWQL/vwYvl3PuClPs=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Infrastructure\\bin\\Debug\\net9.0\\BookStore.Infrastructure.pdb"
@@ -262,8 +262,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "0moexd2vsj",
-      "Integrity": "GGkSiKr+2t1+HYYZFphfungc0CdF3xgBInbeb3XRz/k=",
+      "Fingerprint": "xff0bhrhov",
+      "Integrity": "0/IDXjwY46m9KnPwiIl57UDwWlaCsMKc1e/J4HeqewU=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\webcil\\BookStore.Infrastructure.wasm"
@@ -6275,12 +6275,12 @@
       "OriginalItemSpec": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\System.Reflection.Primitives.wasm"
     },
     {
-      "Identity": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\5s5l2fj6g3-z6l9eehw7k.gz",
+      "Identity": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\5s5l2fj6g3-cjy0ou5xei.gz",
       "SourceId": "BookStore.Client",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/BookStore.Infrastructure#[.{fingerprint=z6l9eehw7k}]!.pdb.gz",
+      "RelativePath": "_framework/BookStore.Infrastructure#[.{fingerprint=cjy0ou5xei}]!.pdb.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -6289,8 +6289,8 @@
       "RelatedAsset": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Infrastructure.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "lmfke0y196",
-      "Integrity": "HbqkuKkj3Oc/WP6fPtBgrNM5nJEVaukm87uCbBjqGzY=",
+      "Fingerprint": "rtdu94yur4",
+      "Integrity": "f3ptR8NKcDl+1kXTruOPgCqjzBTLTvuJB1nW559I6J0=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Infrastructure.pdb"
@@ -7073,12 +7073,12 @@
       "OriginalItemSpec": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\System.AppContext.wasm"
     },
     {
-      "Identity": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\8lyipcsnt4-0moexd2vsj.gz",
+      "Identity": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\8lyipcsnt4-xff0bhrhov.gz",
       "SourceId": "BookStore.Client",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/BookStore.Infrastructure#[.{fingerprint=0moexd2vsj}]!.wasm.gz",
+      "RelativePath": "_framework/BookStore.Infrastructure#[.{fingerprint=xff0bhrhov}]!.wasm.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -7087,8 +7087,8 @@
       "RelatedAsset": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Infrastructure.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "3a5swos66s",
-      "Integrity": "u8l4SoTCZQAFTePGV4pmnE50mIX9HpHUJPxO54uVptE=",
+      "Fingerprint": "6t6nkbmllg",
+      "Integrity": "OsIRORSC0V4Hb/Qhe3o70K3DKWxGedcmkojQYmV3LhM=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Infrastructure.wasm"
@@ -8900,12 +8900,12 @@
       "OriginalItemSpec": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\System.Text.Encodings.Web.wasm"
     },
     {
-      "Identity": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\k8256upqu8-gr7qrepc4o.gz",
+      "Identity": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\k8256upqu8-denvfkhq9v.gz",
       "SourceId": "BookStore.Client",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/BookStore.Core#[.{fingerprint=gr7qrepc4o}]!.pdb.gz",
+      "RelativePath": "_framework/BookStore.Core#[.{fingerprint=denvfkhq9v}]!.pdb.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -8914,14 +8914,14 @@
       "RelatedAsset": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Core.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "ljc4gbglae",
-      "Integrity": "f4vfZUa6QkjB/CDW1F4w5AfXOTloQigNkzAFw54lFGU=",
+      "Fingerprint": "qiau9nxr1u",
+      "Integrity": "Pjr0NeObCFn8h/rP0lecOkDxdHYiF+cC5c9XELvTSIM=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Core.pdb"
     },
     {
-      "Identity": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\kh7ctqb7bd-vbj0t00wbz.gz",
+      "Identity": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\kh7ctqb7bd-k9kxablu6r.gz",
       "SourceId": "BookStore.Client",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\",
@@ -8935,8 +8935,8 @@
       "RelatedAsset": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\blazor.boot.json",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "047wf6jsmo",
-      "Integrity": "AJ315OwO2Lq9Pkr+30PUaU6CT8MBf5bEYG/TNwlU4e4=",
+      "Fingerprint": "q28fzks131",
+      "Integrity": "XlbE40nJRN7vyxbl6usM3UQ79hr9vnI6fOBav7Xgyus=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\blazor.boot.json"
@@ -10433,12 +10433,12 @@
       "OriginalItemSpec": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Identity": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\tgqd2f6f6b-tlna3rbrp6.gz",
+      "Identity": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\tgqd2f6f6b-pcaqic66mg.gz",
       "SourceId": "BookStore.Client",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/BookStore.Client#[.{fingerprint=tlna3rbrp6}]!.pdb.gz",
+      "RelativePath": "_framework/BookStore.Client#[.{fingerprint=pcaqic66mg}]!.pdb.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -10447,8 +10447,8 @@
       "RelatedAsset": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Client.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "3d6p0st9or",
-      "Integrity": "iROrtbUqTaa/9nOy66w6NDyHD0G9Xes2tAHhOOTz+Gg=",
+      "Fingerprint": "kddp2qh3rx",
+      "Integrity": "CDbsr+SYsNK/JiVh2kt/x9ubUKrc4Duwjy0A4hMhkB8=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Client.pdb"
@@ -10622,12 +10622,12 @@
       "OriginalItemSpec": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\v8puobwmp7-6awy5y4fzn.gz",
+      "Identity": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\v8puobwmp7-vocttxc4kw.gz",
       "SourceId": "BookStore.Client",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/BookStore.Core#[.{fingerprint=6awy5y4fzn}]!.wasm.gz",
+      "RelativePath": "_framework/BookStore.Core#[.{fingerprint=vocttxc4kw}]!.wasm.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -10636,8 +10636,8 @@
       "RelatedAsset": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Core.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "vdtmgyb99k",
-      "Integrity": "vfnsZ/sjas6VcXrlF9X41z+VKQkFXDT+RksVZiXiKcY=",
+      "Fingerprint": "odf2ucbtmp",
+      "Integrity": "pMfwI+7d+oKZriSNi+LtZKd5ncA/rvaQTg7/Db0fvQg=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Core.wasm"
@@ -11231,12 +11231,12 @@
       "OriginalItemSpec": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\System.ComponentModel.Annotations.wasm"
     },
     {
-      "Identity": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\ysom51drby-omcf5ttzjc.gz",
+      "Identity": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\ysom51drby-sxg6edtw9p.gz",
       "SourceId": "BookStore.Client",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/BookStore.Client#[.{fingerprint=omcf5ttzjc}]!.wasm.gz",
+      "RelativePath": "_framework/BookStore.Client#[.{fingerprint=sxg6edtw9p}]!.wasm.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -11245,8 +11245,8 @@
       "RelatedAsset": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Client.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "0cvj7chuuo",
-      "Integrity": "YMzq9RzImyEvvjgafesf2+bLIDstL/hQ5D4ZD+YklPw=",
+      "Fingerprint": "d08xvrqk5n",
+      "Integrity": "M+7YZ80G2XzHX2NoWX+CefhjlgWK2yPsmS9baUuz7WM=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Client.wasm"
@@ -13605,11 +13605,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"257WcJU+3lVwg5V9mjItFEH/LpEtdLET3BEkPWOY20U=\""
+          "Value": "\"KPW4i8K0z2+yP4WEd0GjvPMa276+9rx915Y0T0g1URE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 Jan 2026 06:20:53 GMT"
+          "Value": "Sun, 15 Feb 2026 16:55:05 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -13619,18 +13619,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-257WcJU+3lVwg5V9mjItFEH/LpEtdLET3BEkPWOY20U="
+          "Value": "sha256-KPW4i8K0z2+yP4WEd0GjvPMa276+9rx915Y0T0g1URE="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\kh7ctqb7bd-vbj0t00wbz.gz",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\kh7ctqb7bd-k9kxablu6r.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000067208818"
+          "Quality": "0.000067222372"
         }
       ],
       "ResponseHeaders": [
@@ -13640,15 +13640,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "14878"
+          "Value": "14875"
         },
         {
           "Name": "ETag",
-          "Value": "\"AJ315OwO2Lq9Pkr+30PUaU6CT8MBf5bEYG/TNwlU4e4=\""
+          "Value": "\"XlbE40nJRN7vyxbl6usM3UQ79hr9vnI6fOBav7Xgyus=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 Jan 2026 06:13:06 GMT"
+          "Value": "Sun, 15 Feb 2026 16:40:07 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -13668,19 +13668,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"257WcJU+3lVwg5V9mjItFEH/LpEtdLET3BEkPWOY20U=\""
+          "Value": "W/\"KPW4i8K0z2+yP4WEd0GjvPMa276+9rx915Y0T0g1URE=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-257WcJU+3lVwg5V9mjItFEH/LpEtdLET3BEkPWOY20U="
+          "Value": "sha256-KPW4i8K0z2+yP4WEd0GjvPMa276+9rx915Y0T0g1URE="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json.gz",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\kh7ctqb7bd-vbj0t00wbz.gz",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\kh7ctqb7bd-k9kxablu6r.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -13689,7 +13689,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "14878"
+          "Value": "14875"
         },
         {
           "Name": "Content-Type",
@@ -13697,11 +13697,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"AJ315OwO2Lq9Pkr+30PUaU6CT8MBf5bEYG/TNwlU4e4=\""
+          "Value": "\"XlbE40nJRN7vyxbl6usM3UQ79hr9vnI6fOBav7Xgyus=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 Jan 2026 06:13:06 GMT"
+          "Value": "Sun, 15 Feb 2026 16:40:07 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -13719,7 +13719,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-AJ315OwO2Lq9Pkr+30PUaU6CT8MBf5bEYG/TNwlU4e4="
+          "Value": "sha256-XlbE40nJRN7vyxbl6usM3UQ79hr9vnI6fOBav7Xgyus="
         }
       ]
     },
@@ -13861,168 +13861,7 @@
       ]
     },
     {
-      "Route": "_framework/BookStore.Client.omcf5ttzjc.wasm",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Client.wasm",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "411413"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"sDaqypd6LowWGwkpOflZ+Nf+gC+Ag0CPNvz4kC6uf/8=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 29 Jan 2026 06:20:52 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "omcf5ttzjc"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/BookStore.Client.wasm"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-sDaqypd6LowWGwkpOflZ+Nf+gC+Ag0CPNvz4kC6uf/8="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BookStore.Client.omcf5ttzjc.wasm",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\ysom51drby-omcf5ttzjc.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000007860955"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "127210"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"YMzq9RzImyEvvjgafesf2+bLIDstL/hQ5D4ZD+YklPw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 29 Jan 2026 06:20:53 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"sDaqypd6LowWGwkpOflZ+Nf+gC+Ag0CPNvz4kC6uf/8=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "omcf5ttzjc"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/BookStore.Client.wasm"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-sDaqypd6LowWGwkpOflZ+Nf+gC+Ag0CPNvz4kC6uf/8="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BookStore.Client.omcf5ttzjc.wasm.gz",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\ysom51drby-omcf5ttzjc.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "127210"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"YMzq9RzImyEvvjgafesf2+bLIDstL/hQ5D4ZD+YklPw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 29 Jan 2026 06:20:53 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "omcf5ttzjc"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/BookStore.Client.wasm.gz"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-YMzq9RzImyEvvjgafesf2+bLIDstL/hQ5D4ZD+YklPw="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BookStore.Client.pdb",
+      "Route": "_framework/BookStore.Client.pcaqic66mg.pdb",
       "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Client.pdb",
       "Selectors": [],
       "ResponseHeaders": [
@@ -14032,7 +13871,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "215104"
+          "Value": "215072"
         },
         {
           "Name": "Content-Type",
@@ -14040,148 +13879,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"/8rkT0WOf3a08Aw7oDUEyjAEmW/BubNIstq75xpjTnM=\""
+          "Value": "\"F2d6mjIkR/DFDE/H6g/Dy5rxdG14idvEfVBHSR8oDoc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 Jan 2026 06:20:52 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-/8rkT0WOf3a08Aw7oDUEyjAEmW/BubNIstq75xpjTnM="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BookStore.Client.pdb",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\tgqd2f6f6b-tlna3rbrp6.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000006058183"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "165065"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"iROrtbUqTaa/9nOy66w6NDyHD0G9Xes2tAHhOOTz+Gg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 29 Jan 2026 06:20:53 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"/8rkT0WOf3a08Aw7oDUEyjAEmW/BubNIstq75xpjTnM=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-/8rkT0WOf3a08Aw7oDUEyjAEmW/BubNIstq75xpjTnM="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BookStore.Client.pdb.gz",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\tgqd2f6f6b-tlna3rbrp6.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "165065"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"iROrtbUqTaa/9nOy66w6NDyHD0G9Xes2tAHhOOTz+Gg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 29 Jan 2026 06:20:53 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-iROrtbUqTaa/9nOy66w6NDyHD0G9Xes2tAHhOOTz+Gg="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BookStore.Client.tlna3rbrp6.pdb",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Client.pdb",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "215104"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"/8rkT0WOf3a08Aw7oDUEyjAEmW/BubNIstq75xpjTnM=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 29 Jan 2026 06:20:52 GMT"
+          "Value": "Sun, 15 Feb 2026 14:00:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14191,7 +13893,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "tlna3rbrp6"
+          "Value": "pcaqic66mg"
         },
         {
           "Name": "label",
@@ -14199,18 +13901,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-/8rkT0WOf3a08Aw7oDUEyjAEmW/BubNIstq75xpjTnM="
+          "Value": "sha256-F2d6mjIkR/DFDE/H6g/Dy5rxdG14idvEfVBHSR8oDoc="
         }
       ]
     },
     {
-      "Route": "_framework/BookStore.Client.tlna3rbrp6.pdb",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\tgqd2f6f6b-tlna3rbrp6.gz",
+      "Route": "_framework/BookStore.Client.pcaqic66mg.pdb",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\tgqd2f6f6b-pcaqic66mg.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000006058183"
+          "Quality": "0.000006059651"
         }
       ],
       "ResponseHeaders": [
@@ -14220,15 +13922,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "165065"
+          "Value": "165025"
         },
         {
           "Name": "ETag",
-          "Value": "\"iROrtbUqTaa/9nOy66w6NDyHD0G9Xes2tAHhOOTz+Gg=\""
+          "Value": "\"CDbsr+SYsNK/JiVh2kt/x9ubUKrc4Duwjy0A4hMhkB8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 Jan 2026 06:20:53 GMT"
+          "Value": "Sun, 15 Feb 2026 14:00:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14248,13 +13950,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"/8rkT0WOf3a08Aw7oDUEyjAEmW/BubNIstq75xpjTnM=\""
+          "Value": "W/\"F2d6mjIkR/DFDE/H6g/Dy5rxdG14idvEfVBHSR8oDoc=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "tlna3rbrp6"
+          "Value": "pcaqic66mg"
         },
         {
           "Name": "label",
@@ -14262,13 +13964,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-/8rkT0WOf3a08Aw7oDUEyjAEmW/BubNIstq75xpjTnM="
+          "Value": "sha256-F2d6mjIkR/DFDE/H6g/Dy5rxdG14idvEfVBHSR8oDoc="
         }
       ]
     },
     {
-      "Route": "_framework/BookStore.Client.tlna3rbrp6.pdb.gz",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\tgqd2f6f6b-tlna3rbrp6.gz",
+      "Route": "_framework/BookStore.Client.pcaqic66mg.pdb.gz",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\tgqd2f6f6b-pcaqic66mg.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -14277,7 +13979,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "165065"
+          "Value": "165025"
         },
         {
           "Name": "Content-Type",
@@ -14285,11 +13987,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"iROrtbUqTaa/9nOy66w6NDyHD0G9Xes2tAHhOOTz+Gg=\""
+          "Value": "\"CDbsr+SYsNK/JiVh2kt/x9ubUKrc4Duwjy0A4hMhkB8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 Jan 2026 06:20:53 GMT"
+          "Value": "Sun, 15 Feb 2026 14:00:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14307,7 +14009,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "tlna3rbrp6"
+          "Value": "pcaqic66mg"
         },
         {
           "Name": "label",
@@ -14315,7 +14017,305 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-iROrtbUqTaa/9nOy66w6NDyHD0G9Xes2tAHhOOTz+Gg="
+          "Value": "sha256-CDbsr+SYsNK/JiVh2kt/x9ubUKrc4Duwjy0A4hMhkB8="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BookStore.Client.pdb",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Client.pdb",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "215072"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"F2d6mjIkR/DFDE/H6g/Dy5rxdG14idvEfVBHSR8oDoc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 15 Feb 2026 14:00:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-F2d6mjIkR/DFDE/H6g/Dy5rxdG14idvEfVBHSR8oDoc="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BookStore.Client.pdb",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\tgqd2f6f6b-pcaqic66mg.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000006059651"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "165025"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"CDbsr+SYsNK/JiVh2kt/x9ubUKrc4Duwjy0A4hMhkB8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 15 Feb 2026 14:00:42 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"F2d6mjIkR/DFDE/H6g/Dy5rxdG14idvEfVBHSR8oDoc=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-F2d6mjIkR/DFDE/H6g/Dy5rxdG14idvEfVBHSR8oDoc="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BookStore.Client.pdb.gz",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\tgqd2f6f6b-pcaqic66mg.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "165025"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"CDbsr+SYsNK/JiVh2kt/x9ubUKrc4Duwjy0A4hMhkB8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 15 Feb 2026 14:00:42 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-CDbsr+SYsNK/JiVh2kt/x9ubUKrc4Duwjy0A4hMhkB8="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BookStore.Client.sxg6edtw9p.wasm",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Client.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "411413"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wHKQo3zV9UnolKKaSzCFVxkM01BqWEFluvDqqK5MmO8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 15 Feb 2026 14:00:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "sxg6edtw9p"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/BookStore.Client.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-wHKQo3zV9UnolKKaSzCFVxkM01BqWEFluvDqqK5MmO8="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BookStore.Client.sxg6edtw9p.wasm",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\ysom51drby-sxg6edtw9p.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000007854657"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "127312"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"M+7YZ80G2XzHX2NoWX+CefhjlgWK2yPsmS9baUuz7WM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 15 Feb 2026 14:00:42 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"wHKQo3zV9UnolKKaSzCFVxkM01BqWEFluvDqqK5MmO8=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "sxg6edtw9p"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/BookStore.Client.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-wHKQo3zV9UnolKKaSzCFVxkM01BqWEFluvDqqK5MmO8="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BookStore.Client.sxg6edtw9p.wasm.gz",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\ysom51drby-sxg6edtw9p.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "127312"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"M+7YZ80G2XzHX2NoWX+CefhjlgWK2yPsmS9baUuz7WM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 15 Feb 2026 14:00:42 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "sxg6edtw9p"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/BookStore.Client.wasm.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-M+7YZ80G2XzHX2NoWX+CefhjlgWK2yPsmS9baUuz7WM="
         }
       ]
     },
@@ -14338,11 +14338,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"sDaqypd6LowWGwkpOflZ+Nf+gC+Ag0CPNvz4kC6uf/8=\""
+          "Value": "\"wHKQo3zV9UnolKKaSzCFVxkM01BqWEFluvDqqK5MmO8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 Jan 2026 06:20:52 GMT"
+          "Value": "Sun, 15 Feb 2026 14:00:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14352,18 +14352,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-sDaqypd6LowWGwkpOflZ+Nf+gC+Ag0CPNvz4kC6uf/8="
+          "Value": "sha256-wHKQo3zV9UnolKKaSzCFVxkM01BqWEFluvDqqK5MmO8="
         }
       ]
     },
     {
       "Route": "_framework/BookStore.Client.wasm",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\ysom51drby-omcf5ttzjc.gz",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\ysom51drby-sxg6edtw9p.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000007860955"
+          "Quality": "0.000007854657"
         }
       ],
       "ResponseHeaders": [
@@ -14373,15 +14373,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "127210"
+          "Value": "127312"
         },
         {
           "Name": "ETag",
-          "Value": "\"YMzq9RzImyEvvjgafesf2+bLIDstL/hQ5D4ZD+YklPw=\""
+          "Value": "\"M+7YZ80G2XzHX2NoWX+CefhjlgWK2yPsmS9baUuz7WM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 Jan 2026 06:20:53 GMT"
+          "Value": "Sun, 15 Feb 2026 14:00:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14401,19 +14401,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"sDaqypd6LowWGwkpOflZ+Nf+gC+Ag0CPNvz4kC6uf/8=\""
+          "Value": "W/\"wHKQo3zV9UnolKKaSzCFVxkM01BqWEFluvDqqK5MmO8=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-sDaqypd6LowWGwkpOflZ+Nf+gC+Ag0CPNvz4kC6uf/8="
+          "Value": "sha256-wHKQo3zV9UnolKKaSzCFVxkM01BqWEFluvDqqK5MmO8="
         }
       ]
     },
     {
       "Route": "_framework/BookStore.Client.wasm.gz",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\ysom51drby-omcf5ttzjc.gz",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\ysom51drby-sxg6edtw9p.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -14422,7 +14422,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "127210"
+          "Value": "127312"
         },
         {
           "Name": "Content-Type",
@@ -14430,11 +14430,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"YMzq9RzImyEvvjgafesf2+bLIDstL/hQ5D4ZD+YklPw=\""
+          "Value": "\"M+7YZ80G2XzHX2NoWX+CefhjlgWK2yPsmS9baUuz7WM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 Jan 2026 06:20:53 GMT"
+          "Value": "Sun, 15 Feb 2026 14:00:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14452,173 +14452,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-YMzq9RzImyEvvjgafesf2+bLIDstL/hQ5D4ZD+YklPw="
+          "Value": "sha256-M+7YZ80G2XzHX2NoWX+CefhjlgWK2yPsmS9baUuz7WM="
         }
       ]
     },
     {
-      "Route": "_framework/BookStore.Core.6awy5y4fzn.wasm",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Core.wasm",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "48917"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"EjuMDjTT88L2usVCbtCmh6aicNZNpAW6Yeu8L7nfDEU=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "6awy5y4fzn"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/BookStore.Core.wasm"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-EjuMDjTT88L2usVCbtCmh6aicNZNpAW6Yeu8L7nfDEU="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BookStore.Core.6awy5y4fzn.wasm",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\v8puobwmp7-6awy5y4fzn.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000051586278"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "19384"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"vfnsZ/sjas6VcXrlF9X41z+VKQkFXDT+RksVZiXiKcY=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"EjuMDjTT88L2usVCbtCmh6aicNZNpAW6Yeu8L7nfDEU=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "6awy5y4fzn"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/BookStore.Core.wasm"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-EjuMDjTT88L2usVCbtCmh6aicNZNpAW6Yeu8L7nfDEU="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BookStore.Core.6awy5y4fzn.wasm.gz",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\v8puobwmp7-6awy5y4fzn.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "19384"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"vfnsZ/sjas6VcXrlF9X41z+VKQkFXDT+RksVZiXiKcY=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "6awy5y4fzn"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/BookStore.Core.wasm.gz"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-vfnsZ/sjas6VcXrlF9X41z+VKQkFXDT+RksVZiXiKcY="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BookStore.Core.gr7qrepc4o.pdb",
+      "Route": "_framework/BookStore.Core.denvfkhq9v.pdb",
       "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Core.pdb",
       "Selectors": [],
       "ResponseHeaders": [
@@ -14628,7 +14467,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "28676"
+          "Value": "28864"
         },
         {
           "Name": "Content-Type",
@@ -14636,11 +14475,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"NNOMuOyV+KW+a7m6ZWi5pe9wNIlouSqW9iGrTNCYshw=\""
+          "Value": "\"y6isSpq+wlLphsMybIi3YegYyH4N8auWMBYHRPYcjC8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:18 GMT"
+          "Value": "Tue, 03 Feb 2026 22:10:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14650,7 +14489,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "gr7qrepc4o"
+          "Value": "denvfkhq9v"
         },
         {
           "Name": "label",
@@ -14658,18 +14497,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-NNOMuOyV+KW+a7m6ZWi5pe9wNIlouSqW9iGrTNCYshw="
+          "Value": "sha256-y6isSpq+wlLphsMybIi3YegYyH4N8auWMBYHRPYcjC8="
         }
       ]
     },
     {
-      "Route": "_framework/BookStore.Core.gr7qrepc4o.pdb",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\k8256upqu8-gr7qrepc4o.gz",
+      "Route": "_framework/BookStore.Core.denvfkhq9v.pdb",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\k8256upqu8-denvfkhq9v.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000072998029"
+          "Quality": "0.000072186530"
         }
       ],
       "ResponseHeaders": [
@@ -14679,15 +14518,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13698"
+          "Value": "13852"
         },
         {
           "Name": "ETag",
-          "Value": "\"f4vfZUa6QkjB/CDW1F4w5AfXOTloQigNkzAFw54lFGU=\""
+          "Value": "\"Pjr0NeObCFn8h/rP0lecOkDxdHYiF+cC5c9XELvTSIM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14707,13 +14546,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"NNOMuOyV+KW+a7m6ZWi5pe9wNIlouSqW9iGrTNCYshw=\""
+          "Value": "W/\"y6isSpq+wlLphsMybIi3YegYyH4N8auWMBYHRPYcjC8=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "gr7qrepc4o"
+          "Value": "denvfkhq9v"
         },
         {
           "Name": "label",
@@ -14721,13 +14560,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-NNOMuOyV+KW+a7m6ZWi5pe9wNIlouSqW9iGrTNCYshw="
+          "Value": "sha256-y6isSpq+wlLphsMybIi3YegYyH4N8auWMBYHRPYcjC8="
         }
       ]
     },
     {
-      "Route": "_framework/BookStore.Core.gr7qrepc4o.pdb.gz",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\k8256upqu8-gr7qrepc4o.gz",
+      "Route": "_framework/BookStore.Core.denvfkhq9v.pdb.gz",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\k8256upqu8-denvfkhq9v.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -14736,7 +14575,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13698"
+          "Value": "13852"
         },
         {
           "Name": "Content-Type",
@@ -14744,11 +14583,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"f4vfZUa6QkjB/CDW1F4w5AfXOTloQigNkzAFw54lFGU=\""
+          "Value": "\"Pjr0NeObCFn8h/rP0lecOkDxdHYiF+cC5c9XELvTSIM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14766,7 +14605,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "gr7qrepc4o"
+          "Value": "denvfkhq9v"
         },
         {
           "Name": "label",
@@ -14774,7 +14613,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-f4vfZUa6QkjB/CDW1F4w5AfXOTloQigNkzAFw54lFGU="
+          "Value": "sha256-Pjr0NeObCFn8h/rP0lecOkDxdHYiF+cC5c9XELvTSIM="
         }
       ]
     },
@@ -14789,7 +14628,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "28676"
+          "Value": "28864"
         },
         {
           "Name": "Content-Type",
@@ -14797,11 +14636,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"NNOMuOyV+KW+a7m6ZWi5pe9wNIlouSqW9iGrTNCYshw=\""
+          "Value": "\"y6isSpq+wlLphsMybIi3YegYyH4N8auWMBYHRPYcjC8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:18 GMT"
+          "Value": "Tue, 03 Feb 2026 22:10:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14811,18 +14650,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-NNOMuOyV+KW+a7m6ZWi5pe9wNIlouSqW9iGrTNCYshw="
+          "Value": "sha256-y6isSpq+wlLphsMybIi3YegYyH4N8auWMBYHRPYcjC8="
         }
       ]
     },
     {
       "Route": "_framework/BookStore.Core.pdb",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\k8256upqu8-gr7qrepc4o.gz",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\k8256upqu8-denvfkhq9v.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000072998029"
+          "Quality": "0.000072186530"
         }
       ],
       "ResponseHeaders": [
@@ -14832,15 +14671,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13698"
+          "Value": "13852"
         },
         {
           "Name": "ETag",
-          "Value": "\"f4vfZUa6QkjB/CDW1F4w5AfXOTloQigNkzAFw54lFGU=\""
+          "Value": "\"Pjr0NeObCFn8h/rP0lecOkDxdHYiF+cC5c9XELvTSIM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14860,19 +14699,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"NNOMuOyV+KW+a7m6ZWi5pe9wNIlouSqW9iGrTNCYshw=\""
+          "Value": "W/\"y6isSpq+wlLphsMybIi3YegYyH4N8auWMBYHRPYcjC8=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-NNOMuOyV+KW+a7m6ZWi5pe9wNIlouSqW9iGrTNCYshw="
+          "Value": "sha256-y6isSpq+wlLphsMybIi3YegYyH4N8auWMBYHRPYcjC8="
         }
       ]
     },
     {
       "Route": "_framework/BookStore.Core.pdb.gz",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\k8256upqu8-gr7qrepc4o.gz",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\k8256upqu8-denvfkhq9v.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -14881,7 +14720,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13698"
+          "Value": "13852"
         },
         {
           "Name": "Content-Type",
@@ -14889,11 +14728,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"f4vfZUa6QkjB/CDW1F4w5AfXOTloQigNkzAFw54lFGU=\""
+          "Value": "\"Pjr0NeObCFn8h/rP0lecOkDxdHYiF+cC5c9XELvTSIM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14911,7 +14750,168 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-f4vfZUa6QkjB/CDW1F4w5AfXOTloQigNkzAFw54lFGU="
+          "Value": "sha256-Pjr0NeObCFn8h/rP0lecOkDxdHYiF+cC5c9XELvTSIM="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BookStore.Core.vocttxc4kw.wasm",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Core.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "49429"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fwZtLdv55bw7vEzwT1Ri72moCzd4hsRXMuS/ZXCHMPM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "vocttxc4kw"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/BookStore.Core.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-fwZtLdv55bw7vEzwT1Ri72moCzd4hsRXMuS/ZXCHMPM="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BookStore.Core.vocttxc4kw.wasm",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\v8puobwmp7-vocttxc4kw.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000051245260"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "19513"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"pMfwI+7d+oKZriSNi+LtZKd5ncA/rvaQTg7/Db0fvQg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"fwZtLdv55bw7vEzwT1Ri72moCzd4hsRXMuS/ZXCHMPM=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "vocttxc4kw"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/BookStore.Core.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-fwZtLdv55bw7vEzwT1Ri72moCzd4hsRXMuS/ZXCHMPM="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BookStore.Core.vocttxc4kw.wasm.gz",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\v8puobwmp7-vocttxc4kw.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "19513"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"pMfwI+7d+oKZriSNi+LtZKd5ncA/rvaQTg7/Db0fvQg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "vocttxc4kw"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/BookStore.Core.wasm.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-pMfwI+7d+oKZriSNi+LtZKd5ncA/rvaQTg7/Db0fvQg="
         }
       ]
     },
@@ -14926,7 +14926,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "48917"
+          "Value": "49429"
         },
         {
           "Name": "Content-Type",
@@ -14934,11 +14934,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"EjuMDjTT88L2usVCbtCmh6aicNZNpAW6Yeu8L7nfDEU=\""
+          "Value": "\"fwZtLdv55bw7vEzwT1Ri72moCzd4hsRXMuS/ZXCHMPM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14948,18 +14948,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-EjuMDjTT88L2usVCbtCmh6aicNZNpAW6Yeu8L7nfDEU="
+          "Value": "sha256-fwZtLdv55bw7vEzwT1Ri72moCzd4hsRXMuS/ZXCHMPM="
         }
       ]
     },
     {
       "Route": "_framework/BookStore.Core.wasm",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\v8puobwmp7-6awy5y4fzn.gz",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\v8puobwmp7-vocttxc4kw.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000051586278"
+          "Quality": "0.000051245260"
         }
       ],
       "ResponseHeaders": [
@@ -14969,15 +14969,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "19384"
+          "Value": "19513"
         },
         {
           "Name": "ETag",
-          "Value": "\"vfnsZ/sjas6VcXrlF9X41z+VKQkFXDT+RksVZiXiKcY=\""
+          "Value": "\"pMfwI+7d+oKZriSNi+LtZKd5ncA/rvaQTg7/Db0fvQg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14997,19 +14997,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"EjuMDjTT88L2usVCbtCmh6aicNZNpAW6Yeu8L7nfDEU=\""
+          "Value": "W/\"fwZtLdv55bw7vEzwT1Ri72moCzd4hsRXMuS/ZXCHMPM=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-EjuMDjTT88L2usVCbtCmh6aicNZNpAW6Yeu8L7nfDEU="
+          "Value": "sha256-fwZtLdv55bw7vEzwT1Ri72moCzd4hsRXMuS/ZXCHMPM="
         }
       ]
     },
     {
       "Route": "_framework/BookStore.Core.wasm.gz",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\v8puobwmp7-6awy5y4fzn.gz",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\v8puobwmp7-vocttxc4kw.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -15018,7 +15018,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "19384"
+          "Value": "19513"
         },
         {
           "Name": "Content-Type",
@@ -15026,11 +15026,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"vfnsZ/sjas6VcXrlF9X41z+VKQkFXDT+RksVZiXiKcY=\""
+          "Value": "\"pMfwI+7d+oKZriSNi+LtZKd5ncA/rvaQTg7/Db0fvQg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -15048,173 +15048,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-vfnsZ/sjas6VcXrlF9X41z+VKQkFXDT+RksVZiXiKcY="
+          "Value": "sha256-pMfwI+7d+oKZriSNi+LtZKd5ncA/rvaQTg7/Db0fvQg="
         }
       ]
     },
     {
-      "Route": "_framework/BookStore.Infrastructure.0moexd2vsj.wasm",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Infrastructure.wasm",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "245525"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"GGkSiKr+2t1+HYYZFphfungc0CdF3xgBInbeb3XRz/k=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "0moexd2vsj"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/BookStore.Infrastructure.wasm"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-GGkSiKr+2t1+HYYZFphfungc0CdF3xgBInbeb3XRz/k="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BookStore.Infrastructure.0moexd2vsj.wasm",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\8lyipcsnt4-0moexd2vsj.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000016389681"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "61013"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"u8l4SoTCZQAFTePGV4pmnE50mIX9HpHUJPxO54uVptE=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"GGkSiKr+2t1+HYYZFphfungc0CdF3xgBInbeb3XRz/k=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "0moexd2vsj"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/BookStore.Infrastructure.wasm"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-GGkSiKr+2t1+HYYZFphfungc0CdF3xgBInbeb3XRz/k="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BookStore.Infrastructure.0moexd2vsj.wasm.gz",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\8lyipcsnt4-0moexd2vsj.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "61013"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"u8l4SoTCZQAFTePGV4pmnE50mIX9HpHUJPxO54uVptE=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "0moexd2vsj"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/BookStore.Infrastructure.wasm.gz"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-u8l4SoTCZQAFTePGV4pmnE50mIX9HpHUJPxO54uVptE="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BookStore.Infrastructure.pdb",
+      "Route": "_framework/BookStore.Infrastructure.cjy0ou5xei.pdb",
       "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Infrastructure.pdb",
       "Selectors": [],
       "ResponseHeaders": [
@@ -15224,7 +15063,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "58568"
+          "Value": "58832"
         },
         {
           "Name": "Content-Type",
@@ -15232,285 +15071,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"i6lBLIyKlyFWPWUbqF8Luq7LuPZal44ma9LarWSSWmA=\""
+          "Value": "\"KHHhzBobERHN6i8xSB7kcgJPaNAWQL/vwYvl3PuClPs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:19 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-i6lBLIyKlyFWPWUbqF8Luq7LuPZal44ma9LarWSSWmA="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BookStore.Infrastructure.pdb",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\5s5l2fj6g3-z6l9eehw7k.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000041464527"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "24116"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"HbqkuKkj3Oc/WP6fPtBgrNM5nJEVaukm87uCbBjqGzY=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"i6lBLIyKlyFWPWUbqF8Luq7LuPZal44ma9LarWSSWmA=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-i6lBLIyKlyFWPWUbqF8Luq7LuPZal44ma9LarWSSWmA="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BookStore.Infrastructure.pdb.gz",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\5s5l2fj6g3-z6l9eehw7k.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "24116"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"HbqkuKkj3Oc/WP6fPtBgrNM5nJEVaukm87uCbBjqGzY=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-HbqkuKkj3Oc/WP6fPtBgrNM5nJEVaukm87uCbBjqGzY="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BookStore.Infrastructure.wasm",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Infrastructure.wasm",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "245525"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"GGkSiKr+2t1+HYYZFphfungc0CdF3xgBInbeb3XRz/k=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-GGkSiKr+2t1+HYYZFphfungc0CdF3xgBInbeb3XRz/k="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BookStore.Infrastructure.wasm",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\8lyipcsnt4-0moexd2vsj.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000016389681"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "61013"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"u8l4SoTCZQAFTePGV4pmnE50mIX9HpHUJPxO54uVptE=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"GGkSiKr+2t1+HYYZFphfungc0CdF3xgBInbeb3XRz/k=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-GGkSiKr+2t1+HYYZFphfungc0CdF3xgBInbeb3XRz/k="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BookStore.Infrastructure.wasm.gz",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\8lyipcsnt4-0moexd2vsj.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "61013"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"u8l4SoTCZQAFTePGV4pmnE50mIX9HpHUJPxO54uVptE=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-u8l4SoTCZQAFTePGV4pmnE50mIX9HpHUJPxO54uVptE="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/BookStore.Infrastructure.z6l9eehw7k.pdb",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Infrastructure.pdb",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "58568"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"i6lBLIyKlyFWPWUbqF8Luq7LuPZal44ma9LarWSSWmA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:19 GMT"
+          "Value": "Tue, 03 Feb 2026 22:10:05 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -15520,7 +15085,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "z6l9eehw7k"
+          "Value": "cjy0ou5xei"
         },
         {
           "Name": "label",
@@ -15528,18 +15093,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-i6lBLIyKlyFWPWUbqF8Luq7LuPZal44ma9LarWSSWmA="
+          "Value": "sha256-KHHhzBobERHN6i8xSB7kcgJPaNAWQL/vwYvl3PuClPs="
         }
       ]
     },
     {
-      "Route": "_framework/BookStore.Infrastructure.z6l9eehw7k.pdb",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\5s5l2fj6g3-z6l9eehw7k.gz",
+      "Route": "_framework/BookStore.Infrastructure.cjy0ou5xei.pdb",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\5s5l2fj6g3-cjy0ou5xei.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000041464527"
+          "Quality": "0.000041221815"
         }
       ],
       "ResponseHeaders": [
@@ -15549,15 +15114,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "24116"
+          "Value": "24258"
         },
         {
           "Name": "ETag",
-          "Value": "\"HbqkuKkj3Oc/WP6fPtBgrNM5nJEVaukm87uCbBjqGzY=\""
+          "Value": "\"f3ptR8NKcDl+1kXTruOPgCqjzBTLTvuJB1nW559I6J0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -15577,13 +15142,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"i6lBLIyKlyFWPWUbqF8Luq7LuPZal44ma9LarWSSWmA=\""
+          "Value": "W/\"KHHhzBobERHN6i8xSB7kcgJPaNAWQL/vwYvl3PuClPs=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "z6l9eehw7k"
+          "Value": "cjy0ou5xei"
         },
         {
           "Name": "label",
@@ -15591,13 +15156,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-i6lBLIyKlyFWPWUbqF8Luq7LuPZal44ma9LarWSSWmA="
+          "Value": "sha256-KHHhzBobERHN6i8xSB7kcgJPaNAWQL/vwYvl3PuClPs="
         }
       ]
     },
     {
-      "Route": "_framework/BookStore.Infrastructure.z6l9eehw7k.pdb.gz",
-      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\5s5l2fj6g3-z6l9eehw7k.gz",
+      "Route": "_framework/BookStore.Infrastructure.cjy0ou5xei.pdb.gz",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\5s5l2fj6g3-cjy0ou5xei.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -15606,7 +15171,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "24116"
+          "Value": "24258"
         },
         {
           "Name": "Content-Type",
@@ -15614,11 +15179,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"HbqkuKkj3Oc/WP6fPtBgrNM5nJEVaukm87uCbBjqGzY=\""
+          "Value": "\"f3ptR8NKcDl+1kXTruOPgCqjzBTLTvuJB1nW559I6J0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 23 Jan 2026 21:31:22 GMT"
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -15636,7 +15201,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "z6l9eehw7k"
+          "Value": "cjy0ou5xei"
         },
         {
           "Name": "label",
@@ -15644,7 +15209,442 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-HbqkuKkj3Oc/WP6fPtBgrNM5nJEVaukm87uCbBjqGzY="
+          "Value": "sha256-f3ptR8NKcDl+1kXTruOPgCqjzBTLTvuJB1nW559I6J0="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BookStore.Infrastructure.pdb",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Infrastructure.pdb",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "58832"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"KHHhzBobERHN6i8xSB7kcgJPaNAWQL/vwYvl3PuClPs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 22:10:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-KHHhzBobERHN6i8xSB7kcgJPaNAWQL/vwYvl3PuClPs="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BookStore.Infrastructure.pdb",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\5s5l2fj6g3-cjy0ou5xei.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000041221815"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24258"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"f3ptR8NKcDl+1kXTruOPgCqjzBTLTvuJB1nW559I6J0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"KHHhzBobERHN6i8xSB7kcgJPaNAWQL/vwYvl3PuClPs=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-KHHhzBobERHN6i8xSB7kcgJPaNAWQL/vwYvl3PuClPs="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BookStore.Infrastructure.pdb.gz",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\5s5l2fj6g3-cjy0ou5xei.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24258"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"f3ptR8NKcDl+1kXTruOPgCqjzBTLTvuJB1nW559I6J0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-f3ptR8NKcDl+1kXTruOPgCqjzBTLTvuJB1nW559I6J0="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BookStore.Infrastructure.wasm",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Infrastructure.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "246037"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0/IDXjwY46m9KnPwiIl57UDwWlaCsMKc1e/J4HeqewU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-0/IDXjwY46m9KnPwiIl57UDwWlaCsMKc1e/J4HeqewU="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BookStore.Infrastructure.wasm",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\8lyipcsnt4-xff0bhrhov.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000016361257"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "61119"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OsIRORSC0V4Hb/Qhe3o70K3DKWxGedcmkojQYmV3LhM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"0/IDXjwY46m9KnPwiIl57UDwWlaCsMKc1e/J4HeqewU=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-0/IDXjwY46m9KnPwiIl57UDwWlaCsMKc1e/J4HeqewU="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BookStore.Infrastructure.wasm.gz",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\8lyipcsnt4-xff0bhrhov.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "61119"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OsIRORSC0V4Hb/Qhe3o70K3DKWxGedcmkojQYmV3LhM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-OsIRORSC0V4Hb/Qhe3o70K3DKWxGedcmkojQYmV3LhM="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BookStore.Infrastructure.xff0bhrhov.wasm",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\BookStore.Infrastructure.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "246037"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0/IDXjwY46m9KnPwiIl57UDwWlaCsMKc1e/J4HeqewU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xff0bhrhov"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/BookStore.Infrastructure.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-0/IDXjwY46m9KnPwiIl57UDwWlaCsMKc1e/J4HeqewU="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BookStore.Infrastructure.xff0bhrhov.wasm",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\8lyipcsnt4-xff0bhrhov.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000016361257"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "61119"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OsIRORSC0V4Hb/Qhe3o70K3DKWxGedcmkojQYmV3LhM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"0/IDXjwY46m9KnPwiIl57UDwWlaCsMKc1e/J4HeqewU=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xff0bhrhov"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/BookStore.Infrastructure.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-0/IDXjwY46m9KnPwiIl57UDwWlaCsMKc1e/J4HeqewU="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/BookStore.Infrastructure.xff0bhrhov.wasm.gz",
+      "AssetFile": "C:\\Users\\isaen\\RiderProjects\\Bookstore\\BookStore.Client\\obj\\Debug\\net9.0\\compressed\\8lyipcsnt4-xff0bhrhov.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "61119"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OsIRORSC0V4Hb/Qhe3o70K3DKWxGedcmkojQYmV3LhM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 22:10:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xff0bhrhov"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/BookStore.Infrastructure.wasm.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-OsIRORSC0V4Hb/Qhe3o70K3DKWxGedcmkojQYmV3LhM="
         }
       ]
     },

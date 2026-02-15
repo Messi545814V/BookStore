@@ -10,7 +10,7 @@ public class RegisterDto
     
     [Required(ErrorMessage = "Пароль є обов'язковим")]
     [StringLength(100, MinimumLength = 8, ErrorMessage = "Пароль має містити мінімум 8 символів")]
-    [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).+$",
+    [RegularExpression(@"^(?=.*[a-zа-яґєії])(?=.*[A-ZА-ЯҐЄІЇ])(?=.*\d)(?=.*[^a-zA-Z\dа-яА-ЯґєіїҐЄІЇ]).+$",
         ErrorMessage = "Пароль має містити принаймні одну велику літеру, одну малу літеру, одну цифру та один спеціальний символ.")]
     public string Password { get; set; } =   string.Empty;
     

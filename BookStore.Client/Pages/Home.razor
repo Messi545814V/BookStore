@@ -416,13 +416,16 @@
                     <h5 class="book-title" title="@book.Title">@book.Title</h5>
                     <p class="book-author">@book.Author</p>
                 </div>
-
+                
+                
                 <div class="book-footer mt-2">
                     <span class="book-price text-white fw-bold">@book.Price ₴</span>
-                    <button class="btn-buy" @onclick:preventDefault @onclick="() => AddToCart(book)">
-                        <i class="bi bi-cart-plus"></i>
-                    </button>
                 </div>
+               
+                @* <button class="btn-buy" @onclick:preventDefault @onclick="() => AddToCart(book)">
+                        <i class="bi bi-cart-plus"></i>
+                    </button> 
+                    *@
             </div>
             <a href="/book/@book.Id" class="stretched-link"></a>
         </div>

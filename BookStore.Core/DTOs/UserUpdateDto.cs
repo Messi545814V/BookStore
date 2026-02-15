@@ -4,19 +4,14 @@ namespace BookStore.Core.DTOs;
 
 public class UserUpdateDto
 {
-    [Required(ErrorMessage = "Ім'я обов'язкове")]
     [StringLength(50, MinimumLength = 3, ErrorMessage = "Ім'я користувача має бути від 2 до 50 символів.")]
     public string FullName { get; set; } =  string.Empty;
     
-    [Required(ErrorMessage = "Ім'я обов'язкове")]
     [StringLength(50, ErrorMessage = "Прізвище користувача має бути від 2 до 50 символів.")]
     public string Surname { get; set; } =  string.Empty;
     
-    [Required(ErrorMessage = "Введіть номер телефону")]
     [RegularExpression(@"^\+380\d{9}$", ErrorMessage = "Формат: +380XXXXXXXXX (рівно 12 цифр)")]
     public string Phone { get; set; } = "";
     
-    [Required(ErrorMessage = "Введіть Email")]
-    [EmailAddress(ErrorMessage = "Некоректний формат Email, Приклад: user@example.com")]
     public string Email { get; set; } = "";
 }

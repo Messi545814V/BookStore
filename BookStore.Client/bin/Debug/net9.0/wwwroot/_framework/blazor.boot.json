@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "BookStore.Client",
   "resources": {
-    "hash": "sha256-6qz/LIBHoJrD09wxQGHOE/fw3n+UPlkPFV/9ZHyTt8g=",
+    "hash": "sha256-4a3EymXqE+nMRYTf4ikrdlC9VZ+iH+DOfatokM81kx0=",
     "fingerprinting": {
       "Azure.Core.92q6rqqhly.wasm": "Azure.Core.wasm",
       "Azure.Identity.b6ekoqlu3w.wasm": "Azure.Identity.wasm",
@@ -238,12 +238,12 @@
       "icudt_CJK.tjcz0u77k5.dat": "icudt_CJK.dat",
       "icudt_EFIGS.tptq2av103.dat": "icudt_EFIGS.dat",
       "icudt_no_CJK.lfu7j35m59.dat": "icudt_no_CJK.dat",
-      "BookStore.Core.6awy5y4fzn.wasm": "BookStore.Core.wasm",
-      "BookStore.Infrastructure.0moexd2vsj.wasm": "BookStore.Infrastructure.wasm",
-      "BookStore.Core.gr7qrepc4o.pdb": "BookStore.Core.pdb",
-      "BookStore.Infrastructure.z6l9eehw7k.pdb": "BookStore.Infrastructure.pdb",
-      "BookStore.Client.omcf5ttzjc.wasm": "BookStore.Client.wasm",
-      "BookStore.Client.tlna3rbrp6.pdb": "BookStore.Client.pdb"
+      "BookStore.Core.vocttxc4kw.wasm": "BookStore.Core.wasm",
+      "BookStore.Infrastructure.xff0bhrhov.wasm": "BookStore.Infrastructure.wasm",
+      "BookStore.Core.denvfkhq9v.pdb": "BookStore.Core.pdb",
+      "BookStore.Infrastructure.cjy0ou5xei.pdb": "BookStore.Infrastructure.pdb",
+      "BookStore.Client.sxg6edtw9p.wasm": "BookStore.Client.wasm",
+      "BookStore.Client.pcaqic66mg.pdb": "BookStore.Client.pdb"
     },
     "jsModuleNative": {
       "dotnet.native.1p93gcv9fh.js": "sha256-1UPiprzN3JhPftx3be7XEMaYlUN+chRF41CuttiWVtQ="
@@ -490,14 +490,14 @@
       "WindowsBase.ag32297siy.wasm": "sha256-BgyZxTgdU9rIYlNC9ZMiMjnvBAJSL0eQH8Y87o1M+q4=",
       "mscorlib.vt9pwshhot.wasm": "sha256-/aFxOaPc1iTNlJw0z4/RGEMD0nzl4qVE3SF4wMsLgp0=",
       "netstandard.or41gtprh3.wasm": "sha256-nD1KqAI5YYz+YohqHaZ5EmXi7Eq9Uy9sUknnI8sj1AM=",
-      "BookStore.Core.6awy5y4fzn.wasm": "sha256-EjuMDjTT88L2usVCbtCmh6aicNZNpAW6Yeu8L7nfDEU=",
-      "BookStore.Infrastructure.0moexd2vsj.wasm": "sha256-GGkSiKr+2t1+HYYZFphfungc0CdF3xgBInbeb3XRz/k=",
-      "BookStore.Client.omcf5ttzjc.wasm": "sha256-sDaqypd6LowWGwkpOflZ+Nf+gC+Ag0CPNvz4kC6uf/8="
+      "BookStore.Core.vocttxc4kw.wasm": "sha256-fwZtLdv55bw7vEzwT1Ri72moCzd4hsRXMuS/ZXCHMPM=",
+      "BookStore.Infrastructure.xff0bhrhov.wasm": "sha256-0/IDXjwY46m9KnPwiIl57UDwWlaCsMKc1e/J4HeqewU=",
+      "BookStore.Client.sxg6edtw9p.wasm": "sha256-wHKQo3zV9UnolKKaSzCFVxkM01BqWEFluvDqqK5MmO8="
     },
     "pdb": {
-      "BookStore.Core.gr7qrepc4o.pdb": "sha256-NNOMuOyV+KW+a7m6ZWi5pe9wNIlouSqW9iGrTNCYshw=",
-      "BookStore.Infrastructure.z6l9eehw7k.pdb": "sha256-i6lBLIyKlyFWPWUbqF8Luq7LuPZal44ma9LarWSSWmA=",
-      "BookStore.Client.tlna3rbrp6.pdb": "sha256-/8rkT0WOf3a08Aw7oDUEyjAEmW/BubNIstq75xpjTnM="
+      "BookStore.Core.denvfkhq9v.pdb": "sha256-y6isSpq+wlLphsMybIi3YegYyH4N8auWMBYHRPYcjC8=",
+      "BookStore.Infrastructure.cjy0ou5xei.pdb": "sha256-KHHhzBobERHN6i8xSB7kcgJPaNAWQL/vwYvl3PuClPs=",
+      "BookStore.Client.pcaqic66mg.pdb": "sha256-F2d6mjIkR/DFDE/H6g/Dy5rxdG14idvEfVBHSR8oDoc="
     }
   },
   "cacheBootResources": true,

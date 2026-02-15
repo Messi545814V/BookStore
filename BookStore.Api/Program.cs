@@ -16,7 +16,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // 1. Налаштування бази даних
 builder.Services.AddDbContext<BookStoreContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"), 
+        b => b.MigrationsAssembly("BookStore.Infrastructure"))); // Вкажіть точну назву проекту з міграціями
 
 
 var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -86,46 +87,57 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // 👇 ВСТАВТЕ ЦЕЙ БЛОК ВІДРАЗУ ПІСЛЯ app.Build() 👇
+// 👇 ВСТАВТЕ ЦЕЙ БЛОК ВІДРАЗУ ПІСЛЯ app.Build() 👇
 using (var scope = app.Services.CreateScope())
 {
-    var context = scope.ServiceProvider.GetRequiredService<BookStoreContext>();
-
-    // Завантажуємо ВСІ книги з авторами та категоріями
-    var books = await context.Books
-        .Include(b => b.Author)
-        .Include(b => b.Category)
-        .ToListAsync();
-
-    bool anyChanged = false;
-
-    foreach (var b in books)
+    var services = scope.ServiceProvider;
+    try
     {
-        // Формуємо правильний пошуковий рядок
-        var newSearchString = TextNormalizer.Normalize(
-            $"{b.Title} {b.Genre} {b.Author?.Name ?? ""} {b.Category?.Name ?? ""}"
-        );
+        var context = services.GetRequiredService<BookStoreContext>();
 
-        // Якщо поточне значення відрізняється (або null), оновлюємо
-        if (b.SearchNormalized != newSearchString)
+        // 👇 1. ДОДАНО: Спочатку створюємо таблиці з ваших міграцій
+        context.Database.Migrate(); 
+        Console.WriteLine("✅ Database created and migrated successfully!");
+
+        // 2. Тепер безпечно завантажуємо ВСІ книги з авторами та категоріями
+        var books = await context.Books
+            .Include(b => b.Author)
+            .Include(b => b.Category)
+            .ToListAsync();
+
+        bool anyChanged = false;
+
+        foreach (var b in books)
         {
-            b.SearchNormalized = newSearchString;
-            anyChanged = true;
+            var newSearchString = TextNormalizer.Normalize(
+                $"{b.Title} {b.Genre} {b.Author?.Name ?? ""} {b.Category?.Name ?? ""}"
+            );
+
+            if (b.SearchNormalized != newSearchString)
+            {
+                b.SearchNormalized = newSearchString;
+                anyChanged = true;
+            }
+        }
+
+        if (anyChanged)
+        {
+            await context.SaveChangesAsync();
+            Console.WriteLine("✅ Database search index updated successfully!");
         }
     }
-
-    if (anyChanged)
+    catch (Exception ex)
     {
-        await context.SaveChangesAsync();
-        Console.WriteLine("✅ Database search index updated successfully!");
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "Помилка під час ініціалізації бази даних.");
     }
 }
 
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// Тимчасово вмикаємо відображення помилок та Swagger для Production
+app.UseDeveloperExceptionPage();
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

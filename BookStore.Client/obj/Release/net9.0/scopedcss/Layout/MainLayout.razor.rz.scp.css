@@ -1,0 +1,48 @@
+.layout-container[b-bh85zrqgsb] {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar[b-bh85zrqgsb] {
+    width: 250px;
+    background: linear-gradient(180deg, #052767, #3a0647);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+/* === Sticky Header === */
+.top-header[b-bh85zrqgsb] {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #ffffffcc;
+    backdrop-filter: blur(10px);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Кнопки у хедері */
+.header-btn[b-bh85zrqgsb] {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 8px;
+    color: #333;
+}
+.header-btn:hover[b-bh85zrqgsb] {
+    color: #0067ff;
+}
+
+/* Пошук */
+
+
+/* Контент */
+.body-content[b-bh85zrqgsb] {
+    padding: 20px;
+    width: 100%;
+}

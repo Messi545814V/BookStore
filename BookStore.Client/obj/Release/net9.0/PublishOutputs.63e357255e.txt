@@ -1,0 +1,1 @@
+C:\Users\isaen\RiderProjects\Bookstore\BookStore.Client\dist\web.config
